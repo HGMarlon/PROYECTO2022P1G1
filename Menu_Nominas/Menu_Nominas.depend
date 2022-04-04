@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1649039929 source:c:\users\my computer\proyectos\proyecto_rhh\menu_nominas\src\menunominas.cpp
+	"menuNominas.h"
+
+1649035467 c:\users\my computer\proyectos\proyecto_rhh\menu_nominas\include\menunominas.h
+	<iostream>
+
+1649040405 source:c:\users\my computer\proyectos\proyecto_rhh\menu_nominas\main.cpp
+	"menuNominas.h"
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+
