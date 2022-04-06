@@ -1,21 +1,17 @@
-#include<iostream>
-#include<fstream>
 #include<stdlib.h>
 #include<cstdlib>
 #include<conio.h>
 #include<iomanip>
-#include "menuNominas.h"
+#include<iostream>
+#include<fstream>
+#include "Procesos.h"
 using namespace std;
-class menuNomina
-{
-	private:
 
-	public:
-		void menu();
-};
-void menuNomina::menu()
-{
-    int choice;
+main(){
+    Menuintermedio menu2;
+    //Procesos mantenimiento;
+
+   int choice;
 	char x;
 	do
     {
@@ -41,7 +37,9 @@ void menuNomina::menu()
     switch(choice)
     {
     case 1:
-        menuM();
+    menu2.Menuxcategorias();
+
+
         break;
 	case 2:
 		cout<<"USTED ESTA EN EL APARTADO GENERACION NOMINA";
@@ -62,15 +60,8 @@ void menuNomina::menu()
         exit(0);
 	default:
 		cout<<"CARACTER NO VALIDO, INGRESE OTRA OPCION";
+		getch();
 	}
-	getch();
+	//getch();
     }while(choice!= 7);
 }
-int main()
-{
-menuNomina menuPrincipal;
-menuPrincipal.menu();
-
-	return 0;
-}
-
