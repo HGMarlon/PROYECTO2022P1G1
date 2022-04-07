@@ -1,20 +1,20 @@
-/*#include<stdlib.h>
+#include "ClsMenus.h"
+#include<stdlib.h>
 #include<cstdlib>
 #include<conio.h>
 #include<iomanip>
 #include<iostream>
 #include<fstream>
-#include "Procesos.h"
 #include "ClsEmpleados.h"
 using namespace std;
 //Aqui estan los constructores
-Procesos::Procesos()
+ClsMenus::ClsMenus()
 {
-
+    //ctor
 }
 
-//Metodos de la clase Menuintermedio
-Menuintermedio::Menuxcategorias()
+//Metodos de la clase Menu intermedio
+ClsMenus::Menuxcategorias()
 {
     ClsEmpleados mantenimiento;
     int choice2;
@@ -39,7 +39,7 @@ Menuintermedio::Menuxcategorias()
     switch(choice2)
     {
     case 1:
-        mantenimiento.menu();
+        //mantenimiento.menu();
         break;
 	case 2:
 
@@ -56,4 +56,10 @@ Menuintermedio::Menuxcategorias()
 	}
 	//getch();
     }while(choice2!= 4);
-}*/
+}
+
+
+ClsMenus::~ClsMenus()
+{
+    //dtor
+}

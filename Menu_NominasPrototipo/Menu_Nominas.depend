@@ -20,3 +20,49 @@
 	<fstream>
 	"Procesos.h"
 
+1649374952 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+
+1649374899 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\procesos.h
+
+1649374899 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\procesos.cpp
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	"Procesos.h"
+	"ClsEmpleados.h"
+
+1649374184 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+
+1649374153 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+	<cstring>
+	<string>
+
+1649374899 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clsmenus.h
+
+1649374992 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+	"ClsMenus.h"
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	"ClsEmpleados.h"
+

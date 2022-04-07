@@ -4,14 +4,14 @@
 #include<iomanip>
 #include<iostream>
 #include<fstream>
-#include "Procesos.h"
+#include "ClsMenus.h"
+#include "ClsEmpleados.h"
 using namespace std;
 
 main(){
-    Menuintermedio menu2;
-    //Procesos mantenimiento;
+    ClsMenus menu2;
 
-   int choice;
+    int choice;
 	char x;
 	do
     {
