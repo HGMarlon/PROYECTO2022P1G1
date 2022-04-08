@@ -31,10 +31,10 @@ main(){
 	cout<<"4. TRANSFERENCIA BANCARIA"<<endl;
 	cout<<"5. GENERACION POLIZA"<<endl;
     cout<<"6. IMPUESTOS"<<endl;
-	cout<<"7. EXIT"<<endl;
+	cout<<"0. EXIT"<<endl;
 
 	cout<<"-------------------------------"<<endl;
-	cout<<"OPCIONES A ESCOGER :     [1/2/3/4/5/6/7]"<<endl;
+	cout<<"OPCIONES A ESCOGER :     [1/2/3/4/5/6/0]"<<endl;
 	cout<<"-------------------------------"<<endl;
 	cout<<"INGRESA TU OPCION : ";
     cin>>iMenu;
@@ -64,11 +64,11 @@ main(){
 	    cout<<"USTED ESTA EN EL APARTADO IMPUESTOS";
 	    getch();
 	    break;
-    case 7:
+    case 0:
         exit(0);
 	default:
 		cout<<"CARACTER NO VALIDO, INGRESE OTRA OPCION";
 		getch();
 	}
-    }while(iMenu!= 7);
+    }while(iMenu!= 0);
 }
