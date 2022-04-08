@@ -1,59 +1,100 @@
+//clase
 #include "ClsEmpleados.h"
 
 //librerias
-#include<stdlib.h>
-#include<cstdlib>
 #include<conio.h>
 #include<iomanip>
 #include<iostream>
 #include<fstream>
+#include<string>
+#include<cstdlib>
 
 using namespace std;
 
 //constructor
-ClsEmpleados::ClsEmpleados()
+ClsEmpleados::ClsEmpleados(int valorClave, const string &m_sNombreEmpleado) : m_iClave(valorClave)
 {
-    //ctor
+    mestablecerNombre(m_sNombreEmpleado);
 }
 
-/*Metodos de clase proceso (menu mantemiento empleado)
-    Agregar nuevo empleado*/
+//obtiene la clave
+int ClsEmpleados::mobtenerClave() const
+{
+    return m_iClave;
+}
+
+void ClsEmpleados::mestablecerClave (int valorClave)
+{
+    m_iClave = valorClave;
+}
+
+//obtiene el nombre completo
+string ClsEmpleados::mobtenerNombre() const
+{
+    return m_sNombreEmpleado;
+}
+
+//establecer nombre
+void ClsEmpleados::mestablecerNombre(const string &cadenaNombreEmpleado)
+{
+    int longitud = cadenaNombreEmpleado.size();
+    longitud = ( longitud < 40 ? longitud : 39);
+    cadenaNombreEmpleado.copy(m_sNombreEmpleado, longitud);
+    m_sNombreEmpleado[longitud]='\0';
+}
+
+//Ingreso de datos de un uevo empleado
 ClsEmpleados::mAgregarEmpleado()
 {
+	int iespacios=0;
 	system("cls");
-	fstream file;
-	cout<<"Agregar nuevo Empleado"<<endl;
-	cout<<"Ingresa el nombre completo del empleado: ";
-	cin>>m_sNombreEmpleado;
-	/*cout<<"Ingresa el numero de DPI del empleado: ";
+	ofstream archivoEmpleados("registrosempleados.dat", ios::out | ios::binary);
+	if( !archivoEmpleados )
+    {
+        cerr << "No se pudo abrir el archivo registro empleados." << endl;
+        exit( EXIT_FAILURE );
+    }
+	ClsEmpleados empleado;
+	cout<<"ingrese clave: ";
+	cin>>m_iClave;
+	ClsEmpleados empleadoEnBlanco;
+	for(int iespacios= 0; iespacios < 100; ++iespacios)
+    {
+        archivoEmpleados.write(reinterpret_cast<const char* > (&empleadoEnBlanco), sizeof(ClsEmpleados));
+    }
+	while (m_iClave>0 && m_iClave<100)
+    {
+        cout<<"Agregar nuevo Empleado"<<endl;
+        cout<<"Ingresa el nombre del empleado: " << endl;
+        cin>> m_sNombreEmpleado;
+        cout<<"Ingresa el numero de DPI del empleado: ";
+        cin>>m_sDpiEmpleado;
+        cout<<"Ingresa la dirección de residencia del empleado: ";
+        cin>>m_sDireccionEmpleado;
+        cout<<"Ingresa el número de telefono del empleado: ";
+        cin>>m_sTelefonoEmpleado;
+        cout<<"Ingresa el correo electronico del empleado: ";
+        cin>>m_sCorreoEmpleado;
+        empleado.mestablecerClave(m_iClave);
+        empleado.mestablecerNombre(m_sNombreEmpleado);
+        archivoEmpleados.seekp((empleado.mobtenerClave() - 1 ) * sizeof(ClsEmpleados));
+        archivoEmpleados.write(reinterpret_cast<const char * > (&empleado), sizeof (ClsEmpleados));
+        cout<<"ingrese clave: ";
+        cin>>m_iClave;
+    }
+	cout<<"Ingresa el numero de DPI del empleado: ";
 	cin>>m_sDpiEmpleado;
-	cout<<"Ingresa el codigo de idenficación del empleado: ";
-	cin>>m_sCodigoIdentificacion;
-	cout<<"Ingresa el pais de origen del empleado: ";
-	cin>>m_sPaisEmpleado;
-	cout<<"Ingresa el pais de residencia del empleado: ";
-	cin>>m_sResidenciaEmpleado;
 	cout<<"Ingresa la dirección de residencia del empleado: ";
 	cin>>m_sDireccionEmpleado;
 	cout<<"Ingresa el número de telefono del empleado: ";
 	cin>>m_sTelefonoEmpleado;
 	cout<<"Ingresa el correo electronico del empleado: ";
 	cin>>m_sCorreoEmpleado;
-	cout<<"Ingresa un número telefonico en caso de emergencia: ";
-	cin>m_sTelefonoEmergenciaEmpleado;*/
-	file.open("registroEmpleados.txt", ios::app | ios::out | ios::binary);
-	file<<std::left<<std::setw(40)<< m_sNombreEmpleado
-	/*<<std::left<<std::setw(15)<< m_sDpiEmpleado
-	<<std::left<<std::setw(15)<< m_sCodigoIdentificacion
-	<<std::setw(15)<< m_sResidenciaEmpleado
-	<<std::setw(15)<< m_sResidenciaEmpleado
-	<<std::setw(20)<< m_sDireccionEmpleado
-	<<std::left<<std::setw(15)<< m_sTelefonoEmpleado
-	<<std::left<<std::setw(20)<< m_sCorreoEmpleado
-	<<std::left<<std::setw(15)<< m_sTelefonoEmergenciaEmpleado */<< "\n";
-	file.close();
+	archivoEmpleados.close();
 }
-ClsEmpleados::mIngresarEmpleado()
+
+//Agregar un nuevo empleado
+/*ClsEmpleados::mIngresarEmpleado()
 {
     char cDecisionNuevoEmpleado;
 do
@@ -62,99 +103,36 @@ do
     		cout<<"Desea agregar otra empleado?(Y,N): ";
     		cin>>cDecisionNuevoEmpleado;
 		}while(cDecisionNuevoEmpleado=='y'||cDecisionNuevoEmpleado=='Y');
-}
-/*
-Empleados::menu()
-{
-    Empleados mostrarE;
-    Empleados modificarE;
-    Empleados buscarE;
-    Empleados borrarE;
-   int choice1;
-	do
-    {
-	system("cls");
+}*/
 
-	cout<<"\t\t\t-------------------------------"<<endl;
-	cout<<"\t\t\t |   SISTEMA GESTION EMPLEADOS  |"<<endl;
-	cout<<"\t\t\t-------------------------------"<<endl;
-	cout<<"\t\t\t 1. Ingreso Empleados"<<endl;
-	cout<<"\t\t\t 2. Despliegue Empleados"<<endl;
-	cout<<"\t\t\t 3. Modifica Empleados"<<endl;
-	cout<<"\t\t\t 4. Busca Empleados"<<endl;
-	cout<<"\t\t\t 5. Borra Empleados"<<endl;
-	cout<<"\t\t\t 6. Volver al menu superior"<<endl;
-
-	cout<<"\t\t\t-------------------------------"<<endl;
-	cout<<"\t\t\tOpcion a escoger:[1/2/3/4/5/6]"<<endl;
-	cout<<"\t\t\t-------------------------------"<<endl;
-	cout<<"Ingresa tu Opcion: ";
-    cin>>choice1;
-
-    switch(choice1)
-    {
-    case 1:
-        ingresarE();
-        getch();
-        break;
-	case 2:
-		mostrarE.display();
-		getch();
-		break;
-	case 3:
-		modificarE.modify();
-		getch();
-		break;
-	case 4:
-		buscarE.searchE();
-		getch();
-		break;
-	case 5:
-		borrarE.deletE();
-		break;
-	case 6:
-		break;
-	default:
-		cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
-		getch();
-	}
-	//getch();
-    }while(choice1!= 6);
-}
-
-Empleados::display()
+ClsEmpleados::mDespliegueEmpleados()
 {
 	system("cls");
-	fstream file;
+	ifstream archivoEmpleados("registrosempleados.dat", ios::in | ios:: binary);
 	int total=0;
-	cout<<"\n-------------------------Tabla de Detalles de Personas -------------------------"<<endl;
-	file.open("ParticipantRecordEmpleados.txt",ios::in);
-	if(!file)
+	cout<<"Tabla de Detalles de Personas"<<endl;
+	if(!archivoEmpleados)
 	{
-		cout<<"\n\t\t\tNo hay información...";
-		file.close();
+		cerr << "No se pudo abrir el archivo registro empleados." << endl;
+        exit( EXIT_FAILURE );
 	}
 	else
 	{
-		file >> id >> name >> phone >> mail >> affiliation;
-		while(!file.eof())
+		ClsEmpleados empleado;
+		while(!archivoEmpleados.eof())
 		{
 			total++;
-			cout<<"\n\n\t\t\t DPI Empleado: "<<id<<endl;
-			cout<<"\t\t\t Nombre y Apellido Empleado: "<<name<<endl;
-			cout<<"\t\t\t Telefono Empleado: "<<phone<<endl;
-			cout<<"\t\t\t Correo Empleado: "<<mail<<endl;
-			cout<<"\t\t\t No.Afiliacion Empleado: "<<affiliation<<endl;
-			file >> id >> name >> phone >> mail >> affiliation;
+			cout<<"Nombre: "<<empleado.mobtenerNombre() <<endl;
+			cout<<"Clave: "<<empleado.mobtenerClave() <<endl;
 		}
 		if(total==0)
 		{
-			cout<<"\n\t\t\tNo hay informacion...";
+			cout<<"No hay informacion...";
 		}
 	}
-	file.close();
+	archivoEmpleados.close();
 }
-Empleados::modify()
+/*Empleados::modify()
 {
 	system("cls");
 	fstream file,file1;
@@ -286,6 +264,58 @@ Empleados::deletE()
 	}
 }
 */
+//Menu de gestion de los datos de empleado
+ClsEmpleados::mMenuEmpleados()
+{
+    ClsEmpleados empleado;
+    int iSeleccionMenuEmpleados;
+	do
+    {
+	system("cls");
+
+	cout<<"-------------------------------"<<endl;
+	cout<<"|   SISTEMA GESTION EMPLEADOS  |"<<endl;
+	cout<<"-------------------------------"<<endl;
+	cout<<"1. Ingreso Empleados"<<endl;
+	cout<<"2. Despliegue Empleados"<<endl;
+	cout<<"3. Modifica Empleados"<<endl;
+	cout<<"4. Busca Empleados"<<endl;
+	cout<<"5. Borra Empleados"<<endl;
+	cout<<"6. Volver al menu superior"<<endl;
+
+	cout<<"-------------------------------"<<endl;
+	cout<<"Opcion a escoger:[1/2/3/4/5/6]"<<endl;
+	cout<<"------------------------------"<<endl;
+	cout<<"Ingresa tu Opcion: ";
+    cin>>iSeleccionMenuEmpleados;
+
+    switch(iSeleccionMenuEmpleados)
+    {
+    case 1:
+        empleado.mAgregarEmpleado();
+        break;
+	case 2:
+		empleado.mDespliegueEmpleados();
+		break;
+	/*case 3:
+		modificarE.modify();
+		getch();
+		break;
+	case 4:
+		buscarE.searchE();
+		getch();
+		break;
+	case 5:
+		borrarE.deletE();
+		break;*/
+	case 6:
+		break;
+	default:
+		cout<<"Opcion invalida...Por favor prueba otra vez..";
+		getch();
+	}
+    }while(iSeleccionMenuEmpleados!= 6);
+}
 ClsEmpleados::~ClsEmpleados()
 {
     //dtor
