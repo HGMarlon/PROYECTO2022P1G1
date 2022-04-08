@@ -34,8 +34,10 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/Procesos.h" />
+		<Unit filename="include/Puesto.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Procesos.cpp" />
+		<Unit filename="src/Puesto.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
