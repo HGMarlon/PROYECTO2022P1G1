@@ -2,6 +2,8 @@
 #ifndef CLSMENUS_H
 #define CLSMENUS_H
 
+using namespace std;
+
 class ClsMenus
 {
     public:

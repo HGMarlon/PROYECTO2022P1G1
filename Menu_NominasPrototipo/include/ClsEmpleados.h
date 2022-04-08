@@ -5,21 +5,31 @@
 #ifndef CLSEMPLEADOS_H
 #define CLSEMPLEADOS_H
 
+using std::string;
+
 
 class ClsEmpleados
 {
     public:
 
         //metodos
-        ClsEmpleados(int = 0, const std::string & = "");
+        ClsEmpleados( int = 0, string = "", string = "");
         mAgregarEmpleado();
         mIngresarEmpleado();
         mMenuEmpleados();
-        void mestablecerClave(int);
+
+        //establecer clave
+        void mestablecerClave( int) ;
         int mobtenerClave() const;
+
         //Funciones obtener nombre
-        void mestablecerNombre(const std::string &);
-        std::string mobtenerNombre() const;
+        void mestablecerNombre( string );
+        string mobtenerNombre() const;
+
+        //establecer dpi
+        void mestablecerDpi ( string );
+        string mobtenerDpi() const;
+
         mDespliegueEmpleados();
         /*modify();
         searchE();
@@ -31,14 +41,14 @@ class ClsEmpleados
     private:
 
         //atributos
-        int m_iClave;
-        char m_sNombreEmpleado[ 40 ];
-        char m_sDpiEmpleado[20];
-        char m_sCodigoIdentificacion[20];
+        int m_iClaveEmpleado;
+        char m_sNombreEmpleado[ 20 ];
+        char m_sDpiEmpleado[ 20 ];
+        /*char m_sCodigoIdentificacion[20];
         char m_sPaisEmpleado[20];
-        char m_sDireccionEmpleado[40];
+        char m_sDireccionEmpleado[ 20 ];
         char m_sTelefonoEmpleado[20];
-        char m_sCorreoEmpleado[20];
+        char m_sCorreoEmpleado[20];*/
 };
 
 #endif // CLSEMPLEADOS_H

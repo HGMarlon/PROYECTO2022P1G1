@@ -29,13 +29,16 @@ ClsMenus::Menuxcategorias()
 	cout<<"-------------------------------"<<endl;
 	cout<<" |   SISTEMA DE MANTENIMIENTO |"<<endl;
 	cout<<"-------------------------------"<<endl;
-	cout<<"1. Modificar empleados"<<endl;
-	cout<<"2. Modificar empresa"<<endl;
-	cout<<"3. Modificar puestos"<<endl;
-	cout<<"4. Volver al menu principal"<<endl;
+	cout<<"1. CRUD empleados"<<endl;
+	cout<<"2. CRUD empresa"<<endl;
+	cout<<"3. CRUD puestos"<<endl;
+	cout<<"4. CRUD conceptos"<<endl;
+	cout<<"5. CRUD departamentos"<<endl;
+	cout<<"6. CRUD bancos"<<endl;
+	cout<<"0. Volver al menu principal"<<endl;
 
 	cout<<"-------------------------------"<<endl;
-	cout<<"Opcion a escoger:[1/2/3/4]"<<endl;
+	cout<<"Opcion a escoger:[1/2/3/0]"<<endl;
 	cout<<"-------------------------------"<<endl;
 	cout<<"Ingresa tu Opcion: ";
     cin>>choice2;
@@ -51,14 +54,14 @@ ClsMenus::Menuxcategorias()
 	case 3:
 
 		break;
-	case 4:
+	case 0:
 
 		break;
 	default:
 		cout<<"Opcion invalida...Por favor prueba otra vez..";
 		getch();
 	}
-    }while(choice2!= 4);
+    }while(choice2!= 0);
 }
 
 
