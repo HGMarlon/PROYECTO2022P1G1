@@ -22,13 +22,7 @@ class Puesto
         string Numero, Cargo, DepaPuesto, Salario, Nivel, HoraEntrada, HoraSalida;
 
 };
-class Menuintermedio
-{
-public:
-    Menuxcategorias();
-private:
 
-};
 
 
 #endif // PUESTO_H

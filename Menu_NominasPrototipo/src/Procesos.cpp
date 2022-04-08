@@ -5,6 +5,7 @@
 #include<iostream>
 #include<fstream>
 #include "Procesos.h"2
+#include "Puesto.h"
 using namespace std;
 //Aqui estan los constructores
 Procesos::Procesos()
@@ -105,6 +106,7 @@ Empleados::menu()
 Menuintermedio::Menuxcategorias()
 {
     Empleados mantenimiento;
+    Puesto puestos;
     int choice2;
 	do
     {
@@ -133,7 +135,7 @@ Menuintermedio::Menuxcategorias()
 
 		break;
 	case 3:
-
+        puestos.menu();
 		break;
 	case 4:
 

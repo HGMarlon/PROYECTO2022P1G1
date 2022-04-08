@@ -20,7 +20,7 @@
 	<fstream>
 	"Procesos.h"
 
-1649357517 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649394683 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<stdlib.h>
 	<cstdlib>
 	<conio.h>
@@ -29,10 +29,10 @@
 	<fstream>
 	"Procesos.h"
 
-1649357517 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\procesos.h
+1649394683 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\procesos.h
 	<cstring>
 
-1649357517 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\procesos.cpp
+1649396548 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\procesos.cpp
 	<stdlib.h>
 	<cstdlib>
 	<conio.h>
@@ -40,8 +40,9 @@
 	<iostream>
 	<fstream>
 	"Procesos.h"
+	"Puesto.h"
 
-1649387844 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\puesto.cpp
+1649394683 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\puesto.cpp
 	<stdlib.h>
 	<cstdlib>
 	<conio.h>
@@ -50,5 +51,5 @@
 	<fstream>
 	"Puesto.h"
 
-1649384687 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\puesto.h
+1649396525 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\puesto.h
 
