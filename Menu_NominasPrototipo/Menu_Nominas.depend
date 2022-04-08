@@ -62,3 +62,34 @@
 	<fstream>
 	<string>
 
+1649452949 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+
+1649452949 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\clsmenus.h
+
+1649452949 c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+	<string>
+
+1649452949 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649452949 source:c:\users\sofia\progra1\proyectos\proyecto\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
