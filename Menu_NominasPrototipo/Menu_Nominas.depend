@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1649272150 source:c:\users\my computer\desktop\prueba menu\menu_definitivo\menu_nominas\main.cpp
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	"Procesos.h"
+
+1649276639 c:\users\my computer\desktop\prueba menu\menu_definitivo\menu_nominas\include\procesos.h
+	<cstring>
+
+1649277868 source:c:\users\my computer\desktop\prueba menu\menu_definitivo\menu_nominas\src\procesos.cpp
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	"Procesos.h"
+
