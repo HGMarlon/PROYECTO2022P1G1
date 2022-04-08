@@ -1,18 +1,23 @@
-#include<stdlib.h>
-#include<cstdlib>
+//librerias
 #include<conio.h>
-#include<iomanip>
 #include<iostream>
 #include<fstream>
+
+//clases
 #include "ClsMenus.h"
 #include "ClsEmpleados.h"
+
 using namespace std;
 
 main(){
-    ClsMenus menu2;
 
-    int choice;
-	char x;
+    //Objeto menu
+    ClsMenus menuMantenimientos;
+
+    //Variables
+    int iMenu;
+
+	//Menu principal
 	do
     {
 	system("cls");
@@ -32,29 +37,32 @@ main(){
 	cout<<"OPCIONES A ESCOGER :     [1/2/3/4/5/6/7]"<<endl;
 	cout<<"-------------------------------"<<endl;
 	cout<<"INGRESA TU OPCION : ";
-    cin>>choice;
+    cin>>iMenu;
 
-    switch(choice)
+    switch(iMenu)
     {
     case 1:
-    menu2.Menuxcategorias();
-
-
+        menuMantenimientos.Menuxcategorias();
         break;
 	case 2:
 		cout<<"USTED ESTA EN EL APARTADO GENERACION NOMINA";
+		getch();
 		break;
 	case 3:
 	    cout<<"USTED ESTA EN EL APARTADO INFORMES NOMINA";
+	    getch();
 		break;
 	case 4:
 	    cout<<"USTED ESTA EN EL APARTADO TRANSFERENCIA BANCARIA";
+	    getch();
 		break;
 	case 5:
 	    cout<<"USTED ESTA EN EL APARTADO GENERACION POLIZA";
+	    getch();
 		break;
 	case 6:
 	    cout<<"USTED ESTA EN EL APARTADO IMPUESTOS";
+	    getch();
 	    break;
     case 7:
         exit(0);
@@ -62,6 +70,5 @@ main(){
 		cout<<"CARACTER NO VALIDO, INGRESE OTRA OPCION";
 		getch();
 	}
-	//getch();
-    }while(choice!= 7);
+    }while(iMenu!= 7);
 }
