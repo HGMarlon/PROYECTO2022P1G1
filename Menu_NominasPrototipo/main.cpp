@@ -6,6 +6,7 @@
 //Clases
 #include "ClsMenus.h"
 #include "ClsEmpleados.h"
+#include "ClsPuestos.h"
 
 using namespace std;
 
