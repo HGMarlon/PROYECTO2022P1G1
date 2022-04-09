@@ -33,9 +33,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/ClsBancos.h" />
 		<Unit filename="include/ClsEmpleados.h" />
 		<Unit filename="include/ClsMenus.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/ClsBancos.cpp" />
 		<Unit filename="src/ClsEmpleados.cpp" />
 		<Unit filename="src/ClsMenus.cpp" />
 		<Extensions />
