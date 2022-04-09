@@ -1,6 +1,7 @@
 //Clases
 #include "ClsMenus.h"
 #include "ClsEmpleados.h"
+#include "ClsPuestos.h"
 
 //Librerias
 #include<conio.h>
@@ -20,7 +21,8 @@ ClsMenus::ClsMenus()
 //Metodos de la clase Menu intermedio
 ClsMenus::mmenuPorCategorias()
 {
-    ClsEmpleados mantenimentoEmpleado;
+    ClsEmpleados mantenimientoEmpleado;
+    ClsPuestos mantenimientoPuesto;
     int choice2;
 	do
     {
@@ -46,13 +48,13 @@ ClsMenus::mmenuPorCategorias()
     switch(choice2)
     {
     case 1:
-        mantenimentoEmpleado.mmenuEmpleado();
+        mantenimientoEmpleado.mmenuEmpleado();
         break;
 	case 2:
 
 		break;
 	case 3:
-
+        mantenimientoPuesto.mMenuPuestos();
 		break;
 	case 0:
 
