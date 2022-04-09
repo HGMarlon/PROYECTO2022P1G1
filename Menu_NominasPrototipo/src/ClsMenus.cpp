@@ -1,6 +1,7 @@
 //Clases
 #include "ClsMenus.h"
 #include "ClsEmpleados.h"
+#include "ClsPuestos.h"
 
 //Librerias
 #include<conio.h>
@@ -21,6 +22,7 @@ ClsMenus::ClsMenus()
 ClsMenus::Menuxcategorias()
 {
     ClsEmpleados mantenimentoEmpleado;
+    ClsPuestos mantenimentopuesto;
     int choice2;
 	do
     {
@@ -52,6 +54,7 @@ ClsMenus::Menuxcategorias()
 
 		break;
 	case 3:
+	    mantenimentopuesto.mMenuPuestos();
 
 		break;
 	case 0:
