@@ -13,67 +13,122 @@
 using namespace std;
 
 //constructor
-ClsEmpleados::ClsEmpleados(int valorClave, string valorNombreEmpleado, string valorDpi)
+ClsEmpleados::ClsEmpleados(int ivalorClave, string svalorNombre, string svalorDpi, string svalorDireccion, string svalorTelefono, string svalorCorreo)
 {
-    mestablecerClave(valorClave);
-    mestablecerNombre(valorNombreEmpleado);
-    mestablecerDpi(valorDpi);
+    mestablecerClave(ivalorClave);
+    mestablecerNombre(svalorNombre);
+    mestablecerDpi(svalorDpi);
+    mestablecerDireccion(svalorDireccion);
+    mestablecerTelefono(svalorTelefono);
+    mestablecerCorreo(svalorCorreo);
 }
 
-//obtiene la clave
+//Funciones de la clave del empleado
 int ClsEmpleados::mobtenerClave() const
 {
-    return m_iClaveEmpleado;
+    return m_iclaveEmpleado;
 }
 
-void ClsEmpleados::mestablecerClave (int valorClave)
+void ClsEmpleados::mestablecerClave (int ienteroClave)
 {
-    m_iClaveEmpleado = valorClave;
+    m_iclaveEmpleado = ienteroClave;
 }
 
-//obtiene el nombre
+//Funciones del nombre del empleado
 string ClsEmpleados::mobtenerNombre() const
 {
-    return m_sNombreEmpleado;
+    return m_snombreEmpleado;
 }
 
-//establecer nombre
-void ClsEmpleados::mestablecerNombre( string nombrestring )
+void ClsEmpleados::mestablecerNombre( string scadenaNombre )
 {
    // copiar a lo más 20 caracteres de la cadena en nombree
-   const char *valorNombreEmpleado = nombrestring.data();
-   int longitud = strlen( valorNombreEmpleado );
-   longitud = ( longitud < 20 ? longitud : 19 );
-   strncpy( m_sNombreEmpleado, valorNombreEmpleado, longitud );
+   const char *svalorNombre = scadenaNombre.data();
+   int ilongitud = strlen( svalorNombre );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_snombreEmpleado, svalorNombre, ilongitud );
 
    // anexar caracter nulo al final del nombre
-   m_sNombreEmpleado[ longitud ] = '\0';
+   m_snombreEmpleado[ ilongitud ] = '\0';
 
 }
 
-//obtener dpi
+//Funciones del Dpi del empleado
 string ClsEmpleados::mobtenerDpi() const
 {
-    return m_sDpiEmpleado;
+    return m_sdpiEmpleado;
 }
 
-//establecer dpi
-void ClsEmpleados::mestablecerDpi( string dpistring )
+void ClsEmpleados::mestablecerDpi( string scadenaDpi )
 {
     // copiar a lo más 20 caracteres de la cadena en dpi
-   const char *valorDpi = dpistring.data();
-   int longitud = strlen( valorDpi );
-   longitud = ( longitud < 20 ? longitud : 19 );
-   strncpy( m_sDpiEmpleado, valorDpi, longitud );
+   const char *svalorDpi = scadenaDpi.data();
+   int ilongitud = strlen( svalorDpi );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_sdpiEmpleado, svalorDpi, ilongitud );
 
-   // anexar caracter nulo al apellido
-   m_sNombreEmpleado[ longitud ] = '\0';
+   // anexar caracter nulo al final del dpi
+   m_sdpiEmpleado[ ilongitud ] = '\0';
 }
 
-//Ingreso de datos de un nuevo empleado
-ClsEmpleados::mAgregarEmpleado()
+//Funciones de la Direccion del empleado
+string ClsEmpleados::mobtenerDireccion() const
 {
-	int iespacios=0;
+    return m_sdireccionEmpleado;
+}
+
+void ClsEmpleados::mestablecerDireccion ( string scadenaDireccion )
+{
+    // copiar a lo más 20 caracteres de la cadena de la direccion
+   const char *svalorDireccion = scadenaDireccion.data();
+   int ilongitud = strlen( svalorDireccion );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_sdireccionEmpleado, svalorDireccion, ilongitud );
+
+   // anexar caracter nulo al final de la cadena de la direccion
+   m_sdireccionEmpleado[ ilongitud ] = '\0';
+}
+
+//Funciones del telefono del empleado
+string ClsEmpleados::mobtenerTelefono() const
+{
+    return m_stelefonoEmpleado;
+}
+
+void ClsEmpleados::mestablecerTelefono ( string scadenaTelefono )
+{
+    // copiar a lo más 20 caracteres de la cadena del telefono
+   const char *svalorTelefono = scadenaTelefono.data();
+   int ilongitud = strlen( svalorTelefono );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_stelefonoEmpleado, svalorTelefono, ilongitud );
+
+   // anexar caracter nulo al final de la cadena del telefono
+   m_stelefonoEmpleado[ ilongitud ] = '\0';
+}
+
+//Funciones del correo electronico del empleado
+string ClsEmpleados::mobtenerCorreo() const
+{
+    return m_scorreoEmpleado;
+}
+
+void ClsEmpleados::mestablecerCorreo ( string scadenaCorreo )
+{
+    // copiar a lo más 20 caracteres de la cadena del telefono
+   const char *svalorCorreo = scadenaCorreo.data();
+   int ilongitud = strlen( svalorCorreo );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_scorreoEmpleado, svalorCorreo, ilongitud );
+
+   // anexar caracter nulo al final de la cadena de la direccion
+   m_scorreoEmpleado[ ilongitud ] = '\0';
+}
+
+
+//Ingreso de datos de un nuevo empleado
+ClsEmpleados::magregarEmpleado()
+{
 	system("cls");
 	ofstream archivoEmpleados("registrosempleados.dat", ios::app | ios::out | ios::binary);
 	if( !archivoEmpleados )
@@ -82,59 +137,42 @@ ClsEmpleados::mAgregarEmpleado()
         exit( EXIT_FAILURE );
     }
 	ClsEmpleados empleado;
-	cout<<"ingrese una nueva clave del empleado: (0-cancelar)";
-	cin>>m_iClaveEmpleado;
-    while(m_iClaveEmpleado!=0)
+	cout<<"ingrese una clave del empleado: (0-cancelar)";
+	cin>>m_iclaveEmpleado;
+    while(m_iclaveEmpleado!=0)
     {
-        cout<<"Agregar nuevo Empleado"<<endl;
+        cout<<"Editar Empleado"<<endl;
         cout<<"Ingresa el nombre del empleado: " << endl;
-        cin>> m_sNombreEmpleado;
+        cin>> m_snombreEmpleado;
         cout<<"Ingresa el numero de DPI del empleado: ";
-        cin>>m_sDpiEmpleado;
-        /*cout<<"Ingresa la dirección de residencia del empleado: ";
-        cin>>m_sDireccionEmpleado;
+        cin>>m_sdpiEmpleado;
+        cout<<"Ingresa la dirección de residencia del empleado: ";
+        cin>>m_sdireccionEmpleado;
         cout<<"Ingresa el número de telefono del empleado: ";
-        cin>>m_sTelefonoEmpleado;
+        cin>>m_stelefonoEmpleado;
         cout<<"Ingresa el correo electronico del empleado: ";
-        cin>>m_sCorreoEmpleado;*/
-        empleado.mestablecerClave(m_iClaveEmpleado);
-        empleado.mestablecerNombre(m_sNombreEmpleado);
-        empleado.mestablecerDpi(m_sDpiEmpleado);
+        cin>>m_scorreoEmpleado;
+        empleado.mestablecerClave(m_iclaveEmpleado);
+        empleado.mestablecerNombre(m_snombreEmpleado);
+        empleado.mestablecerDpi(m_sdpiEmpleado);
+        empleado.mestablecerDireccion(m_sdireccionEmpleado);
+        empleado.mestablecerTelefono(m_stelefonoEmpleado);
+        empleado.mestablecerCorreo(m_scorreoEmpleado);
         archivoEmpleados.seekp((empleado.mobtenerClave() - 1 ) * sizeof(ClsEmpleados));
         archivoEmpleados.write(reinterpret_cast<const char * > (&empleado), sizeof (ClsEmpleados));
+        cout<<"Datos almacenados con éxito";
         cout<<"ingrese nueva clave: (0-salir)";
-        cin>>m_iClaveEmpleado;
+        cin>>m_iclaveEmpleado;
     }
-
-	/*cout<<"Ingresa el numero de DPI del empleado: ";
-	cin>>m_sDpiEmpleado;
-	cout<<"Ingresa la dirección de residencia del empleado: ";
-	cin>>m_sDireccionEmpleado;
-	cout<<"Ingresa el número de telefono del empleado: ";
-	cin>>m_sTelefonoEmpleado;
-	cout<<"Ingresa el correo electronico del empleado: ";
-	cin>>m_sCorreoEmpleado;
-	archivoEmpleados.close();*/
+	archivoEmpleados.close();
 }
 
-//Agregar un nuevo empleado
-/*ClsEmpleados::mIngresarEmpleado()
-{
-    char cDecisionNuevoEmpleado;
-do
-    	{
-    		mAgregarEmpleado();
-    		cout<<"Desea agregar otra empleado?(Y,N): ";
-    		cin>>cDecisionNuevoEmpleado;
-		}while(cDecisionNuevoEmpleado=='y'||cDecisionNuevoEmpleado=='Y');
-}*/
-
-ClsEmpleados::mDespliegueEmpleados()
+ClsEmpleados::mdespliegueEmpleado()
 {
 	system("cls");
 	ifstream archivoEmpleados("registrosempleados.dat", ios::in | ios:: binary);
-	int total=0;
-	cout<<"Tabla de Detalles de Personas"<<endl;
+	int iinformacion=0;
+	cout<<"Tabla de Detalles de Personas:"<<endl;
 	if(!archivoEmpleados)
 	{
 		cerr << "No se pudo abrir el archivo registro empleados." << endl;
@@ -145,71 +183,66 @@ ClsEmpleados::mDespliegueEmpleados()
 		ClsEmpleados empleado;
 		while(!archivoEmpleados.eof())
 		{
-			total++;
-			cout<<"Nombre: "<<empleado.mobtenerNombre() <<endl;
+			iinformacion++;
 			cout<<"Clave: "<<empleado.mobtenerClave() <<endl;
+			cout<<"Nombre: "<<empleado.mobtenerNombre() <<endl;
+			cout<<"DPI: "<<empleado.mobtenerDpi() <<endl;
+			cout<<"Direccion: "<<empleado.mobtenerDireccion() <<endl;
+			cout<<"Telefono: "<<empleado.mobtenerTelefono() <<endl;
+			cout<<"Correo: "<<empleado.mobtenerCorreo() <<endl;
 		}
-		if(total==0)
+		if(iinformacion==0)
 		{
 			cout<<"No hay informacion...";
 		}
+		cout<<"Fin del archivo.";
 	}
 	archivoEmpleados.close();
 }
-/*Empleados::modify()
+ClsEmpleados::mmodificarEmpleado()
 {
 	system("cls");
-	fstream file,file1;
-	string participant_id;
-	int found=0;
-	cout<<"\n-------------------------Modificacion Detalles Persona-------------------------"<<endl;
-	file.open("ParticipantRecordEmpleados.txt",ios::in);
-	if(!file)
-	{
-		cout<<"\n\t\t\tNo hay informacion..,";
-		file.close();
-	}
-	else
-	{
-		cout<<"\n Ingrese Id de la personas que quiere modificar: ";
-		cin>>participant_id;
-		file1.open("RecordEmpleados.txt",ios::app | ios::out);
-		file >> id >> name >> phone >> mail >> affiliation;
-		while(!file.eof())
-		{
-			if(participant_id!=id)
-			{
-			 file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< name <<std::left<<std::setw(15)<< phone <<std::left<<std::setw(15)<< mail <<std::left<<std::setw(15)<< affiliation << "\n";
-			}
-			else
-			{
-				cout<<"\t\t\tIngrese DPI Empleado: ";
-				cin>>id;
-				cout<<"\t\t\tIngrese Nombre y Apellido Empleado: ";
-				cin>>name;
-				cout<<"\t\t\tIngrese Telefono Empleado: ";
-				cin>>phone;
-				cout<<"\t\t\tIngrese Correo Empleado: ";
-				cin>>mail;
-				cout<<"\t\t\tIngrese No.Afiliacion Persona: ";
-				cin>>affiliation;
-				file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< name <<std::left<<std::setw(15)<< phone <<std::left<<std::setw(15)<< mail <<std::left<<std::setw(15)<< affiliation << "\n";
-				found++;
-			}
-			file >> id >> name >> phone >> mail >> affiliation;
-
-		}
-		file1.close();
-		file.close();
-		remove("ParticipantRecordEmpleados.txt");
-		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
-	}
+	ofstream archivoEmpleados("registrosempleados.dat", ios::app | ios::out | ios::binary);
+	if( !archivoEmpleados )
+    {
+        cerr << "No se pudo abrir el archivo registro empleados." << endl;
+        exit( EXIT_FAILURE );
+    }
+	ClsEmpleados empleado;
+	cout<<"Ingrese la clave del empleado a modificar(0-Salir): ";
+    cin>>m_iclaveEmpleado;
+	while(m_iclaveEmpleado!=0)
+    {
+        empleado.mbuscarEmpleado(m_iclaveEmpleado);
+        cout<<"Editar Empleado"<<endl;
+        cout<<"Ingresa el nombre del empleado: " << endl;
+        cin>> m_snombreEmpleado;
+        cout<<"Ingresa el numero de DPI del empleado: ";
+        cin>>m_sdpiEmpleado;
+        cout<<"Ingresa la dirección de residencia del empleado: ";
+        cin>>m_sdireccionEmpleado;
+        cout<<"Ingresa el número de telefono del empleado: ";
+        cin>>m_stelefonoEmpleado;
+        cout<<"Ingresa el correo electronico del empleado: ";
+        cin>>m_scorreoEmpleado;
+        empleado.mestablecerClave(m_iclaveEmpleado);
+        empleado.mestablecerNombre(m_snombreEmpleado);
+        empleado.mestablecerDpi(m_sdpiEmpleado);
+        empleado.mestablecerDireccion(m_sdireccionEmpleado);
+        empleado.mestablecerTelefono(m_stelefonoEmpleado);
+        empleado.mestablecerCorreo(m_scorreoEmpleado);
+        archivoEmpleados.seekp((empleado.mobtenerClave() - 1 ) * sizeof(ClsEmpleados));
+        archivoEmpleados.write(reinterpret_cast<const char * > (&empleado), sizeof (ClsEmpleados));
+        cout<<"Datos almacenados con éxito";
+        cout<<"Para editar otro empleado ingrese otra clave: (0-salir)";
+        cin>>m_iclaveEmpleado;
+    }
 }
 
-Empleados::searchE()
+ClsEmpleados::mbuscarEmpleado( int ivalorClave )
 {
 	system("cls");
-	fstream file;
+	/*fstream file;
 	int found=0;
 	file.open("ParticipantRecordEmpleados.txt",ios::in);
 	if(!file)
@@ -242,11 +275,11 @@ Empleados::searchE()
 			cout<<"\n\t\t\t Empleado no encontrado...";
 		}
 		file.close();
-	}
+	}*/
 }
-Empleados::deletE()
+ClsEmpleados::meliminarEmpleado()
 {
-	system("cls");
+	/*system("cls");
 	fstream file,file1;
 	string participant_idEmpleado;
 	int found=0;
@@ -285,14 +318,14 @@ Empleados::deletE()
 		file.close();
 		remove("ParticipantRecordEmpleados.txt");
 		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
-	}
+	}*/
 }
-*/
 //Menu de gestion de los datos de empleado
-ClsEmpleados::mMenuEmpleados()
+
+ClsEmpleados::mmenuEmpleado()
 {
     ClsEmpleados empleado;
-    int iSeleccionMenuEmpleados;
+    int iseleccionMenuEmpleados;
 	do
     {
 	system("cls");
@@ -311,34 +344,32 @@ ClsEmpleados::mMenuEmpleados()
 	cout<<"Opcion a escoger:[1/2/3/4/5/0]"<<endl;
 	cout<<"------------------------------"<<endl;
 	cout<<"Ingresa tu Opcion: ";
-    cin>>iSeleccionMenuEmpleados;
+    cin>>iseleccionMenuEmpleados;
 
-    switch(iSeleccionMenuEmpleados)
+    switch(iseleccionMenuEmpleados)
     {
     case 1:
-        empleado.mAgregarEmpleado();
+        empleado.magregarEmpleado();
         break;
 	case 2:
-		empleado.mDespliegueEmpleados();
+		empleado.mdespliegueEmpleado();
 		break;
-	/*case 3:
-		modificarE.modify();
-		getch();
+	case 3:
+		empleado.mmodificarEmpleado();
 		break;
 	case 4:
-		buscarE.searchE();
-		getch();
+		empleado.mbuscarEmpleado();
 		break;
 	case 5:
-		borrarE.deletE();
-		break;*/
+		empleado.meliminarEmpleado();
+		break;
 	case 0:
 		break;
 	default:
 		cout<<"Opcion invalida...Por favor prueba otra vez..";
 		getch();
 	}
-    }while(iSeleccionMenuEmpleados!= 0);
+    }while(iseleccionMenuEmpleados!= 0);
 }
 ClsEmpleados::~ClsEmpleados()
 {

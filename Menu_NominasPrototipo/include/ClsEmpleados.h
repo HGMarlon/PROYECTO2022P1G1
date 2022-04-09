@@ -1,7 +1,7 @@
 //librerias
 #include<string>
 
-//cpp
+//C++
 #ifndef CLSEMPLEADOS_H
 #define CLSEMPLEADOS_H
 
@@ -13,42 +13,53 @@ class ClsEmpleados
     public:
 
         //metodos
-        ClsEmpleados( int = 0, string = "", string = "");
-        mAgregarEmpleado();
-        mIngresarEmpleado();
-        mMenuEmpleados();
+        ClsEmpleados( int = 0, string = "", string = "", string = "", string = "", string = "");
+        magregarEmpleado();
+        mdespliegueEmpleado();
+        mmodificarEmpleado();
+        mbuscarEmpleado( int = 0);
+        meliminarEmpleado();
+        mmenuEmpleado();
 
-        //establecer clave
-        void mestablecerClave( int) ;
+        /*Funciones de los atibutos
+            Fuciones de la clave del empleado*/
+        void mestablecerClave( int ) ;
         int mobtenerClave() const;
 
-        //Funciones obtener nombre
+        //Funciones del nombre del empleado
         void mestablecerNombre( string );
         string mobtenerNombre() const;
 
-        //establecer dpi
+        //Funciones del dpi del empleado
         void mestablecerDpi ( string );
         string mobtenerDpi() const;
 
-        mDespliegueEmpleados();
-        /*modify();
-        searchE();
-        deletE();*/
+        //Funciones de la direccion del empleado
+        void mestablecerDireccion ( string );
+        string mobtenerDireccion() const;
+
+        //Funciones del telefono del empleado
+        void mestablecerTelefono ( string );
+        string mobtenerTelefono() const;
+
+        //Funciones del correo electronico del empleado
+        void mestablecerCorreo ( string );
+        string mobtenerCorreo() const;
+
+        //Destructor
         virtual ~ClsEmpleados();
 
     protected:
 
     private:
 
-        //atributos
-        int m_iClaveEmpleado;
-        char m_sNombreEmpleado[ 20 ];
-        char m_sDpiEmpleado[ 20 ];
-        /*char m_sCodigoIdentificacion[20];
-        char m_sPaisEmpleado[20];
-        char m_sDireccionEmpleado[ 20 ];
-        char m_sTelefonoEmpleado[20];
-        char m_sCorreoEmpleado[20];*/
+        //Atributos
+        int m_iclaveEmpleado;
+        char m_snombreEmpleado[ 20 ];
+        char m_sdpiEmpleado[ 20 ];
+        char m_sdireccionEmpleado[ 20 ];
+        char m_stelefonoEmpleado[ 20 ];
+        char m_scorreoEmpleado[ 20 ];
 };
 
 #endif // CLSEMPLEADOS_H
