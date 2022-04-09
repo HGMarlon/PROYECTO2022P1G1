@@ -14,20 +14,21 @@ using namespace std;
 //constructor
 ClsEmpresa::ClsEmpresa(char p_sNombreEmpresa,char p_sCorreoEmpresa,char p_sNombreRepresentante,char p_sActividadEconomica,int p_iNitEmpresa,int p_iDireccionEmpresa,int p_iTelefonoEmpresa,int p_iNumeroEmpleados,int p_iNumeroEmpresa)
 {
-   m_sNombreEmpresa=p_sNombreEmpresa;
-   m_sCorreoEmpresa=p_sCorreoEmpresa;
-   m_sNombreRepresentante=p_sNombreRepresentante;
-   m_sActividadEconomica=p_sActividadEconomica;
-   m_iNitEmpresa=p_iNitEmpresa;
-   m_iDireccionEmpresa=p_iDireccionEmpresa;
-   m_iTelefonoEmpresa=p_iTelefonoEmpresa;
-   m_iNumeroEmpleados=p_iNumeroEmpleados;
-   m_iNumeroDeEmpresa=p_iNumeroEmpresa;
-
+    m_sNombreEmpresa[20]=p_sNombreEmpresa;
+    m_sCorreoEmpresa[20]=p_sCorreoEmpresa;
+    m_sNombreRepresentante[20]=p_sNombreRepresentante;
+    m_sActividadEconomica[20]=p_sActividadEconomica;
+    m_iNitEmpresa[20]=p_iNitEmpresa;
+    m_iDireccionEmpresa[20]=p_iDireccionEmpresa;
+    m_iTelefonoEmpresa[20]=p_iTelefonoEmpresa;
+    m_iNumeroEmpleados[20]=p_iNumeroEmpleados;
+    m_iNumeroDeEmpresa[20]=p_iNumeroEmpresa;
 }
 
-//metodo obtiene nombre de la empresa
+//metodo menu de la empresa
 void ClsEmpresa::mMenuEmpresa(){
+
+    ClsEmpresa empresa
     int iSeleccionMenuEmpresa;
     do
     {
@@ -52,22 +53,22 @@ void ClsEmpresa::mMenuEmpresa(){
     switch(iSeleccionMenuEmpresa)
     {
 	case 1:
-		mostrarE.mIngresarEmpresa();
+		empresa.mIngresarEmpresa();
 		getch();
 		break;
 	case 2:
-		desplegarE.mDesplegarEmpresa();
+		empresa.mDesplegarEmpresa();
 		getch();
 		break;
 	case 3:
-		modificarE.mModificarEmpresa();
+		empresa.mModificarEmpresa();
 		getch();
 		break;
 	case 4:
-		buscarE.mBuscarEmpresa();
+		empresa.mBuscarEmpresa();
 		break;
 	case 5:
-	    borrarE.mEliminarEmpresa();
+	    empresa.mEliminarEmpresa();
 		break;
     case 0:
 		break;
@@ -78,6 +79,39 @@ void ClsEmpresa::mMenuEmpresa(){
 	//getch();
     }while(iSeleccionMenuEmpresa!=0);
 }
+
+//metodo datos de la empresa
+void ClsEmpresa::mIngresarEmpresa(){
+    int iespacios=0;
+    system("cls");
+    ofstream archivoEmpresa("datosempresa.dat", ios::app | ios::out | ios::binary);
+    if( !archivoEmpleados )
+    {
+        cerr << "No se pudo abrir el archivo datos empresa." << endl;
+        exit( EXIT_FAILURE );
+    }
+    ClsEmpresa empresa;
+    cout<<"----Agregar datos de una Empresa----"<<endl;
+    cout<<"Ingresa Nombre de la Empresa: " << endl;
+    cin>> m_sNombreEmpresa;
+    cout<<"Ingresa Actividad Economica: "; << endl;
+    cin>>m_sActividadEconomica;
+    cout<<"Ingresa Correo Electronico de la empresa: "; << endl;
+    cin>>m_sCorreoEmpresa;
+    cout<<"Ingresa Nombre del Gerente o Representante legal: "; << endl;
+    cin>>m_sNombreRepresentante;
+    cout<<"Ingresa No.de nit: "; << endl;
+    cin>>m_iNitEmpresa;
+    cout<<"Ingresa No.de nit: "; << endl;
+    cin>>m_iNitEmpresa;
+    cout<<"Ingresa Direccion de la Empresa: "; << endl;
+    cin>>m_iDireccionEmpresa;
+    cout<<"Ingresa No.de trabajadores que posee la Empresa: "; << endl;
+    cin>>m_iNumeroEmpleados;
+    cout<<"Ingresa No.de Empresa: "; << endl;
+    cin>>m_iNumeroDeEmpresa;
+}
+
 
 
 ClsEmpresa::~ClsEmpresa()
