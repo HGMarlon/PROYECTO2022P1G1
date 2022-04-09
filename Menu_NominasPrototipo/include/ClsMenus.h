@@ -10,7 +10,7 @@ class ClsMenus
 
         //Metodos
         ClsMenus();
-        Menuxcategorias();
+        mmenuPorCategorias();
         virtual ~ClsMenus();
 
     protected:

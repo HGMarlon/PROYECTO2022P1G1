@@ -1,9 +1,9 @@
-//librerias
+//Librerias
 #include<conio.h>
 #include<iostream>
 #include<fstream>
 
-//clases
+//Clases
 #include "ClsMenus.h"
 #include "ClsEmpleados.h"
 
@@ -15,7 +15,7 @@ main(){
     ClsMenus menuMantenimientos;
 
     //Variables
-    int iMenu;
+    int imenu;
 
 	//Menu principal
 	do
@@ -37,12 +37,12 @@ main(){
 	cout<<"OPCIONES A ESCOGER :     [1/2/3/4/5/6/0]"<<endl;
 	cout<<"-------------------------------"<<endl;
 	cout<<"INGRESA TU OPCION : ";
-    cin>>iMenu;
+    cin>>imenu;
 
-    switch(iMenu)
+    switch(imenu)
     {
     case 1:
-        menuMantenimientos.Menuxcategorias();
+        menuMantenimientos.mmenuPorCategorias();
         break;
 	case 2:
 		cout<<"USTED ESTA EN EL APARTADO GENERACION NOMINA";
@@ -70,5 +70,5 @@ main(){
 		cout<<"CARACTER NO VALIDO, INGRESE OTRA OPCION";
 		getch();
 	}
-    }while(iMenu!= 0);
+    }while(imenu!= 0);
 }

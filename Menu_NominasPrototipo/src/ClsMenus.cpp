@@ -18,7 +18,7 @@ ClsMenus::ClsMenus()
 }
 
 //Metodos de la clase Menu intermedio
-ClsMenus::Menuxcategorias()
+ClsMenus::mmenuPorCategorias()
 {
     ClsEmpleados mantenimentoEmpleado;
     int choice2;
@@ -46,7 +46,7 @@ ClsMenus::Menuxcategorias()
     switch(choice2)
     {
     case 1:
-        mantenimentoEmpleado.mMenuEmpleados();
+        mantenimentoEmpleado.mmenuEmpleado();
         break;
 	case 2:
 
