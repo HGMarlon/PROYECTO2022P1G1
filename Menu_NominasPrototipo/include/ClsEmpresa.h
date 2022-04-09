@@ -10,15 +10,22 @@ using namespace std;
 class ClsEmpresa
 {
     public:
-        ClsEmpresa();
-
-
+         //metodos
+        ClsEmpresa(char,char,char,char,int,int,int,int,int);//constructor
+        void mMenuEmpresa();
+        void mInsertarEmpresa();
+        void mIngresarEmpresa();
+        void mDesplegarEmpresa();
+        void mModificarEmpresa();
+        void mBuscarEmpresa();
+        void mEliminarEmpresa();
 
         virtual ~ClsEmpresa();
 
     protected:
 
     private:
+        //atributos
         char m_sNombreEmpresa[20];
         char m_sCorreoEmpresa[20];
         char m_sNombreRepresentante[20];
