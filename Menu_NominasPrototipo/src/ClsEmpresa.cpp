@@ -84,7 +84,7 @@ void ClsEmpresa::mMenuEmpresa(){
 void ClsEmpresa::mIngresarEmpresa(){
     int iespacios=0;
     system("cls");
-    ofstream archivoEmpresa("datosempresa.dat", ios::app | ios::out | ios::binary);
+    ofstream archivoEmpresa("datosempresa.dat", ios::app | ios::out | ios::out | ios::binary);
     if( !archivoEmpresa )
     {
         cerr << "No se pudo abrir el archivo datos empresa." << endl;
@@ -114,7 +114,7 @@ void ClsEmpresa::mIngresarEmpresa(){
 
 ClsEmpresa::mDesplegarEmpresa(){
     system("cls");
-	ifstream archivoEmpresa("datosempresa.dat", ios::in | ios:: binary);
+	ifstream archivoEmpresa("datosempresa.dat", ios::in | ios::out | ios:: binary);
 	int total=0;
 	cout<<"----Tabla de datos de Empresa----"<<endl;
 	if(!archivoEmpresa)
@@ -146,8 +146,61 @@ ClsEmpresa::mDesplegarEmpresa(){
 	archivoEmpleados.close();
 }
 
+ClsEmpresa::mModificarEmpresa(){
+    system("cls");
+	fstream file,file1;
+	int numero_Empresa;
+	cout<<"\n-------------------------Modificacion Datos de Empresa-------------------------"<<endl;
+	file.open("datosEmpresa.dat",ios::in | ios::out | ios::binary);
+	if(!file)
+	{
+		cout<<"\n\t\t\tNo hay informacion..,";
+		file.close();
+	}
+	else
+	{
+		cout<<"\n Ingrese el numero de empresa que desea modificar: ";
+		cin>>numero_Empresa;
+		file1.open("RegistroDatosEmpresa.dat",ios::app | ios::out | ios::in | ios::binary);
+		file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
+		while(!file.eof())
+		{
+			if(numero_Empresa!=m_iNumeroDeEmpresa
+            file1<<std::left<<std::setw(20)<< m_sNombreEmpresa <<std::left<<std::setw(20)<< m_sActividadEconomica <<std::left<<std::setw(20)<< m_sCorreoEmpresa <<std::left<<std::setw(20)<< m_sNombreRepresentante <<std::left<<std::setw(20)<< m_iNitEmpresa <<std::left<<std::setw(20)<< m_iDireccionEmpresa  <<std::left<<std::setw(20)<< m_iTelefonoEmpresa << std::left<<std::setw(20)<< m_iNumeroEmpleados <<std::left<<std::setw(20)<< m_iNumeroDeEmpresa <<std::left<<std::setw(20) <<"\n";
+			}
+			else
+			{
+                cout<<"----Agregar datos de una Empresa----"<<endl;
+                cout<<"Ingresa Nombre de la Empresa: " << endl;
+                cin>>m_sNombreEmpresa;
+                cout<<"Ingresa Actividad Economica: "; << endl;
+                cin>>m_sActividadEconomica;
+                cout<<"Ingresa Correo Electronico de la empresa: "; << endl;
+                cin>>m_sCorreoEmpresa;
+                cout<<"Ingresa Nombre del Gerente o Representante legal: "; << endl;
+                cin>>m_sNombreRepresentante;
+                cout<<"Ingresa No.de nit: "; << endl;
+                cin>>m_iNitEmpresa;
+                cout<<"Ingresa Direccion de la Empresa: "; << endl;
+                cin>>m_iDireccionEmpresa;
+                cout<<"Ingresa telefono de la Empresa: "; << endl;
+                cin>>m_iTelefonoEmpresa;
+                cout<<"Ingresa No.de trabajadores que posee la Empresa: "; << endl;
+                cin>>m_iNumeroEmpleados;
+                cout<<"Ingresa No.de Empresa: "; << endl;
+                cin>>m_iNumeroDeEmpresa;
+                file1<<std::left<<std::setw(20)<< m_sNombreEmpresa <<std::left<<std::setw(20)<< m_sActividadEconomica <<std::left<<std::setw(20)<< m_sCorreoEmpresa <<std::left<<std::setw(20)<< m_sNombreRepresentante <<std::left<<std::setw(20)<< m_iNitEmpresa <<std::left<<std::setw(20)<< m_iDireccionEmpresa  <<std::left<<std::setw(20)<< m_iTelefonoEmpresa << std::left<<std::setw(20)<< m_iNumeroEmpleados <<std::left<<std::setw(20)<< m_iNumeroDeEmpresa <<std::left<<std::setw(20) <<"\n";
+				found++;
+			}
+			file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
 
-
+		}
+		file1.close();
+		file.close();
+		remove("datosEmpresa.dat");
+		rename("RegistroDatosEmpresa.dat","datosEmpresa.dat");
+	}
+}
 
 
 ClsEmpresa::~ClsEmpresa()
