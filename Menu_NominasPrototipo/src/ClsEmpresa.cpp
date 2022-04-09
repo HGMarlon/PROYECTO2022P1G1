@@ -245,9 +245,49 @@ ClsEmpresa::mBuscarEmpresa(){
 	}
 }
 
-
-
-
+ClsEmpresa::mEliminarEmpresa()
+{
+	system("cls");
+	fstream file,file1;
+	int numero_EmpresaN;
+	int found=0;
+	cout<<"\n-------------------------Detalles Empresa a Borrar-------------------------"<<endl;
+	file.open("datosEmpresa.dat",ios::in| ios::out | ios::binary);
+	if(!file)
+	{
+		cout<<"\n\t\t\tNo hay informacion...";
+		file.close();
+	}
+	else
+	{
+		cout<<"\n Ingrese el numero de Empresa que quiere borrar: ";
+		cin>>numero_EmpresaN;
+		file1.open("RegistroDatosEmpresa.dat",ios::app | ios::out | ios::binary);
+		file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
+		while(!file.eof())
+		{
+			if(numero_EmpresaN!= m_iNumeroDeEmpresa)
+			{
+				file1<<std::left<<std::setw(20)<< m_sNombreEmpresa <<std::left<<std::setw(20)<< m_sActividadEconomica <<std::left<<std::setw(20)<< m_sCorreoEmpresa <<std::left<<std::setw(20)<< m_sNombreRepresentante <<std::left<<std::setw(20)<< m_iNitEmpresa <<std::left<<std::setw(20)<< m_iDireccionEmpresa  <<std::left<<std::setw(20)<< m_iTelefonoEmpresa << std::left<<std::setw(20)<< m_iNumeroEmpleados <<std::left<<std::setw(20)<< m_iNumeroDeEmpresa <<std::left<<std::setw(20) <<"\n";
+			}
+			else
+			{
+				found++;
+				cout << "\n\t\t\tBorrado de informacion exitoso";
+			}
+			file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ; ;
+		}
+		if(found==0)
+		{
+			cout<<"\n\t\t\t numero de Empresa no encontrado...";
+			getch();
+		}
+		file1.close();
+		file.close();
+		remove("datosEmpresa.dat");
+		rename("RegistroDatosEmpresa.dat","datosEmpresa.dat");
+	}
+}
 
 ClsEmpresa::~ClsEmpresa()
 {
