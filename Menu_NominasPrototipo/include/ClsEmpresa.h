@@ -12,12 +12,12 @@ class ClsEmpresa
     public:
         ClsEmpresa(char,char,char,char,int,int,int,int,int);//constructor
        //metodos
-        void mMenuEmpresa();
-        void mIngresarEmpresa();
-        void mDesplegarEmpresa();
-        void mModificarEmpresa();
-        void mBuscarEmpresa();
-        void mEliminarEmpresa();
+         mMenuEmpresa();
+         mIngresarEmpresa();
+         mDesplegarEmpresa();
+         mModificarEmpresa();
+         mBuscarEmpresa();
+         mEliminarEmpresa();
 
 
         virtual ~ClsEmpresa();
@@ -30,11 +30,11 @@ class ClsEmpresa
         char m_sCorreoEmpresa[20];
         char m_sNombreRepresentante[20];
         char m_sActividadEconomica[20];
-        int m_iNitEmpresa[20];
-        int m_iDireccionEmpresa[20];
-        int m_iTelefonoEmpresa[20];
-        int m_iNumeroEmpleados[20];
-        int m_iNumeroDeEmpresa[20];
+        int m_iNitEmpresa;
+        int m_iDireccionEmpresa;
+        int m_iTelefonoEmpresa;
+        int m_iNumeroEmpleados;
+        int m_iNumeroDeEmpresa;
 
 };
 

@@ -18,17 +18,17 @@ ClsEmpresa::ClsEmpresa(char p_sNombreEmpresa,char p_sActividadEconomica,char p_s
     m_sCorreoEmpresa[20]=p_sCorreoEmpresa;
     m_sNombreRepresentante[20]=p_sNombreRepresentante;
     m_sActividadEconomica[20]=p_sActividadEconomica;
-    m_iNitEmpresa[20]=p_iNitEmpresa;
-    m_iDireccionEmpresa[20]=p_iDireccionEmpresa;
-    m_iTelefonoEmpresa[20]=p_iTelefonoEmpresa;
-    m_iNumeroEmpleados[20]=p_iNumeroEmpleados;
-    m_iNumeroDeEmpresa[20]=p_iNumeroEmpresa;
+    m_iNitEmpresa=p_iNitEmpresa;
+    m_iDireccionEmpresa=p_iDireccionEmpresa;
+    m_iTelefonoEmpresa=p_iTelefonoEmpresa;
+    m_iNumeroEmpleados=p_iNumeroEmpleados;
+    m_iNumeroDeEmpresa=p_iNumeroEmpresa;
 }
 
 //metodo menu de la empresa
-void ClsEmpresa::mMenuEmpresa(){
-
-    ClsEmpresa empresa
+ClsEmpresa::mMenuEmpresa()
+{
+    ClsEmpresa empresa;
     int iSeleccionMenuEmpresa;
     do
     {
@@ -53,22 +53,22 @@ void ClsEmpresa::mMenuEmpresa(){
     switch(iSeleccionMenuEmpresa)
     {
 	case 1:
-		empresa.mIngresarEmpresa();
+		mIngresarEmpresa();
 		getch();
 		break;
 	case 2:
-		empresa.mDesplegarEmpresa();
+		mDesplegarEmpresa();
 		getch();
 		break;
 	case 3:
-		empresa.mModificarEmpresa();
+		mModificarEmpresa();
 		getch();
 		break;
 	case 4:
-		empresa.mBuscarEmpresa();
+		mBuscarEmpresa();
 		break;
 	case 5:
-	    empresa.mEliminarEmpresa();
+	    mEliminarEmpresa();
 		break;
     case 0:
 		break;
@@ -81,7 +81,7 @@ void ClsEmpresa::mMenuEmpresa(){
 }
 
 //metodo datos de la empresa
-void ClsEmpresa::mIngresarEmpresa(){
+ClsEmpresa::mIngresarEmpresa(){
     int iespacios=0;
     system("cls");
     ofstream archivoEmpresa("datosempresa.dat", ios::app | ios::out | ios::out | ios::binary);
@@ -90,26 +90,30 @@ void ClsEmpresa::mIngresarEmpresa(){
         cerr << "No se pudo abrir el archivo datos empresa." << endl;
         exit( EXIT_FAILURE );
     }
-    ClsEmpresa empresa;
     cout<<"----Agregar datos de una Empresa----"<<endl;
     cout<<"Ingresa Nombre de la Empresa: " << endl;
     cin>>m_sNombreEmpresa;
-    cout<<"Ingresa Actividad Economica: "; << endl;
+    cout<<"Ingresa Actividad Economica: " << endl;
     cin>>m_sActividadEconomica;
-    cout<<"Ingresa Correo Electronico de la empresa: "; << endl;
+    cout<<"Ingresa Correo Electronico de la empresa: " << endl;
     cin>>m_sCorreoEmpresa;
-    cout<<"Ingresa Nombre del Gerente o Representante legal: "; << endl;
+    cout<<"Ingresa Nombre del Gerente o Representante legal: " << endl;
     cin>>m_sNombreRepresentante;
-    cout<<"Ingresa No.de nit: "; << endl;
+    cout<<"Ingresa No.de nit: " << endl;
     cin>>m_iNitEmpresa;
-    cout<<"Ingresa Direccion de la Empresa: "; << endl;
+    cout<<"Ingresa Direccion de la Empresa: " << endl;
     cin>>m_iDireccionEmpresa;
-    cout<<"Ingresa telefono de la Empresa: "; << endl;
+    cout<<"Ingresa telefono de la Empresa: " << endl;
     cin>>m_iTelefonoEmpresa;
-    cout<<"Ingresa No.de trabajadores que posee la Empresa: "; << endl;
+    cout<<"Ingresa No.de trabajadores que posee la Empresa: " << endl;
     cin>>m_iNumeroEmpleados;
-    cout<<"Ingresa No.de Empresa: "; << endl;
+    cout<<"Ingresa No.de Empresa: " << endl;
     cin>>m_iNumeroDeEmpresa;
+    empresa.mIngresarEmpresa();
+    empresa.mDesplegarEmpresa();
+    empresa.mModificarEmpresa();
+    empresa.mBuscarEmpresa();
+    empresa.mEliminarEmpresa();
 }
 
 ClsEmpresa::mDesplegarEmpresa(){
@@ -124,7 +128,6 @@ ClsEmpresa::mDesplegarEmpresa(){
 	}
 	else
 	{
-		ClsEmpresa empresa;
 		while(!archivoEmpresa.eof())
 		{
 			total++;
@@ -143,7 +146,7 @@ ClsEmpresa::mDesplegarEmpresa(){
 			cout<<"No hay informacion...";
 		}
 	}
-	archivoEmpleados.close();
+	archivoEmpresa.close();
 }
 
 ClsEmpresa::mModificarEmpresa(){
@@ -165,7 +168,7 @@ ClsEmpresa::mModificarEmpresa(){
 		file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
 		while(!file.eof())
 		{
-			if(numero_Empresa!=m_iNumeroDeEmpresa
+			if(numero_Empresa!=m_iNumeroDeEmpresa){
             file1<<std::left<<std::setw(20)<< m_sNombreEmpresa <<std::left<<std::setw(20)<< m_sActividadEconomica <<std::left<<std::setw(20)<< m_sCorreoEmpresa <<std::left<<std::setw(20)<< m_sNombreRepresentante <<std::left<<std::setw(20)<< m_iNitEmpresa <<std::left<<std::setw(20)<< m_iDireccionEmpresa  <<std::left<<std::setw(20)<< m_iTelefonoEmpresa << std::left<<std::setw(20)<< m_iNumeroEmpleados <<std::left<<std::setw(20)<< m_iNumeroDeEmpresa <<std::left<<std::setw(20) <<"\n";
 			}
 			else
@@ -173,24 +176,24 @@ ClsEmpresa::mModificarEmpresa(){
                 cout<<"----Agregar datos de una Empresa----"<<endl;
                 cout<<"Ingresa Nombre de la Empresa: " << endl;
                 cin>>m_sNombreEmpresa;
-                cout<<"Ingresa Actividad Economica: "; << endl;
+                cout<<"Ingresa Actividad Economica: " << endl;
                 cin>>m_sActividadEconomica;
-                cout<<"Ingresa Correo Electronico de la empresa: "; << endl;
+                cout<<"Ingresa Correo Electronico de la empresa: " << endl;
                 cin>>m_sCorreoEmpresa;
-                cout<<"Ingresa Nombre del Gerente o Representante legal: "; << endl;
+                cout<<"Ingresa Nombre del Gerente o Representante legal: " << endl;
                 cin>>m_sNombreRepresentante;
-                cout<<"Ingresa No.de nit: "; << endl;
+                cout<<"Ingresa No.de nit: " << endl;
                 cin>>m_iNitEmpresa;
-                cout<<"Ingresa Direccion de la Empresa: "; << endl;
+                cout<<"Ingresa Direccion de la Empresa: " << endl;
                 cin>>m_iDireccionEmpresa;
-                cout<<"Ingresa telefono de la Empresa: "; << endl;
+                cout<<"Ingresa telefono de la Empresa: " << endl;
                 cin>>m_iTelefonoEmpresa;
-                cout<<"Ingresa No.de trabajadores que posee la Empresa: "; << endl;
+                cout<<"Ingresa No.de trabajadores que posee la Empresa: " << endl;
                 cin>>m_iNumeroEmpleados;
-                cout<<"Ingresa No.de Empresa: "; << endl;
+                cout<<"Ingresa No.de Empresa: " << endl;
                 cin>>m_iNumeroDeEmpresa;
                 file1<<std::left<<std::setw(20)<< m_sNombreEmpresa <<std::left<<std::setw(20)<< m_sActividadEconomica <<std::left<<std::setw(20)<< m_sCorreoEmpresa <<std::left<<std::setw(20)<< m_sNombreRepresentante <<std::left<<std::setw(20)<< m_iNitEmpresa <<std::left<<std::setw(20)<< m_iDireccionEmpresa  <<std::left<<std::setw(20)<< m_iTelefonoEmpresa << std::left<<std::setw(20)<< m_iNumeroEmpleados <<std::left<<std::setw(20)<< m_iNumeroDeEmpresa <<std::left<<std::setw(20) <<"\n";
-				found++;
+
 			}
 			file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
 

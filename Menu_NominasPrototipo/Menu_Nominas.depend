@@ -62,12 +62,13 @@
 	<fstream>
 	<string>
 
-1649456217 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649490299 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
 	"ClsMenus.h"
 	"ClsEmpleados.h"
+	"ClsEmpresa.h"
 
 1649456217 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsmenus.h
 
@@ -96,6 +97,6 @@
 1649457639 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempresa.cpp
 	"ClsEmpresa.h"
 
-1649460160 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
+1649491297 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
 	<string>
 
