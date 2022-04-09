@@ -202,6 +202,52 @@ ClsEmpresa::mModificarEmpresa(){
 	}
 }
 
+ClsEmpresa::mBuscarEmpresa(){
+
+	system("cls");
+	fstream file;
+	int found=0;
+	file.open("datosEmpresa.dat",ios::in | ios::out | ios::binary);
+	if(!file)
+	{
+		cout<<"\n-------------------------Datos de la Empresa buscada------------------------"<<endl;
+		cout<<"\n\t\t\tNo hay informacion...";
+	}
+	else
+	{
+		int numero_EmpresaN;
+		cout<<"\n-------------------------Datos de la Empresa buscada------------------------"<<endl;
+		cout<<"\nIngrese el numero de empresa que desea modificar: ";
+		cin>>numero_EmpresaN;
+		file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
+		while(!file.eof())
+		{
+			if(numero_EmpresaN==m_iNumeroDeEmpresa)
+			{
+				cout<<"Nombre: "<< m_sNombreEmpresa <<endl;
+                cout<<"Actividad: "<< m_sActividadEconomica <<endl;
+                cout<<"Correo: "<< m_sCorreoEmpresa <<endl;
+                cout<<"Representante: "<< m_sNombreRepresentante <<endl;
+                cout<<"Nit: "<< m_iNitEmpresa <<endl;
+                cout<<"Direccion: "<< m_iDireccionEmpresa <<endl;
+                cout<<"Telefono: "<< m_iTelefonoEmpresa <<endl;
+                cout<<"Empleados: "<< m_iNumeroEmpleados <<endl;
+                cout<<"Empresa: "<< m_iNumeroDeEmpresa <<endl;
+				found++;
+			}
+			file >> m_sNombreEmpresa >> m_sActividadEconomica >> m_sCorreoEmpresa >> m_sNombreRepresentante >> m_iNitEmpresa >> m_iDireccionEmpresa >> m_iTelefonoEmpresa >> m_iNumeroEmpleados >>  m_iNumeroDeEmpresa ;
+		}
+		if(found==0)
+		{
+			cout<<"\n\t\t\t Empresa no encontrada...";
+		}
+		file.close();
+	}
+}
+
+
+
+
 
 ClsEmpresa::~ClsEmpresa()
 {
