@@ -12,7 +12,7 @@
 using namespace std;
 
 //constructor
-ClsEmpresa::ClsEmpresa(char p_sNombreEmpresa,char p_sCorreoEmpresa,char p_sNombreRepresentante,char p_sActividadEconomica,int p_iNitEmpresa,int p_iDireccionEmpresa,int p_iTelefonoEmpresa,int p_iNumeroEmpleados,int p_iNumeroEmpresa)
+ClsEmpresa::ClsEmpresa(char p_sNombreEmpresa,char p_sActividadEconomica,char p_sCorreoEmpresa,char p_sNombreRepresentante,int p_iNitEmpresa,int p_iDireccionEmpresa,int p_iTelefonoEmpresa,int p_iNumeroEmpleados,int p_iNumeroEmpresa)
 {
     m_sNombreEmpresa[20]=p_sNombreEmpresa;
     m_sCorreoEmpresa[20]=p_sCorreoEmpresa;
@@ -85,7 +85,7 @@ void ClsEmpresa::mIngresarEmpresa(){
     int iespacios=0;
     system("cls");
     ofstream archivoEmpresa("datosempresa.dat", ios::app | ios::out | ios::binary);
-    if( !archivoEmpleados )
+    if( !archivoEmpresa )
     {
         cerr << "No se pudo abrir el archivo datos empresa." << endl;
         exit( EXIT_FAILURE );
@@ -93,7 +93,7 @@ void ClsEmpresa::mIngresarEmpresa(){
     ClsEmpresa empresa;
     cout<<"----Agregar datos de una Empresa----"<<endl;
     cout<<"Ingresa Nombre de la Empresa: " << endl;
-    cin>> m_sNombreEmpresa;
+    cin>>m_sNombreEmpresa;
     cout<<"Ingresa Actividad Economica: "; << endl;
     cin>>m_sActividadEconomica;
     cout<<"Ingresa Correo Electronico de la empresa: "; << endl;
@@ -102,15 +102,51 @@ void ClsEmpresa::mIngresarEmpresa(){
     cin>>m_sNombreRepresentante;
     cout<<"Ingresa No.de nit: "; << endl;
     cin>>m_iNitEmpresa;
-    cout<<"Ingresa No.de nit: "; << endl;
-    cin>>m_iNitEmpresa;
     cout<<"Ingresa Direccion de la Empresa: "; << endl;
     cin>>m_iDireccionEmpresa;
+    cout<<"Ingresa telefono de la Empresa: "; << endl;
+    cin>>m_iTelefonoEmpresa;
     cout<<"Ingresa No.de trabajadores que posee la Empresa: "; << endl;
     cin>>m_iNumeroEmpleados;
     cout<<"Ingresa No.de Empresa: "; << endl;
     cin>>m_iNumeroDeEmpresa;
 }
+
+ClsEmpresa::mDesplegarEmpresa(){
+    system("cls");
+	ifstream archivoEmpresa("datosempresa.dat", ios::in | ios:: binary);
+	int total=0;
+	cout<<"----Tabla de datos de Empresa----"<<endl;
+	if(!archivoEmpresa)
+	{
+		cerr << "No se pudo abrir el archivo datos empresa." << endl;
+        exit( EXIT_FAILURE );
+	}
+	else
+	{
+		ClsEmpresa empresa;
+		while(!archivoEmpresa.eof())
+		{
+			total++;
+			cout<<"Nombre: "<< m_sNombreEmpresa <<endl;
+			cout<<"Actividad: "<< m_sActividadEconomica <<endl;
+			cout<<"Correo: "<< m_sCorreoEmpresa <<endl;
+			cout<<"Representante: "<< m_sNombreRepresentante <<endl;
+			cout<<"Nit: "<< m_iNitEmpresa <<endl;
+			cout<<"Direccion: "<< m_iDireccionEmpresa <<endl;
+			cout<<"Telefono: "<< m_iTelefonoEmpresa <<endl;
+			cout<<"Empleados: "<< m_iNumeroEmpleados <<endl;
+			cout<<"Empresa: "<< m_iNumeroDeEmpresa <<endl;
+		}
+		if(total==0)
+		{
+			cout<<"No hay informacion...";
+		}
+	}
+	archivoEmpleados.close();
+}
+
+
 
 
 
