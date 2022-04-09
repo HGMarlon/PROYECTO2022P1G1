@@ -26,9 +26,9 @@ int ClsEmpleados::mobtenerClave() const
     return m_iClaveEmpleado;
 }
 
-void ClsEmpleados::mestablecerClave (int valorClave)
+void ClsEmpleados::mestablecerClave (int ienteroClave)
 {
-    m_iClaveEmpleado = valorClave;
+    m_iClaveEmpleado = ienteroClave;
 }
 
 //obtiene el nombre

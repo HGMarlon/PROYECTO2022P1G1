@@ -62,3 +62,49 @@
 	<fstream>
 	<string>
 
+1649452002 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+
+1649452002 c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\include\clsmenus.h
+
+1649452002 c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+	<string>
+
+1649456327 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649523124 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+	"clsconceptos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
+1649526637 c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\include\clsconceptos.h
+	<string>
+	<fstream>
+
+1649528399 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\menu_nominasprototipo\src\clsconceptos.cpp
+	"clsconceptos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+

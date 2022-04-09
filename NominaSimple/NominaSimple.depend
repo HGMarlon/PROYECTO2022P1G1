@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1649530979 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\nominasimple\src\clsprueba.cpp
+	"clsprueba.h"
+	<string>
+	<iostream>
+
+1649531214 c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\nominasimple\include\clsprueba.h
+	<string>
+
+1649531181 source:c:\users\arcangel\desktop\clases\semestre3\programacioni\git\proyecto2022p1g1\nominasimple\main.cpp
+	<fstream>
+	<iostream>
+	"ClsPrueba.h"
+
