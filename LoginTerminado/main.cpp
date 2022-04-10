@@ -8,12 +8,15 @@
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
+#include "Clslogin.h"
 
 using namespace std;
 
 int obtenerCuenta( const char * const );
+int obtenerUsuario( const char * const );
 void nuevoEmpleado( fstream& );
 void crearArchivoCredito();
+void crearArchivoUsuarios();
 void consultarRegistro(fstream&);
 void mostrarLineaPantalla(const ClsEmpleados &);
 void actualizarRegistro(fstream&);
@@ -21,12 +24,46 @@ void mostrarLinea( ostream&, const ClsEmpleados & );
 void imprimirRegistro( fstream& );
 void eliminarRegistro( fstream& );
 void buscarEmpleado( fstream& );
+void nuevoUsuario( fstream& );
+int buscarUsuario( fstream&, int );
+string obtenerNombreUsuario();
 
 main(){
     //Variables
     int imenuPrincipal;
     int m_iclaveEmpleado=0;
     char m_snombreEmpleado[0];
+    int iingresoUsuario;
+    char snombreUsuario[ 20 ];
+    int isesion = 0;
+    int a=1;
+    string ingresoUsuario;
+    /*Login
+       abrir el archivo en modo de lectura y escritura*/
+    fstream archivoUsuarios("registrousuarios.dat", ios::in | ios::out | ios::binary);
+
+    // salir del programa si fstream no puede abrir el archivo
+    if ( !archivoUsuarios ){
+            cerr << "No se pudo abrir el archivo." << endl;
+            crearArchivoUsuarios();
+            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+            exit ( 0 );
+        } // fin de instrucción if
+
+    cout<<"1. Iniciar sesion "<<endl;
+    cout<<"2. Registrarse "<<endl;
+    cin>>isesion;
+    if(isesion==2)
+    {
+        nuevoUsuario(archivoUsuarios);
+    }
+
+    a=buscarUsuario(archivoUsuarios, a);
+
+    if(a==0){
+
+        getch();
+
 
 	//Menu principal
 	do
@@ -207,7 +244,7 @@ main(){
 	}
 	}while(imenuPrincipal!= 0);
 }
-
+}
 // crear e insertar registro
 void nuevoEmpleado( fstream &insertarEnArchivo )
 {
@@ -253,6 +290,7 @@ void nuevoEmpleado( fstream &insertarEnArchivo )
            << " ya contiene informacion." << endl;
 
 } // fin de la función nuevoRegistro
+
 int obtenerCuenta( const char * const indicador )
 {
    int m_iclaveEmpleado;
@@ -483,3 +521,123 @@ void buscarEmpleado( fstream &leerDeArchivo )
    getch();
 
 } // fin de la función consultarRegistro
+
+// crear e insertar registro
+void nuevoUsuario( fstream &insertarEnArchivo )
+{
+//Clslogin usuario;
+   // obtener el número de cuenta a crear
+   int aingresoUsuario = obtenerUsuario( "Escriba el codigo de ingreso " );
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivo.seekg(
+      ( aingresoUsuario - 1 ) * sizeof( Clslogin ) );
+
+   // leer el registro del archivo
+   Clslogin usuario;
+   insertarEnArchivo.read( reinterpret_cast< char * >( &usuario ),
+      sizeof( Clslogin ) );
+
+   // crear el registro, si éste no existe ya
+   if ( usuario.mobtenerIngreso() == 0 ) {
+
+      char m_snombreUsuario[ 20 ];
+
+      // el usuario introduce el nombre
+      cout << "Escriba el nombre : " << endl;
+      cin >> setw( 20 ) >> m_snombreUsuario;
+
+      // usar valores para llenar los valores de la clave
+      usuario.mestablecernombreUsuario( m_snombreUsuario );
+      usuario.mestablecerIngreso( aingresoUsuario );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivo.seekp( ( aingresoUsuario - 1 ) *
+         sizeof( Clslogin ) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivo.write(
+         reinterpret_cast< const char * >( &usuario ),
+         sizeof( Clslogin ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "La cuenta #" << aingresoUsuario
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+
+void crearArchivoUsuarios()
+{
+    ofstream archivoUsuarios("registrousuarios.dat", ios::out | ios::binary);
+    if(!archivoUsuarios)
+    {
+        cerr<<"No se abrio el archivo"<<endl;
+        exit(1);
+    }
+    Clslogin usuarioEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoUsuarios.write(reinterpret_cast<const char * > (&usuarioEnBlanco), sizeof(Clslogin));
+    }
+}
+
+int obtenerUsuario( const char * const indicador )
+{
+   int m_iingresoUsuario;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicador << " (1 - 100): ";
+      cin >> m_iingresoUsuario;
+
+   } while ( m_iingresoUsuario < 1 || m_iingresoUsuario > 100 );
+
+   return m_iingresoUsuario;
+
+} // fin de la función obtenerCuenta
+
+int buscarUsuario( fstream &leerDeArchivo, int a )
+{
+    system("cls");
+   char snombreUsuario[ 20 ];
+   cout<<"Ingrese su nombre de usuario :";
+   cin>>snombreUsuario;
+   string nombreUsuario;
+   // obtener el número de cuenta a buscar
+   int numeroUsuario = obtenerUsuario("Escriba su codigo : ");
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivo.seekg(
+      ( numeroUsuario - 1 ) * sizeof( Clslogin ) );
+
+   // leer el primer registro del archivo
+   Clslogin usuario;
+   leerDeArchivo.read( reinterpret_cast< char * >( &usuario ),
+      sizeof( Clslogin ) );
+
+   if ( usuario.mobtenerIngreso() != 0 )
+    {
+        nombreUsuario=usuario.mobtenernombreUsuario();
+    }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr <<"No esta registrado." << endl;
+   }
+   if (nombreUsuario==snombreUsuario)
+    {
+        cout<<"Acceso concedido";
+        return a=0;
+    }
+    else
+    {
+        cout <<"Acceso denegado";
+    }
+   getch();
+
+} // fin de la función consultarRegistro
+
