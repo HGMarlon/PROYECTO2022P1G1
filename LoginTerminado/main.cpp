@@ -25,7 +25,7 @@ void imprimirRegistro( fstream& );
 void eliminarRegistro( fstream& );
 void buscarEmpleado( fstream& );
 void nuevoUsuario( fstream& );
-void buscarUsuario( fstream& );
+int buscarUsuario( fstream&, int );
 string obtenerNombreUsuario();
 
 main(){
@@ -36,29 +36,34 @@ main(){
     int iingresoUsuario;
     char snombreUsuario[ 20 ];
     int isesion = 0;
+    int a=1;
     string ingresoUsuario;
     /*Login
        abrir el archivo en modo de lectura y escritura*/
-    fstream archivoUsuarios("registroUsuaios.dat", ios::in | ios::out | ios::binary);
+    fstream archivoUsuarios("registrousuarios.dat", ios::in | ios::out | ios::binary);
 
     // salir del programa si fstream no puede abrir el archivo
-    if ( !archivoUsuarios )
-        {
+    if ( !archivoUsuarios ){
             cerr << "No se pudo abrir el archivo." << endl;
             crearArchivoUsuarios();
             cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
-            exit ( 1 );
+            exit ( 0 );
         } // fin de instrucción if
 
-    cout<<"1. Iniciar sesion ";
-    cout<<"2. Registrarse ";
+    cout<<"1. Iniciar sesion "<<endl;
+    cout<<"2. Registrarse "<<endl;
     cin>>isesion;
     if(isesion==2)
     {
         nuevoUsuario(archivoUsuarios);
     }
 
-    buscarUsuario(archivoUsuarios);
+    a=buscarUsuario(archivoUsuarios, a);
+
+    if(a==0){
+
+        getch();
+
 
 	//Menu principal
 	do
@@ -239,7 +244,7 @@ main(){
 	}
 	}while(imenuPrincipal!= 0);
 }
-
+}
 // crear e insertar registro
 void nuevoEmpleado( fstream &insertarEnArchivo )
 {
@@ -522,7 +527,7 @@ void nuevoUsuario( fstream &insertarEnArchivo )
 {
 //Clslogin usuario;
    // obtener el número de cuenta a crear
-   int aingresoUsuario = obtenerUsuario( "Escriba el nuevo numero de cuenta" );
+   int aingresoUsuario = obtenerUsuario( "Escriba el codigo de ingreso " );
 
    // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
    insertarEnArchivo.seekg(
@@ -539,7 +544,7 @@ void nuevoUsuario( fstream &insertarEnArchivo )
       char m_snombreUsuario[ 20 ];
 
       // el usuario introduce el nombre
-      cout << "Escriba el nombre: " << endl;
+      cout << "Escriba el nombre : " << endl;
       cin >> setw( 20 ) >> m_snombreUsuario;
 
       // usar valores para llenar los valores de la clave
@@ -566,7 +571,7 @@ void nuevoUsuario( fstream &insertarEnArchivo )
 
 void crearArchivoUsuarios()
 {
-    ofstream archivoUsuarios("registroUsuarios.dat", ios::out | ios::binary);
+    ofstream archivoUsuarios("registrousuarios.dat", ios::out | ios::binary);
     if(!archivoUsuarios)
     {
         cerr<<"No se abrio el archivo"<<endl;
@@ -594,14 +599,15 @@ int obtenerUsuario( const char * const indicador )
 
 } // fin de la función obtenerCuenta
 
-void buscarUsuario( fstream &leerDeArchivo )
+int buscarUsuario( fstream &leerDeArchivo, int a )
 {
+    system("cls");
    char snombreUsuario[ 20 ];
-   cout<<"Ingrese su nombre de usuario";
+   cout<<"Ingrese su nombre de usuario :";
    cin>>snombreUsuario;
    string nombreUsuario;
    // obtener el número de cuenta a buscar
-   int numeroUsuario = obtenerUsuario("Escriba su contraseña : ");
+   int numeroUsuario = obtenerUsuario("Escriba su codigo : ");
 
    // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
    leerDeArchivo.seekg(
@@ -625,6 +631,7 @@ void buscarUsuario( fstream &leerDeArchivo )
    if (nombreUsuario==snombreUsuario)
     {
         cout<<"Acceso concedido";
+        return a=0;
     }
     else
     {
@@ -633,3 +640,4 @@ void buscarUsuario( fstream &leerDeArchivo )
    getch();
 
 } // fin de la función consultarRegistro
+

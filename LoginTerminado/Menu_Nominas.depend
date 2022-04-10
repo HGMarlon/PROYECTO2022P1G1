@@ -138,3 +138,63 @@
 	<string>
 	<iostream>
 
+1649625305 source:c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649625305 c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+	<string>
+	<iostream>
+
+1649628426 source:c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\src\clslogin.cpp
+	"Clslogin.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649628426 c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\include\clslogin.h
+	<string>
+	<iostream>
+
+1649625305 source:c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
+1649625305 c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\include\clspuestos.h
+	<string>
+
+1649625305 source:c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\src\clspuestos.cpp
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649628426 source:c:\users\my computer\proyectos\proyecto_rhh\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	<string>
+	<iomanip>
+	<cstdlib>
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	"Clslogin.h"
+
