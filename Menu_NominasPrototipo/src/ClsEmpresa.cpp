@@ -70,7 +70,24 @@ void ClsEmpresa::mestablecerCorreoE( string sCorreoE )
 
 
 
+//Funciones del nombre del gerente
+string ClsEmpresa:: mobtenerDirectorE() const
+{
+    return m_sNombreDirector;
+}
 
+void ClsEmpresa::mestablecerDirectorE( string sNombreDirector )
+{
+   // copiar a lo más 20 caracteres de la cadena en nombree
+   const char *svalorNombreD = sNombreDirector.data();
+   int ilongitud = strlen( svalorNombreD );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy(m_sNombreDirector, svalorNombreD, ilongitud );
+
+   // anexar caracter nulo al final del nombre
+   m_sNombreDirector[ ilongitud ] = '\0';
+
+}
 
 
 
