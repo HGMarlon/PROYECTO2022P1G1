@@ -3,6 +3,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip>
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
@@ -45,7 +46,7 @@ main(){
             do
             {
                 system("cls");
-
+                //Menu segundo nivel
                 cout<<"-------------------------------"<<endl;
                 cout<<" |   SISTEMA DE MANTENIMIENTO |"<<endl;
                 cout<<"-------------------------------"<<endl;
@@ -62,7 +63,7 @@ main(){
                 cout<<"-------------------------------"<<endl;
                 cout<<"Ingresa tu Opcion: ";
                 cin>>choice2;
-
+                //Menu segundo nivel
                 switch(choice2)
                 {
                 case 1:
@@ -71,7 +72,7 @@ main(){
                         do
                         {
                             system("cls");
-
+                            //Menu tercer nivel
                             cout<<"-------------------------------"<<endl;
                             cout<<"|   SISTEMA GESTION EMPLEADOS  |"<<endl;
                             cout<<"-------------------------------"<<endl;
@@ -87,13 +88,14 @@ main(){
                             cout<<"------------------------------"<<endl;
                             cout<<"Ingresa tu Opcion: ";
                             cin>>iseleccionMenuEmpleados;
-
+                            //menu tercer nivel
                             switch(iseleccionMenuEmpleados)
                             {
                             case 1:
                                 {
+                                    //agregando empleados
                                     system("cls");
-                                    ofstream archivoEmpleados("registrosempleados.dat", ios::app | ios::out | ios::binary);
+                                    /*ofstream archivoEmpleados("registrosempleados.txt", ios::app | ios::out | ios::binary);
                                     if( !archivoEmpleados )
                                     {
                                         cerr << "No se pudo abrir el archivo registro empleados." << endl;
@@ -107,27 +109,29 @@ main(){
                                         cout<<"Editar Empleado"<<endl;
                                         cout<<"Ingresa el nombre del empleado: " << endl;
                                         cin>> m_snombreEmpleado;
-                                        /*cout<<"Ingresa el numero de DPI del empleado: ";
+                                        cout<<"Ingresa el numero de DPI del empleado: ";
                                         cin>>m_sdpiEmpleado;
                                         cout<<"Ingresa la dirección de residencia del empleado: ";
                                         cin>>m_sdireccionEmpleado;
                                         cout<<"Ingresa el número de telefono del empleado: ";
                                         cin>>m_stelefonoEmpleado;
                                         cout<<"Ingresa el correo electronico del empleado: ";
-                                        cin>>m_scorreoEmpleado;*/
+                                        cin>>m_scorreoEmpleado;
                                         empleado.mestablecerClave(m_iclaveEmpleado);
                                         empleado.mestablecerNombre(m_snombreEmpleado);
-                                        /*empleado.mestablecerDpi(m_sdpiEmpleado);
+                                        empleado.mestablecerDpi(m_sdpiEmpleado);
                                         empleado.mestablecerDireccion(m_sdireccionEmpleado);
                                         empleado.mestablecerTelefono(m_stelefonoEmpleado);
-                                        empleado.mestablecerCorreo(m_scorreoEmpleado);*/
+                                        empleado.mestablecerCorreo(m_scorreoEmpleado);
                                         archivoEmpleados.seekp((empleado.mobtenerClave() - 1 ) * sizeof(ClsEmpleados));
                                         archivoEmpleados.write(reinterpret_cast<const char * > (&empleado), sizeof (ClsEmpleados));
+                                        archivoEmpleados << left << setw( 9 ) << "Clave" << setw( 20 )
+                                        << "Nombre" << endl;
                                         cout<<"Datos almacenados con éxito";
                                         cout<<"ingrese nueva clave: (0-salir)";
                                         cin>>m_iclaveEmpleado;
                                     }
-                                    archivoEmpleados.close();
+                                    archivoEmpleados.close();*/
                                 }
                                 break;
                             case 2:

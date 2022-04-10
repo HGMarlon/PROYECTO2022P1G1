@@ -20,11 +20,12 @@
 	<fstream>
 	"Procesos.h"
 
-1649555067 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649557343 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
 	<string>
+	<iomanip>
 	"ClsEmpleados.h"
 	"ClsPuestos.h"
 
