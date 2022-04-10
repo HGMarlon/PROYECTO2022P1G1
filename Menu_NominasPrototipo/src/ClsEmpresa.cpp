@@ -90,6 +90,24 @@ void ClsEmpresa::mestablecerDirectorE( string sNombreDirector )
 }
 
 
+//Funciones actividad de la empresa
+string ClsEmpresa::mobtenerActividadE() const
+{
+    return m_sActividadEconomica;
+}
+
+void ClsEmpresa::mestablecerNombreE( string sActividadE )
+{
+   // copiar a lo más 20 caracteres de la cadena en nombree
+   const char *svalorActividadE = sActividadE.data();
+   int ilongitud = strlen( svalorActividadE );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_sActividadEconomica, svalorActividadE, ilongitud );
+
+   // anexar caracter nulo al final del nombre
+   m_sActividadEconomica[ ilongitud ] = '\0';
+
+}
 
 
 
