@@ -110,6 +110,85 @@ void ClsEmpresa::mestablecerNombreE( string sActividadE )
 }
 
 
+//Funciones nit de la empresa
+string ClsEmpresa::mobtenerNitE() const
+{
+    return m_iNitEmpresa;
+}
+
+void ClsEmpresa::mestablecerNitE( string sNitE )
+{
+   // copiar a lo más 20 caracteres de la cadena en nombree
+   const char *svalorNitE = sNitE.data();
+   int ilongitud = strlen( svalorNitE );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_iNitEmpresa, svalorNitE, ilongitud );
+
+   // anexar caracter nulo al final del nombre
+   m_iNitEmpresa[ ilongitud ] = '\0';
+
+}
+
+
+
+//Funciones direccion de la empresa
+string ClsEmpresa::mobtenerDireccionE() const
+{
+    return m_iDireccionEmpresa;
+}
+
+void ClsEmpresa::mestablecerDireccionE( string sDireccionE )
+{
+   // copiar a lo más 20 caracteres de la cadena en nombree
+   const char *svalorDireccionE = sDireccionE.data();
+   int ilongitud = strlen( svalorDireccionE );
+   ilongitud = ( ilongitud < 20 ? ilongitud : 19 );
+   strncpy( m_iDireccionEmpresa, svalorDireccionE, ilongitud );
+
+   // anexar caracter nulo al final del nombre
+   m_iDireccionEmpresa[ ilongitud ] = '\0';
+
+}
+
+
+//Funciones telefono de la empresa
+int ClsEmpresa::mobtenerTelefonoE() const
+{
+    return m_iTelefonoEmpresa;
+}
+
+void ClsEmpleados::mestablecerTelefonoE (int  ivalorTelefonoE)
+{
+    m_iTelefonoEmpresa =  ivalorTelefonoE;
+}
+
+
+
+//Funciones numero de empleados de la empresa
+int ClsEmpresa::mobtenerNumeroEmpleadosE() const
+{
+    return m_iNumeroEmpleados;
+}
+
+void ClsEmpleados::mestablecerNumeroEmpleadosE (int ivalorNumEmpleados)
+{
+    m_iNumeroEmpleados = ivalorNumEmpleados;
+}
+
+
+
+//Funciones numero de empresa
+int ClsEmpresa::mobtenerNumeroEmpresa() const
+{
+    return  m_iNumeroDeEmpresa;
+}
+
+void ClsEmpleados::mestablecerNumeroEmpresa(int ivalorNumEmpresa)
+{
+     m_iNumeroDeEmpresa = ivalorNumEmpresa;
+}
+
+
 
 
 
