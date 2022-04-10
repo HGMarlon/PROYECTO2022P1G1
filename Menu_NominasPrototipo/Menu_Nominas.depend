@@ -121,7 +121,7 @@
 	<cstdlib>
 	<cstring>
 
-1649596833 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649597879 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
@@ -167,11 +167,11 @@
 	<cstdlib>
 	<cstring>
 
-1649597286 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
+1649597879 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
 	<string>
 	<iostream>
 
-1649597714 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempresa.cpp
+1649597879 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempresa.cpp
 	"ClsEmpresa.h"
 	<conio.h>
 	<iomanip>
