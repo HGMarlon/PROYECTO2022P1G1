@@ -10,6 +10,9 @@
 
 using namespace std;
 
+int obtenerCuenta( const char * const );
+void nuevoEmpleado( fstream& );
+
 main(){
     //Variables
     int imenuPrincipal;
@@ -107,8 +110,9 @@ main(){
                             case 1:
                                 {
                                     //agregando empleados
-                                    /*system("cls");
-                                    ClsEmpleados empleado;
+                                    system("cls");
+                                    nuevoEmpleado(archivoEmpleados);
+                                    /*ClsEmpleados empleado;
                                     cout<<"ingrese una clave del empleado: (0-cancelar)";
                                     cin>>m_iclaveEmpleado;
                                     while(m_iclaveEmpleado!=0)
@@ -208,3 +212,63 @@ main(){
 	}
 	}while(imenuPrincipal!= 0);
 }
+
+// crear e insertar registro
+void nuevoEmpleado( fstream &insertarEnArchivo )
+{
+   // obtener el número de cuenta a crear
+   int inumeroClave = obtenerCuenta( "Escriba el nuevo numero de cuenta" );
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivo.seekg(
+      ( inumeroClave - 1 ) * sizeof( ClsEmpleados ) );
+
+   // leer el registro del archivo
+   ClsEmpleados empleado;
+   insertarEnArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+
+   // crear el registro, si éste no existe ya
+   if ( empleado.mobtenerClave() == 0 ) {
+
+      char snombreEmpleado[ 20 ];
+
+      // el usuario introduce el apellido, primer nombre y saldo
+      cout << "Escriba el nombre: " << endl;
+      cin >> setw( 20 ) >> snombreEmpleado;
+
+      // usar valores para llenar los valores de la cuenta
+      empleado.mestablecerNombre( snombreEmpleado );
+      empleado.mestablecerClave( inumeroClave );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivo.seekp( ( inumeroClave - 1 ) *
+         sizeof( ClsEmpleados ) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivo.write(
+         reinterpret_cast< const char * >( &empleado ),
+         sizeof( ClsEmpleados ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "La cuenta #" << inumeroClave
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerCuenta( const char * const indicador )
+{
+   int inumeroClave;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicador << " (1 - 100): ";
+      cin >> inumeroClave;
+
+   } while ( inumeroClave < 1 || inumeroClave > 100 );
+
+   return inumeroClave;
+
+} // fin de la función obtenerCuenta
