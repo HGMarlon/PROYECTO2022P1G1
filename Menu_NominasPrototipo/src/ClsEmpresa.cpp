@@ -257,6 +257,46 @@ do
 
 
 
+ClsEmpresa::mdespliegueEmpresa()
+{
+	system("cls");
+	ifstream archivoEmpresa("registrosempresa.dat", ios::in | ios:: binary);
+	int iinformacionE=0;
+	cout<<"Tabla de Detalles de Empresa:"<<endl;
+	if(!archivoEmpresa)
+	{
+		cerr << "No se pudo abrir el archivo detalles empresa." << endl;
+        exit( EXIT_FAILURE );
+	}
+	else
+	{
+		ClsEmpresa empresa;
+		while(!archivoEmpresa.eof())
+		{
+			iinformacionE++;
+			cout<<"Nombre:"<<empresa.mobtenerNombreE()<<endl;
+			cout<<"Correo:"<<empresa.mobtenerCorreoE()<<endl;
+			cout<<"Director:"<<empresa.mobtenerDirectorE()<<endl;
+			cout<<"Actividad Economica:"<<mobtenerActividadE()<<endl;
+			cout<<"Nit:"<<empresa.mobtenerNitE()<<endl;
+			cout<<"Direccion:"<<empresa.mobtenerDireccionE()<<endl;
+			cout<<"Telefono:"<<empresa.mobtenerTelefonoE()<<endl;
+			cout<<"Numero de empleados:"<<empresa.mobtenerNumeroEmpleadosE()<<endl;
+			cout<<"Numero de empresa:"<<empresa.mobtenerNumeroEmpresa()<<endl;
+
+		}
+		if(iinformacionE==0)
+		{
+			cout<<"No hay informacion...";
+		}
+		cout<<"Fin del archivo.";
+	}
+	archivoEmpresa.close();
+}
+
+
+
+
 
 
 
