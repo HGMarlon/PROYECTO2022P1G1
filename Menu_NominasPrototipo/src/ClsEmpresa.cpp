@@ -50,6 +50,24 @@ void ClsEmpresa::mestablecerNombreE( string sNombreE )
 }
 
 
+//Funciones del correo electronico de la empresa
+string ClsEmpresa::mobtenerCorreoE() const
+{
+    return m_sCorreoEmpresa;
+}
+
+void ClsEmpresa::mestablecerCorreoE( string sCorreoE )
+{
+    // copiar a lo más 20 caracteres de la cadena del telefono
+   const char *svalorCorreoE = sCorreoE.data();
+   int ilongitud = strlen( svalorCorreoE );
+   ilongitud = ( ilongitud< 20 ? ilongitud : 19 );
+   strncpy( m_sCorreoEmpresa, svalorCorreoE, ilongitud );
+
+   // anexar caracter nulo al final de la cadena de la direccion
+   m_sCorreoEmpresa[ ilongitud ] = '\0';
+}
+
 
 
 
