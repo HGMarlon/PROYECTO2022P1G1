@@ -8,6 +8,7 @@
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
+#include "ClsEmpresa.h"
 
 using namespace std;
 
@@ -17,11 +18,29 @@ void crearArchivoCredito();
 void consultarRegistro(fstream&);
 void mostrarLineaPantalla(const ClsEmpleados &);
 
+//empresa
+int obtenerCuentaEmpresa( const char * const );
+void nuevaEmpresa( fstream& );
+void crearArchivoCreditoEmpresa();
+void consultarRegistroEmpresa(fstream&);
+void mostrarLineaPantallaE(const ClsEmpresa &);
+
 main(){
     //Variables
     int imenuPrincipal;
     int m_iclaveEmpleado=0;
     char m_snombreEmpleado[0];
+
+    //variables empresa
+    char m_sNombreEmpresa[0];
+    char m_sCorreoEmpresa[0];
+    char m_sNombreDirector[0];
+    char m_sActividadEconomica[0];
+    char m_iNitEmpresa[0];
+    char m_iDireccionEmpresa[0];
+    int m_iTelefonoEmpresa=0;
+    int m_iNumeroEmpleados=0;
+    int m_iNumeroDeEmpresa=0;
 
 	//Menu principal
 	do
@@ -150,6 +169,18 @@ main(){
                         do
                         {
                             system("cls");
+                            //archivoempresa
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoEmpresa("registrosempresa.dat", ios::in | ios::out | ios::binary);
+
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoEmpresa ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                crearArchivoCreditoEmpresa();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );
+                                exit( EXIT_FAILURE );
+                            }
 
                             cout<<"\t\t\t-------------------------------"<<endl;
                             cout<<"\t\t\t |   SISTEMA GESTION EMPRESA |"<<endl;
@@ -170,9 +201,16 @@ main(){
                             switch(iSeleccionMenuEmpresa)
                             {
                                 case 1:
+                                    //agregando empresa
+                                    system("cls");
+                                    nuevaEmpresa(archivoEmpresa);
 
                                     break;
                                 case 2:
+                                    //Consultar empresa
+                                    system("cls");
+                                    consultarRegistroEmpresa(archivoEmpresa);
+                                    getch();
 
                                     break;
                                 case 3:
@@ -313,6 +351,116 @@ void crearArchivoCredito()
         archivoEmpleados.write(reinterpret_cast<const char * > (&empleadoEnBlanco), sizeof(ClsEmpleados));
     }
 }
+
+
+// crear e insertar registro empresa
+void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
+{
+   // obtener nombre de empresa a crear
+   int m_sNombreEmpresa= obtenerCuentaEmpresa( "Escriba el nuevo nombre de la empresa");
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivoEmpresa.seekg(
+      ( m_sNombreEmpresa- 1 ) * sizeof( ClsEmpresa) );
+
+   // leer el registro del archivo
+   ClsEmpresa empresa;
+   insertarEnArchivoEmpresa.read( reinterpret_cast< char * >( &empresa),
+      sizeof( ClsEmpresa) );
+
+   // crear el registro, si éste no existe ya
+   if ( empresa.mobtenerNombre() == 0 ) {
+///////////////////////////////////////////////////////////////////////
+        char m_sNombreEmpresa[20];
+        char m_sCorreoEmpresa[20];
+        char m_sNombreDirector[20];
+        char m_sActividadEconomica[20];
+        char m_iNitEmpresa[13];
+        char m_iDireccionEmpresa[20];
+        int m_iTelefonoEmpresa;
+        int m_iNumeroEmpleados;
+        int m_iNumeroDeEmpresa;
+
+      // el usuario introduce
+      cout << "Escriba el nombre de la empresa:" << endl;
+      cin >> setw( 20 ) >> m_sNombreEmpresa;
+      cout << "Escriba el nombre del correo de la empresa:" << endl;
+      cin >> setw( 20 ) >> m_sCorreoEmpresa;
+      cout << "Escriba el nombre del director de la emprsa:" << endl;
+      cin >> setw( 20 ) >> m_sNombreDirector;
+      cout << "Escriba actividad economica de la empresa:" << endl;
+      cin >> setw( 20 ) >>m_sActividadEconomica ;
+      cout << "Escriba el nit de la empresa:" << endl;
+      cin >> setw( 13 ) >>m_iNitEmpresa;
+      cout << "Escriba la direccion de la empresa:" << endl;
+      cin >> setw( 20 ) >>m_iDireccionEmpresa;
+      cout << "Escriba el telefono de la empresa:" << endl;
+      cin >> setw( 8 ) >>m_iTelefonoEmpresa;
+      cout << "Escriba el numero de empleados:" << endl;
+      cin >> setw( 6 ) >>m_iNumeroEmpleados;
+      cout << "Escriba el numero de empresa:" << endl;
+      cin >> setw( 20 ) >>m_iNumeroDeEmpresa;
+
+
+      empresa.mestablecerNombreE(m_sNombreEmpresa);
+      empresa.mestablecerCorreoE(m_sCorreoEmpresa);
+      empresa.mestablecerDirectorE(m_sNombreDirector);
+      empresa.mestablecerActividadE(m_sActividadEconomica);
+      empresa.mestablecerNitE(m_iNitEmpresa);
+      empresa.mestablecerDireccionE(m_iDireccionEmpresa);
+      empresa.mestablecerTelefonoE(m_iTelefonoEmpresa);
+      empresa.mestablecerNumeroEmpleadosE(m_iNumeroEmpleados);
+      empresa.mestablecerNumeroEmpresa(m_iNumeroDeEmpresa);
+
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivoEmpresa.seekp( ( m_iNumeroPuesto - 1 ) *
+         sizeof( ClsEmpresa) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivoEmpresa.write(
+         reinterpret_cast< const char * >( &empresa ),
+         sizeof( ClsEmpresa) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "el numero#" << m_sNombreEmpresa
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerCuentaEmpresa( const char * const indicadorEmpresa )
+{
+   int m_sNombreEmpresa;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicadorEmpresa << " (1 - 100): ";
+      cin >> m_sNombreEmpresa;
+
+   } while ( m_sNombreEmpresa < 1 || m_sNombreEmpresa > 100 );
+
+   return m_sNombreEmpresa;
+
+} // fin de la función obtenerCuenta
+
+void crearArchivoCreditoEmpresa()
+{
+    ofstream archivoEmpresa("registrosempresa.dat", ios::out | ios::binary);
+    if(!archivoEmpresa)
+    {
+        cerr<<"No se abrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsEmpresa EmpresaEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoEmpresa.write(reinterpret_cast<const char * > (&EmpresaEnBlanco), sizeof(ClsEmpresa));
+    }
+}
+
+
 //MOSTRAR
 void consultarRegistro( fstream &leerDeArchivo )
 {
