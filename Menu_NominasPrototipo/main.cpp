@@ -357,11 +357,11 @@ void crearArchivoCredito()
 void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
 {
    // obtener nombre de empresa a crear
-   int m_sNombreEmpresa= obtenerCuentaEmpresa( "Escriba el nuevo nombre de la empresa");
+   int m_iNumeroDeEmpresa= obtenerCuentaEmpresa( "Escriba el nuevo nombre de la empresa");
 
    // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
    insertarEnArchivoEmpresa.seekg(
-      ( m_sNombreEmpresa- 1 ) * sizeof( ClsEmpresa) );
+      ( m_iNumeroDeEmpresa- 1 ) * sizeof( ClsEmpresa) );
 
    // leer el registro del archivo
    ClsEmpresa empresa;
@@ -369,7 +369,7 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
       sizeof( ClsEmpresa) );
 
    // crear el registro, si éste no existe ya
-   if ( empresa.mobtenerNombre() == 0 ) {
+   if ( empresa.mobtenerNumeroEmpresa() == 0 ) {
 ///////////////////////////////////////////////////////////////////////
         char m_sNombreEmpresa[20];
         char m_sCorreoEmpresa[20];
@@ -414,7 +414,7 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
 
 
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
-      insertarEnArchivoEmpresa.seekp( ( m_iNumeroPuesto - 1 ) *
+      insertarEnArchivoEmpresa.seekp( ( m_iNumeroDeEmpresa - 1 ) *
          sizeof( ClsEmpresa) );
 
       // insertar el registro en el archivo
@@ -426,22 +426,22 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
 
    // mostrar error si la cuenta ya existe
    else
-      cerr << "el numero#" << m_sNombreEmpresa
+      cerr << "el numero#" << m_iNumeroDeEmpresa
            << " ya contiene informacion." << endl;
 
 } // fin de la función nuevoRegistro
 int obtenerCuentaEmpresa( const char * const indicadorEmpresa )
 {
-   int m_sNombreEmpresa;
+   int m_iNumeroDeEmpresa;
 
    // obtener el valor del número de cuenta
    do {
       cout << indicadorEmpresa << " (1 - 100): ";
-      cin >> m_sNombreEmpresa;
+      cin >> m_iNumeroDeEmpresa;
 
-   } while ( m_sNombreEmpresa < 1 || m_sNombreEmpresa > 100 );
+   } while ( m_iNumeroDeEmpresa < 1 || m_iNumeroDeEmpresa > 100 );
 
-   return m_sNombreEmpresa;
+   return m_iNumeroDeEmpresa;
 
 } // fin de la función obtenerCuenta
 
@@ -526,7 +526,7 @@ void consultarRegistroEmpresa( fstream &leerDeArchivoEmpresa )
    while ( !leerDeArchivoEmpresa.eof() ) {
 
       // escribir un registro individual en el archivo de texto
-      if ( empresa.mobtenerNombreE() != 0 )
+      if ( empresa.mobtenerNumeroEmpresa() != 0 )
          mostrarLineaPantallaE(empresa);
 
       // leer siguiente registro del archivo de registros

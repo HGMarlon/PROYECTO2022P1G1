@@ -12,7 +12,7 @@ class ClsEmpresa
 {
     public:
         //metodos
-        ClsEmpresa(string = "", string = ""/*, string = "", string = "",string = "",string = "",int = 0,int = 0*/);
+        ClsEmpresa(string = "", string = "", string = "", string = "",string = "",string = "",int = 0,int = 0,int = 0);
        /* mIngresarEmpresa();
         mAgregarEmpresa();
         mMenuEmpresa();*/
@@ -46,7 +46,7 @@ class ClsEmpresa
          int mobtenerNumeroEmpleadosE()const;
 
          void mestablecerNumeroEmpresa(int);
-         int mobtenerNumeroEmpresa()const;*/
+         int mobtenerNumeroEmpresa()const;
 
 
         /*magregarEmpresa();

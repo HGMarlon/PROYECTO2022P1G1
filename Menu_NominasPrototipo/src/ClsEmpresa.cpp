@@ -19,13 +19,13 @@ using namespace std;
 
 ClsEmpresa::ClsEmpresa(string svalorNombreE, string svalorCorreoE, string svalorNombreD, string svalorActividadE, string svalorNitE, string svalorDireccionE, int ivalorTelefonoE, int ivalorNumEmpleados, int ivalorNumEmpresa)
 {
-    mestablecerNombreE(svalorNombre);
-    mestablecerCorreoE(svalorCorreo);
+    mestablecerNombreE(svalorNombreE);
+    mestablecerCorreoE(svalorCorreoE);
     mestablecerDirectorE(svalorNombreD);
-    mestablecerActividadE(svalorActividad);
-    mestablecerNitE(svalorNit);
-    mestablecerDireccionE(svalorDireccion);
-    mestablecerTelefonoE(ivalorTelefono);
+    mestablecerActividadE(svalorActividadE);
+    mestablecerNitE(svalorNitE);
+    mestablecerDireccionE(svalorDireccionE);
+    mestablecerTelefonoE(ivalorTelefonoE);
     mestablecerNumeroEmpleadosE(ivalorNumEmpleados);
     mestablecerNumeroEmpresa(ivalorNumEmpresa);
 }
@@ -96,7 +96,7 @@ string ClsEmpresa::mobtenerActividadE() const
     return m_sActividadEconomica;
 }
 
-void ClsEmpresa::mestablecerNombreE( string sActividadE )
+void ClsEmpresa::mestablecerActividadE( string sActividadE )
 {
    // copiar a lo más 20 caracteres de la cadena en nombree
    const char *svalorActividadE = sActividadE.data();
@@ -157,7 +157,7 @@ int ClsEmpresa::mobtenerTelefonoE() const
     return m_iTelefonoEmpresa;
 }
 
-void ClsEmpleados::mestablecerTelefonoE (int  ivalorTelefonoE)
+void ClsEmpresa::mestablecerTelefonoE (int  ivalorTelefonoE)
 {
     m_iTelefonoEmpresa =  ivalorTelefonoE;
 }
@@ -170,7 +170,7 @@ int ClsEmpresa::mobtenerNumeroEmpleadosE() const
     return m_iNumeroEmpleados;
 }
 
-void ClsEmpleados::mestablecerNumeroEmpleadosE (int ivalorNumEmpleados)
+void ClsEmpresa::mestablecerNumeroEmpleadosE (int ivalorNumEmpleados)
 {
     m_iNumeroEmpleados = ivalorNumEmpleados;
 }
@@ -183,13 +183,13 @@ int ClsEmpresa::mobtenerNumeroEmpresa() const
     return  m_iNumeroDeEmpresa;
 }
 
-void ClsEmpleados::mestablecerNumeroEmpresa(int ivalorNumEmpresa)
+void ClsEmpresa::mestablecerNumeroEmpresa(int ivalorNumEmpresa)
 {
      m_iNumeroDeEmpresa = ivalorNumEmpresa;
 }
 
 
-
+/*
 //Ingreso de datos nueva empresa
 ClsEmpresa::magregarEmpresa()
 {
@@ -239,7 +239,7 @@ ClsEmpresa::magregarEmpresa()
         cin>>m_sNombreEmpresa;
     }
 	archivoEmpresa.close();
-}*/
+}
 
 
 
@@ -482,7 +482,8 @@ ClsEmpresa::mMenuEmpresa()
 }*/
 
 
-ClsEmpresa::~ClsEmpresa()
+/*ClsEmpresa::~ClsEmpresa()
 {
     //dtor
-}
+}*/
+
