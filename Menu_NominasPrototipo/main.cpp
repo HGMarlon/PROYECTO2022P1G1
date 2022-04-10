@@ -357,7 +357,7 @@ void crearArchivoCredito()
 void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
 {
    // obtener nombre de empresa a crear
-   int m_iNumeroDeEmpresa= obtenerCuentaEmpresa( "Escriba el nuevo nombre de la empresa");
+   int m_iNumeroDeEmpresa= obtenerCuentaEmpresa( "Escriba el nombre de la empresa");
 
    // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
    insertarEnArchivoEmpresa.seekg(
@@ -375,7 +375,7 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
         char m_sCorreoEmpresa[20];
         char m_sNombreDirector[20];
         char m_sActividadEconomica[20];
-        char m_iNitEmpresa[13];
+        char m_iNitEmpresa[14];
         char m_iDireccionEmpresa[20];
         int m_iTelefonoEmpresa;
         int m_iNumeroEmpleados;
@@ -391,13 +391,13 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
       cout << "Escriba actividad economica de la empresa:" << endl;
       cin >> setw( 20 ) >>m_sActividadEconomica ;
       cout << "Escriba el nit de la empresa:" << endl;
-      cin >> setw( 13 ) >>m_iNitEmpresa;
+      cin >> setw( 14 ) >>m_iNitEmpresa;
       cout << "Escriba la direccion de la empresa:" << endl;
       cin >> setw( 20 ) >>m_iDireccionEmpresa;
       cout << "Escriba el telefono de la empresa:" << endl;
-      cin >> setw( 8 ) >>m_iTelefonoEmpresa;
+      cin >> setw( 9 ) >>m_iTelefonoEmpresa;
       cout << "Escriba el numero de empleados:" << endl;
-      cin >> setw( 6 ) >>m_iNumeroEmpleados;
+      cin >> setw( 7 ) >>m_iNumeroEmpleados;
       cout << "Escriba el numero de empresa:" << endl;
       cin >> setw( 20 ) >>m_iNumeroDeEmpresa;
 
@@ -506,12 +506,7 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
 //MOSTRAR EMPRESA
 void consultarRegistroEmpresa( fstream &leerDeArchivoEmpresa )
 {
-   cout << left << setw( 20 ) << "Nombre" << setw( 20 )
-       << "Correo"<< setw( 20 )<< "Director" << setw( 20 )
-       << "Actividad Economica"<< setw( 13 )<< "Nit"<< setw( 20 )
-       << "Direccion"<< setw( 8 )<< "Telefono"<< setw( 6 )<< "Empleados"
-       << setw( 20 )<< "Numero de Empresa"/*<< setw( 14 )
-        << "Primer nombre" << right<< setw( 10 ) << "Saldo"*/ << endl;
+   cout << left << setw( 20 ) << "Nombre" << setw( 20 )<< "Correo"<< setw( 20 )<< "Director" << setw( 20 )<< "Actividad Economica "<< setw( 14 )<< "Nit "<< setw( 20 )<< "Direccion"<< setw( 9 )<< "Telefono "<< setw( 7 )<< "Empleados "<< setw( 20 )<< "Numero de Empresa "<< setw( 14 )<< endl;
 
 
    // colocar el apuntador de posición de archivo al principio del archivo de registros
@@ -543,10 +538,10 @@ void mostrarLineaPantallaE( const ClsEmpresa &registroEmpresa )
           << setw( 20 ) << registroEmpresa.mobtenerCorreoE().data()
           << setw( 20 ) << registroEmpresa.mobtenerDirectorE().data()
           << setw( 20 ) << registroEmpresa. mobtenerActividadE().data()
-          << setw( 13 ) << registroEmpresa.mobtenerNitE().data()
+          << setw( 14 ) << registroEmpresa.mobtenerNitE().data()
           << setw( 20 ) << registroEmpresa.mobtenerDireccionE().data()
-          << setw( 8 ) << registroEmpresa.mobtenerTelefonoE()
-          << setw( 6 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
+          << setw( 9 ) << registroEmpresa.mobtenerTelefonoE()
+          << setw( 7 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
           << setw( 20 ) << registroEmpresa.mobtenerNumeroEmpresa()
           /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
           << setw( 10 ) << setprecision( 2 ) << right << fixed
