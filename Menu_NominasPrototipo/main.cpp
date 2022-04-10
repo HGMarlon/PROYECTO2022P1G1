@@ -16,6 +16,7 @@ void nuevoEmpleado( fstream& );
 void crearArchivoCredito();
 void consultarRegistro(fstream&);
 void mostrarLineaPantalla(const ClsEmpleados &);
+void actualizarRegistro(fstream&);
 
 main(){
     //Variables
@@ -305,3 +306,50 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
           << showpoint << registro.obtenerSaldo() */<< endl;
 
 } // fin de la función mostrarLineaPantalla
+
+//ACTUALIZAR
+void actualizarRegistro( fstream &actualizarArchivo )
+{
+   // obtener el número de cuenta a actualizar
+   int numeroClave = obtenerCuenta( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   actualizarArchivo.seekg(
+      ( numeroClave - 1 ) * sizeof( ClsEmpleados ) );
+
+   // leer el primer registro del archivo
+   ClsEmpleados empleado;
+   actualizarArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+
+   // actualizar el registro
+   if ( empleado.mobtenerClave() != 0 ) {
+      mostrarLinea( cout, empleado );////////////////////////////////////////////////////////////////////////////////////////////
+
+      // solicitar al usuario que especifique la transacción
+      cout << "\nEscriba cargo (+) o abono (-): ";
+      double transaccion; // cargo o abono
+      cin >> transaccion;
+
+      // actualizar el saldo del registro
+      double saldoAnterior = empleado.obtenerSaldo();
+      empleado.establecerSaldo( saldoAnterior + transaccion );
+      mostrarLinea( cout, empleado );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      actualizarArchivo.seekp(
+         ( numeroClave - 1 ) * sizeof( DatosCliente ) );
+
+      // escribir el registro actualizado sobre el registro anterior en el archivo
+      actualizarArchivo.write(
+         reinterpret_cast< const char * >( &empleado ),
+         sizeof( DatosCliente ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta no existe
+   else
+      cerr << "La cuenta #" << numeroClave
+         << " no tiene informacion." << endl;
+
+} // fin de la función actualizarRegistro
