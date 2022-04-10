@@ -1,4 +1,4 @@
-#include "ClsPuestos.h"
+/* #include "ClsPuestos.h"
 
 #include<conio.h>
 #include<iomanip>
@@ -187,7 +187,7 @@ ClsPuestos::mAgregarPuestos()
 	cin>>m_sTelefonoEmpleado;
 	cout<<"Ingresa el correo electronico del empleado: ";
 	cin>>m_sCorreoEmpleado;
-	archivoEmpleados.close();*/
+	archivoEmpleados.close();
 }
 
 //Agregar un nuevo empleado
@@ -202,7 +202,7 @@ do
 		}while(cDecisionNuevoEmpleado=='y'||cDecisionNuevoEmpleado=='Y');
 }*/
 
-ClsPuestos::mDesplieguePuestos()
+/*ClsPuestos::mDesplieguePuestos()
 {
 	system("cls");
 	ifstream archivoPuestos("registrospuestos.dat", ios::in | ios:: binary);
@@ -362,7 +362,7 @@ Empleados::deletE()
 }
 */
 //Menu de gestion de los datos de empleado
-ClsPuestos::mMenuPuestos()
+/*ClsPuestos::mMenuPuestos()
 {
     ClsPuestos puesto;
     int iSeleccionMenuPuestos;
@@ -405,7 +405,7 @@ ClsPuestos::mMenuPuestos()
 	case 5:
 		borrarE.deletE();
 		break;*/
-	case 0:
+	/*case 0:
 		break;
 	default:
 		cout<<"Opcion invalida...Por favor prueba otra vez..";
@@ -416,5 +416,5 @@ ClsPuestos::mMenuPuestos()
 ClsPuestos::~ClsPuestos()
 {
     //dtor
-}
+}*/
 

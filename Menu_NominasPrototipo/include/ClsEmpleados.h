@@ -15,11 +15,11 @@ class ClsEmpleados
         //metodos
         ClsEmpleados( int = 0, string = "", string = "", string = "", string = "", string = "");
         magregarEmpleado();
-        mdespliegueEmpleado();
+        /*mdespliegueEmpleado();
         mmodificarEmpleado();
         mbuscarEmpleado( int = 0);
         meliminarEmpleado();
-        mmenuEmpleado();
+        mmenuEmpleado();*/
 
         /*Funciones de los atibutos
             Fuciones de la clave del empleado*/

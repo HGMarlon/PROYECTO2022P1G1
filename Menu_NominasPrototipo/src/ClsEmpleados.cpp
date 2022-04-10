@@ -167,7 +167,7 @@ ClsEmpleados::magregarEmpleado()
 	archivoEmpleados.close();
 }
 
-ClsEmpleados::mdespliegueEmpleado()
+/*ClsEmpleados::mdespliegueEmpleado()
 {
 	system("cls");
 	ifstream archivoEmpleados("registrosempleados.dat", ios::in | ios:: binary);
@@ -276,8 +276,8 @@ ClsEmpleados::mbuscarEmpleado( int ivalorClave )
 		}
 		file.close();
 	}*/
-}
-ClsEmpleados::meliminarEmpleado()
+//}
+/*ClsEmpleados::meliminarEmpleado()
 {
 	/*system("cls");
 	fstream file,file1;
@@ -319,10 +319,10 @@ ClsEmpleados::meliminarEmpleado()
 		remove("ParticipantRecordEmpleados.txt");
 		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
 	}*/
-}
+//}
 //Menu de gestion de los datos de empleado
 
-ClsEmpleados::mmenuEmpleado()
+/*ClsEmpleados::mmenuEmpleado()
 {
     ClsEmpleados empleado;
     int iseleccionMenuEmpleados;
@@ -370,7 +370,7 @@ ClsEmpleados::mmenuEmpleado()
 		getch();
 	}
     }while(iseleccionMenuEmpleados!= 0);
-}
+}*/
 ClsEmpleados::~ClsEmpleados()
 {
     //dtor

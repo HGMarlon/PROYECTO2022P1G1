@@ -2,7 +2,7 @@
 #ifndef CLSMENUS_H
 #define CLSMENUS_H
 
-using namespace std;
+/*using namespace std;
 
 class ClsMenus
 {
@@ -16,6 +16,6 @@ class ClsMenus
     protected:
 
     private:
-};
+};*/
 
 #endif // CLSMENUS_H
