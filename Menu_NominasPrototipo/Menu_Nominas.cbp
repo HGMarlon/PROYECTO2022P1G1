@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +25,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,9 +37,11 @@
 		</Compiler>
 		<Unit filename="include/ClsEmpleados.h" />
 		<Unit filename="include/ClsMenus.h" />
+		<Unit filename="include/ClsSeguridad.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ClsEmpleados.cpp" />
 		<Unit filename="src/ClsMenus.cpp" />
+		<Unit filename="src/ClsSeguridad.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

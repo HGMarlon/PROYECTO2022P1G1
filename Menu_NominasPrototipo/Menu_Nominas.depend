@@ -62,3 +62,34 @@
 	<fstream>
 	<string>
 
+1649460348 source:c:\users\my computer\proyectos\proyecto_rhh\menu_nominasprototipo\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+
+1649460348 c:\users\my computer\proyectos\proyecto_rhh\menu_nominasprototipo\include\clsmenus.h
+
+1649460348 c:\users\my computer\proyectos\proyecto_rhh\menu_nominasprototipo\include\clsempleados.h
+	<string>
+
+1649460348 source:c:\users\my computer\proyectos\proyecto_rhh\menu_nominasprototipo\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649460348 source:c:\users\my computer\proyectos\proyecto_rhh\menu_nominasprototipo\src\clsmenus.cpp
+	"ClsMenus.h"
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
