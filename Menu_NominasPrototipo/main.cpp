@@ -72,6 +72,19 @@ main(){
                         do
                         {
                             system("cls");
+                            //archivoempleados
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoEmpleados( "registrosempleados.dat", ios::in | ios::out | ios::binary);
+
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoEmpleados ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                /*crearArchivoCredito();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );*/
+                                exit( EXIT_FAILURE );
+
+                               } // fin de instrucción if
                             //Menu tercer nivel
                             cout<<"-------------------------------"<<endl;
                             cout<<"|   SISTEMA GESTION EMPLEADOS  |"<<endl;
@@ -94,13 +107,7 @@ main(){
                             case 1:
                                 {
                                     //agregando empleados
-                                    system("cls");
-                                    /*ofstream archivoEmpleados("registrosempleados.txt", ios::app | ios::out | ios::binary);
-                                    if( !archivoEmpleados )
-                                    {
-                                        cerr << "No se pudo abrir el archivo registro empleados." << endl;
-                                        exit( EXIT_FAILURE );
-                                    }
+                                    /*system("cls");
                                     ClsEmpleados empleado;
                                     cout<<"ingrese una clave del empleado: (0-cancelar)";
                                     cin>>m_iclaveEmpleado;
@@ -131,7 +138,7 @@ main(){
                                         cout<<"ingrese nueva clave: (0-salir)";
                                         cin>>m_iclaveEmpleado;
                                     }
-                                    archivoEmpleados.close();*/
+                                    archivoEmpleados.close(); */
                                 }
                                 break;
                             case 2:
