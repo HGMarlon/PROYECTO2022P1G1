@@ -190,6 +190,73 @@ void ClsEmpleados::mestablecerNumeroEmpresa(int ivalorNumEmpresa)
 
 
 
+//Ingreso de datos nueva empresa
+ClsEmpresa::magregarEmpresa()
+{
+	system("cls");
+	ofstream archivoEmpresa("registrosempresa.dat", ios::app | ios::out | ios::binary);
+	if( !archivoEmpresa )
+    {
+        cerr << "No se pudo abrir el archivo de datos empresa." << endl;
+        exit( EXIT_FAILURE );
+    }
+	ClsEmpresa empresa;
+	cout<<"ingrese nuevo nombre para la empresa: (0-cancelar)";
+	cin>>m_sNombreEmpresa;
+    while(m_sNombreEmpresa!=0)
+    {
+        cout<<"Editar Empresa"<<endl;
+        cout<<"Ingresa el nombre de la empresa: " << endl;
+        cin>> m_sNombreEmpresa;
+        cout<<"Ingresa el correo electronico de la empresa: ";
+        cin>> m_sCorreoEmpresa;
+        cout<<"Ingresa nombre del director/encargado de la empresa: ";
+        cin>>m_sNombreDirector;
+        cout<<"Ingresa actividad economica de la empresa: ";
+        cin>>m_sActividadEconomica;
+        cout<<"Ingresa el nit de la empresa: ";
+        cin>>m_iNitEmpresa;
+        cout<<"Ingresa direccion de la empresa: ";
+        cin>>m_iDireccionEmpresa;
+        cout<<"Ingresa telefono de la empresa: ";
+        cin>>m_iTelefonoEmpresa;
+        cout<<"Ingresa numero de empleados de la empresa: ";
+        cin>>m_iNumeroEmpleados;
+        cout<<"Ingresa numero de empresa: ";
+        cin>>m_iNumeroDeEmpresa;
+        empresa.mestablecerNombreE(svalorNombre);
+        empresa.mestablecerCorreoE(svalorCorreo);
+        empresa.mestablecerDirectorE(svalorNombreD);
+        empresa.mestablecerActividadE(svalorActividad);
+        empresa.mestablecerNitE(svalorNit);
+        empresa.mestablecerDireccionE(svalorDireccion);
+        empresa.mestablecerTelefonoE(ivalorTelefono);
+        empresa.mestablecerNumeroEmpleadosE(ivalorNumEmpleados);
+        archivoEmpresa.seekp((empresa.mobtenerNombreE - 1 ) * sizeof(ClsEmpresa));
+        archivoEmpresa.write(reinterpret_cast<const char * > (&empresa), sizeof (ClsEmpresa));
+        cout<<"Datos almacenados con éxito";
+        cout<<"ingrese nuevo nombre de empresa: (0-salir)";
+        cin>>m_sNombreEmpresa;
+    }
+	archivoEmpresa.close();
+}*/
+
+
+
+/Agregar un nueva empresa
+ClsEmpresa::mIngresarEmpresa()
+{
+    char cDecisionNuevoEmpresa;
+do
+    	{
+    		magregarEmpresa();
+    		cout<<"Desea agregar otra empresa?(Y,N): ";
+    		cin>>cDecisionNuevoEmpresa;
+		}while(cDecisionNuevoEmpresa=='y'||cDecisionNuevoEmpresa=='Y');
+}
+
+
+
 
 
 
