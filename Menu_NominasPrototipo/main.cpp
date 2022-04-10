@@ -145,6 +145,54 @@ main(){
                     }
                     break;
                 case 2:
+                    {
+                        int iSeleccionMenuEmpresa;
+                        do
+                        {
+                            system("cls");
+
+                            cout<<"\t\t\t-------------------------------"<<endl;
+                            cout<<"\t\t\t |   SISTEMA GESTION EMPRESA |"<<endl;
+                            cout<<"\t\t\t-------------------------------"<<endl;
+                            cout<<"\t\t\t 1. Ingreso Empresa"<<endl;
+                            cout<<"\t\t\t 2. Despliegue Empresa"<<endl;
+                            cout<<"\t\t\t 3. Modifica Empresa"<<endl;
+                            cout<<"\t\t\t 4. Busca Empresa"<<endl;
+                            cout<<"\t\t\t 5. Borra Empresa"<<endl;
+                            cout<<"\t\t\t 0. Volver al menu superior"<<endl;
+
+                            cout<<"\t\t\t-------------------------------"<<endl;
+                            cout<<"\t\t\tOpcion a escoger:[1/2/3/4/5/0]"<<endl;
+                            cout<<"\t\t\t-------------------------------"<<endl;
+                            cout<<"Ingresa tu Opcion: ";
+                            cin>>iSeleccionMenuEmpresa;
+
+                            switch(iSeleccionMenuEmpresa)
+                            {
+                                case 1:
+
+                                    break;
+                                case 2:
+
+                                    break;
+                                case 3:
+
+                                    break;
+                                case 4:
+
+                                    break;
+                                case 5:
+
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
+                                    getch();
+                            }
+                        //getch();
+                        }while(iSeleccionMenuEmpresa!=0);
+                    }
 
                     break;
                 case 3:
