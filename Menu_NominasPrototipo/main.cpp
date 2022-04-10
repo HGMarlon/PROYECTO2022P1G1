@@ -501,3 +501,56 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
           << showpoint << registro.obtenerSaldo() */<< endl;
 
 } // fin de la función mostrarLineaPantalla
+
+
+//MOSTRAR EMPRESA
+void consultarRegistroEmpresa( fstream &leerDeArchivoEmpresa )
+{
+   cout << left << setw( 20 ) << "Nombre" << setw( 20 )
+       << "Correo"<< setw( 20 )<< "Director" << setw( 20 )
+       << "Actividad Economica"<< setw( 13 )<< "Nit"<< setw( 20 )
+       << "Direccion"<< setw( 8 )<< "Telefono"<< setw( 6 )<< "Empleados"
+       << setw( 20 )<< "Numero de Empresa"/*<< setw( 14 )
+        << "Primer nombre" << right<< setw( 10 ) << "Saldo"*/ << endl;
+
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoEmpresa.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsEmpresa empresa;
+   leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+      sizeof( ClsEmpresa ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoEmpresa.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( empresa.mobtenerNombreE() != 0 )
+         mostrarLineaPantallaE(empresa);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+         sizeof( ClsEmpresa ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantallaE( const ClsEmpresa &registroEmpresa )
+{
+   cout << left << setw( 20 ) << registroEmpresa.mobtenerNombreE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerCorreoE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDirectorE().data()
+          << setw( 20 ) << registroEmpresa. mobtenerActividadE().data()
+          << setw( 13 ) << registroEmpresa.mobtenerNitE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDireccionE().data()
+          << setw( 8 ) << registroEmpresa.mobtenerTelefonoE()
+          << setw( 6 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
+          << setw( 20 ) << registroEmpresa.mobtenerNumeroEmpresa()
+          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
+          << setw( 10 ) << setprecision( 2 ) << right << fixed
+          << showpoint << registro.obtenerSaldo() <<*/ <<endl;
+
+} // fin de la función mostrarLineaPantalla
+
