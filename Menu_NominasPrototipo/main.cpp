@@ -4,6 +4,7 @@
 #include<fstream>
 #include<string>
 #include<iomanip>
+#include<cstdlib>
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
@@ -12,6 +13,9 @@ using namespace std;
 
 int obtenerCuenta( const char * const );
 void nuevoEmpleado( fstream& );
+void crearArchivoCredito();
+void consultarRegistro(fstream&);
+void mostrarLineaPantalla(const ClsEmpleados &);
 
 main(){
     //Variables
@@ -77,14 +81,14 @@ main(){
                             system("cls");
                             //archivoempleados
                             // abrir el archivo en modo de lectura y escritura
-                            fstream archivoEmpleados( "registrosempleados.dat", ios::in | ios::out | ios::binary);
+                            fstream archivoEmpleados("registrosempleados.dat", ios::in | ios::out | ios::binary);
 
                             // salir del programa si fstream no puede abrir el archivo
                             if ( !archivoEmpleados ) {
                                 cerr << "No se pudo abrir el archivo." << endl;
-                                /*crearArchivoCredito();
+                                crearArchivoCredito();
                                 cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
-                                exit ( 1 );*/
+                                exit ( 1 );
                                 exit( EXIT_FAILURE );
 
                                } // fin de instrucción if
@@ -112,41 +116,15 @@ main(){
                                     //agregando empleados
                                     system("cls");
                                     nuevoEmpleado(archivoEmpleados);
-                                    /*ClsEmpleados empleado;
-                                    cout<<"ingrese una clave del empleado: (0-cancelar)";
-                                    cin>>m_iclaveEmpleado;
-                                    while(m_iclaveEmpleado!=0)
-                                    {
-                                        cout<<"Editar Empleado"<<endl;
-                                        cout<<"Ingresa el nombre del empleado: " << endl;
-                                        cin>> m_snombreEmpleado;
-                                        cout<<"Ingresa el numero de DPI del empleado: ";
-                                        cin>>m_sdpiEmpleado;
-                                        cout<<"Ingresa la dirección de residencia del empleado: ";
-                                        cin>>m_sdireccionEmpleado;
-                                        cout<<"Ingresa el número de telefono del empleado: ";
-                                        cin>>m_stelefonoEmpleado;
-                                        cout<<"Ingresa el correo electronico del empleado: ";
-                                        cin>>m_scorreoEmpleado;
-                                        empleado.mestablecerClave(m_iclaveEmpleado);
-                                        empleado.mestablecerNombre(m_snombreEmpleado);
-                                        empleado.mestablecerDpi(m_sdpiEmpleado);
-                                        empleado.mestablecerDireccion(m_sdireccionEmpleado);
-                                        empleado.mestablecerTelefono(m_stelefonoEmpleado);
-                                        empleado.mestablecerCorreo(m_scorreoEmpleado);
-                                        archivoEmpleados.seekp((empleado.mobtenerClave() - 1 ) * sizeof(ClsEmpleados));
-                                        archivoEmpleados.write(reinterpret_cast<const char * > (&empleado), sizeof (ClsEmpleados));
-                                        archivoEmpleados << left << setw( 9 ) << "Clave" << setw( 20 )
-                                        << "Nombre" << endl;
-                                        cout<<"Datos almacenados con éxito";
-                                        cout<<"ingrese nueva clave: (0-salir)";
-                                        cin>>m_iclaveEmpleado;
-                                    }
-                                    archivoEmpleados.close(); */
                                 }
                                 break;
                             case 2:
-                                //empleado.mdespliegueEmpleado();
+                                {
+                                    //Consultar
+                                    system("cls");
+                                    consultarRegistro(archivoEmpleados);
+                                    getch();
+                                }
                                 break;
                             case 3:
                                 //empleado.mmodificarEmpleado();
@@ -217,11 +195,11 @@ main(){
 void nuevoEmpleado( fstream &insertarEnArchivo )
 {
    // obtener el número de cuenta a crear
-   int inumeroClave = obtenerCuenta( "Escriba el nuevo numero de cuenta" );
+   int m_iclaveEmpleado = obtenerCuenta( "Escriba el nuevo numero de cuenta" );
 
    // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
    insertarEnArchivo.seekg(
-      ( inumeroClave - 1 ) * sizeof( ClsEmpleados ) );
+      ( m_iclaveEmpleado - 1 ) * sizeof( ClsEmpleados ) );
 
    // leer el registro del archivo
    ClsEmpleados empleado;
@@ -231,18 +209,18 @@ void nuevoEmpleado( fstream &insertarEnArchivo )
    // crear el registro, si éste no existe ya
    if ( empleado.mobtenerClave() == 0 ) {
 
-      char snombreEmpleado[ 20 ];
+      char m_snombreEmpleado[ 20 ];
 
       // el usuario introduce el apellido, primer nombre y saldo
       cout << "Escriba el nombre: " << endl;
-      cin >> setw( 20 ) >> snombreEmpleado;
+      cin >> setw( 20 ) >> m_snombreEmpleado;
 
       // usar valores para llenar los valores de la cuenta
-      empleado.mestablecerNombre( snombreEmpleado );
-      empleado.mestablecerClave( inumeroClave );
+      empleado.mestablecerNombre( m_snombreEmpleado );
+      empleado.mestablecerClave( m_iclaveEmpleado );
 
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
-      insertarEnArchivo.seekp( ( inumeroClave - 1 ) *
+      insertarEnArchivo.seekp( ( m_iclaveEmpleado - 1 ) *
          sizeof( ClsEmpleados ) );
 
       // insertar el registro en el archivo
@@ -254,21 +232,76 @@ void nuevoEmpleado( fstream &insertarEnArchivo )
 
    // mostrar error si la cuenta ya existe
    else
-      cerr << "La cuenta #" << inumeroClave
+      cerr << "La cuenta #" << m_iclaveEmpleado
            << " ya contiene informacion." << endl;
 
 } // fin de la función nuevoRegistro
 int obtenerCuenta( const char * const indicador )
 {
-   int inumeroClave;
+   int m_iclaveEmpleado;
 
    // obtener el valor del número de cuenta
    do {
       cout << indicador << " (1 - 100): ";
-      cin >> inumeroClave;
+      cin >> m_iclaveEmpleado;
 
-   } while ( inumeroClave < 1 || inumeroClave > 100 );
+   } while ( m_iclaveEmpleado < 1 || m_iclaveEmpleado > 100 );
 
-   return inumeroClave;
+   return m_iclaveEmpleado;
 
 } // fin de la función obtenerCuenta
+
+void crearArchivoCredito()
+{
+    ofstream archivoEmpleados("registrosempleados.dat", ios::out | ios::binary);
+    if(!archivoEmpleados)
+    {
+        cerr<<"No se habrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsEmpleados empleadoEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoEmpleados.write(reinterpret_cast<const char * > (&empleadoEnBlanco), sizeof(ClsEmpleados));
+    }
+}
+//MOSTRAR
+void consultarRegistro( fstream &leerDeArchivo )
+{
+
+   cout << left << setw( 10 ) << "Clave" << setw( 20 )
+       << "Nombre" /*<< setw( 14 ) << "Primer nombre" << right
+       << setw( 10 ) << "Saldo"*/ << endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivo.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsEmpleados empleado;
+   leerDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivo.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( empleado.mobtenerClave() != 0 )
+         mostrarLineaPantalla(empleado);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+         sizeof( ClsEmpleados ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantalla( const ClsEmpleados &registro )
+{
+   cout << left << setw( 10 ) << registro.mobtenerClave()
+          << setw( 20 ) << registro.mobtenerNombre().data()
+          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data()
+          << setw( 10 ) << setprecision( 2 ) << right << fixed
+          << showpoint << registro.obtenerSaldo() */<< endl;
+
+} // fin de la función mostrarLineaPantalla

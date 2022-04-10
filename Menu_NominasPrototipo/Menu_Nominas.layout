@@ -2,39 +2,39 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\ClsPuestos.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1351" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\ClsPuestos.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5328" topLine="168" />
-		</Cursor>
-	</File>
-	<File name="include\ClsMenus.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\ClsMenus.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="248" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\ClsEmpleados.h" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4565" topLine="79" />
+			<Cursor1 position="766" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="include\ClsEmpleados.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1429" topLine="20" />
+			<Cursor1 position="9421" topLine="260" />
 		</Cursor>
 	</File>
-	<File name="src\ClsMenus.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\ClsPuestos.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1416" topLine="37" />
+			<Cursor1 position="5328" topLine="168" />
+		</Cursor>
+	</File>
+	<File name="include\ClsPuestos.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1351" topLine="19" />
 		</Cursor>
 	</File>
 	<File name="src\ClsEmpleados.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3788" topLine="128" />
+			<Cursor1 position="11670" topLine="349" />
+		</Cursor>
+	</File>
+	<File name="src\ClsMenus.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1416" topLine="37" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
