@@ -17,6 +17,10 @@ void crearArchivoCredito();
 void consultarRegistro(fstream&);
 void mostrarLineaPantalla(const ClsEmpleados &);
 void actualizarRegistro(fstream&);
+void mostrarLinea( ostream&, const ClsEmpleados & );
+void imprimirRegistro( fstream& );
+void eliminarRegistro( fstream& );
+void buscarEmpleado( fstream& );
 
 main(){
     //Variables
@@ -100,12 +104,13 @@ main(){
                             cout<<"1. Ingreso Empleados"<<endl;
                             cout<<"2. Despliegue Empleados"<<endl;
                             cout<<"3. Modifica Empleados"<<endl;
-                            cout<<"4. Busca Empleados"<<endl;
+                            cout<<"4. Imprimir Regisro de Empleados"<<endl;
                             cout<<"5. Borra Empleados"<<endl;
+                            cout<<"6. Buscar Empleados"<<endl;
                             cout<<"0. Volver al menu superior"<<endl;
 
                             cout<<"-------------------------------"<<endl;
-                            cout<<"Opcion a escoger:[1/2/3/4/5/0]"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/4/5/6/0]"<<endl;
                             cout<<"------------------------------"<<endl;
                             cout<<"Ingresa tu Opcion: ";
                             cin>>iseleccionMenuEmpleados;
@@ -128,13 +133,24 @@ main(){
                                 }
                                 break;
                             case 3:
-                                //empleado.mmodificarEmpleado();
+                                {
+                                    actualizarRegistro(archivoEmpleados);
+                                }
                                 break;
                             case 4:
-                                //empleado.mbuscarEmpleado();
+                                {
+                                    imprimirRegistro(archivoEmpleados);
+                                }
                                 break;
                             case 5:
-                                //empleado.meliminarEmpleado();
+                                {
+                                    eliminarRegistro(archivoEmpleados);
+                                }
+                                break;
+                            case 6:
+                                {
+                                    buscarEmpleado(archivoEmpleados);
+                                }
                                 break;
                             case 0:
                                 break;
@@ -149,7 +165,7 @@ main(){
 
                     break;
                 case 3:
-                    //mantenimientoPuesto.mMenuPuestos();
+
                     break;
                 case 0:
 
@@ -212,11 +228,11 @@ void nuevoEmpleado( fstream &insertarEnArchivo )
 
       char m_snombreEmpleado[ 20 ];
 
-      // el usuario introduce el apellido, primer nombre y saldo
+      // el usuario introduce el nombre
       cout << "Escriba el nombre: " << endl;
       cin >> setw( 20 ) >> m_snombreEmpleado;
 
-      // usar valores para llenar los valores de la cuenta
+      // usar valores para llenar los valores de la clave
       empleado.mestablecerNombre( m_snombreEmpleado );
       empleado.mestablecerClave( m_iclaveEmpleado );
 
@@ -271,8 +287,7 @@ void consultarRegistro( fstream &leerDeArchivo )
 {
 
    cout << left << setw( 10 ) << "Clave" << setw( 20 )
-       << "Nombre" /*<< setw( 14 ) << "Primer nombre" << right
-       << setw( 10 ) << "Saldo"*/ << endl;
+       << "Nombre" << endl;
 
    // colocar el apuntador de posición de archivo al principio del archivo de registros
    leerDeArchivo.seekg( 0 );
@@ -301,9 +316,7 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
 {
    cout << left << setw( 10 ) << registro.mobtenerClave()
           << setw( 20 ) << registro.mobtenerNombre().data()
-          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data()
-          << setw( 10 ) << setprecision( 2 ) << right << fixed
-          << showpoint << registro.obtenerSaldo() */<< endl;
+          << endl;
 
 } // fin de la función mostrarLineaPantalla
 
@@ -324,26 +337,25 @@ void actualizarRegistro( fstream &actualizarArchivo )
 
    // actualizar el registro
    if ( empleado.mobtenerClave() != 0 ) {
-      mostrarLinea( cout, empleado );////////////////////////////////////////////////////////////////////////////////////////////
+      mostrarLinea( cout, empleado );
 
       // solicitar al usuario que especifique la transacción
-      cout << "\nEscriba cargo (+) o abono (-): ";
-      double transaccion; // cargo o abono
-      cin >> transaccion;
+      cout << "\nEscriba el nombre: ";
+      char m_snombreEmpleado [ 20 ];
+      cin >> m_snombreEmpleado;
 
       // actualizar el saldo del registro
-      double saldoAnterior = empleado.obtenerSaldo();
-      empleado.establecerSaldo( saldoAnterior + transaccion );
+      empleado.mestablecerNombre( m_snombreEmpleado );
       mostrarLinea( cout, empleado );
 
       // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
       actualizarArchivo.seekp(
-         ( numeroClave - 1 ) * sizeof( DatosCliente ) );
+         ( numeroClave - 1 ) * sizeof( ClsEmpleados ) );
 
       // escribir el registro actualizado sobre el registro anterior en el archivo
       actualizarArchivo.write(
          reinterpret_cast< const char * >( &empleado ),
-         sizeof( DatosCliente ) );
+         sizeof( ClsEmpleados ) );
 
    } // fin de instrucción if
 
@@ -353,3 +365,121 @@ void actualizarRegistro( fstream &actualizarArchivo )
          << " no tiene informacion." << endl;
 
 } // fin de la función actualizarRegistro
+
+// mostrar registro individual
+void mostrarLinea( ostream &salida, const ClsEmpleados &registro )
+{
+   salida << left << setw( 10 ) << registro.mobtenerClave()
+          << setw( 20 ) << registro.mobtenerNombre().data()
+          << endl;
+
+} // fin de la función mostrarLinea
+
+void imprimirRegistro( fstream &leerDeArchivo )
+{
+   // crear archivo de texto
+   ofstream archivoImprimirSalida( "imprimir.txt", ios::out );
+
+   // salir del programa si ofstream no puede crear el archivo
+   if ( !archivoImprimirSalida ) {
+      cerr << "No se pudo crear el archivo." << endl;
+      exit( 1 );
+
+   } // fin de instrucción if
+
+   archivoImprimirSalida << left << setw( 10 ) << "Clave" << setw( 20 )
+       << "nombre: "<< endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivo.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsEmpleados empleado;
+   leerDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivo.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( empleado.mobtenerClave() != 0 )
+         mostrarLinea( archivoImprimirSalida, empleado );
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+         sizeof( ClsEmpleados ) );
+
+   } // fin de instrucción while
+
+} // fin de la función imprimirRegistro
+
+void eliminarRegistro( fstream &eliminarDeArchivo )
+{
+   // obtener número de cuenta a eliminar
+   int numeroClave= obtenerCuenta( "Escriba la cuenta a eliminar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   eliminarDeArchivo.seekg(
+      ( numeroClave - 1 ) * sizeof( ClsEmpleados ) );
+
+   // leer el registro del archivo
+   ClsEmpleados empleado;
+   eliminarDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+
+   // eliminar el registro, si es que existe en el archivo
+   if ( empleado.mobtenerClave() != 0 ) {
+      ClsEmpleados empleadoEnBlanco;
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      eliminarDeArchivo.seekp( ( numeroClave - 1 ) *
+         sizeof( ClsEmpleados ) );
+
+      // reemplazar el registro existente con un registro en blanco
+      eliminarDeArchivo.write(
+         reinterpret_cast< const char * >( &empleadoEnBlanco ),
+         sizeof( ClsEmpleados ) );
+
+      cout << "Empleado clave #" << numeroClave << " eliminado correctamente.\n";
+
+   } // fin de instrucción if
+
+   // mostrar error si el registro no existe
+   else
+   {
+       cerr << "Empleado clave #" << numeroClave << " esta vacia.\n";
+   }
+   getch();
+
+} // fin de eliminarRegistro
+
+void buscarEmpleado( fstream &leerDeArchivo )
+{
+
+   // obtener el número de cuenta a buscar
+   int numeroClave = obtenerCuenta( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivo.seekg(
+      ( numeroClave - 1 ) * sizeof( ClsEmpleados ) );
+
+   // leer el primer registro del archivo
+   ClsEmpleados empleado;
+   leerDeArchivo.read( reinterpret_cast< char * >( &empleado ),
+      sizeof( ClsEmpleados ) );
+    //cout<<empleado.mobtenerClave();
+
+   // actualizar el registro
+   if ( empleado.mobtenerClave() != 0 ) {
+      mostrarLinea( cout, empleado );
+   }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr << "La cuenta #" << numeroClave
+         << " no tiene informacion." << endl;
+   }
+   getch();
+
+} // fin de la función consultarRegistro
