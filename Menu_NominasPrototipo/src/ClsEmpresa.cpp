@@ -295,9 +295,191 @@ ClsEmpresa::mdespliegueEmpresa()
 }
 
 
+/*Empleados::modify()
+{
+	system("cls");
+	fstream file,file1;
+	string participant_id;
+	int found=0;
+	cout<<"\n-------------------------Modificacion Detalles Persona-------------------------"<<endl;
+	file.open("ParticipantRecordEmpleados.txt",ios::in);
+	if(!file)
+	{
+		cout<<"\n\t\t\tNo hay informacion..,";
+		file.close();
+	}
+	else
+	{
+		cout<<"\n Ingrese Id de la personas que quiere modificar: ";
+		cin>>participant_id;
+		file1.open("RecordEmpleados.txt",ios::app | ios::out);
+		file >> id >> name >> phone >> mail >> affiliation;
+		while(!file.eof())
+		{
+			if(participant_id!=id)
+			{
+			 file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< name <<std::left<<std::setw(15)<< phone <<std::left<<std::setw(15)<< mail <<std::left<<std::setw(15)<< affiliation << "\n";
+			}
+			else
+			{
+				cout<<"\t\t\tIngrese DPI Empleado: ";
+				cin>>id;
+				cout<<"\t\t\tIngrese Nombre y Apellido Empleado: ";
+				cin>>name;
+				cout<<"\t\t\tIngrese Telefono Empleado: ";
+				cin>>phone;
+				cout<<"\t\t\tIngrese Correo Empleado: ";
+				cin>>mail;
+				cout<<"\t\t\tIngrese No.Afiliacion Persona: ";
+				cin>>affiliation;
+				file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< name <<std::left<<std::setw(15)<< phone <<std::left<<std::setw(15)<< mail <<std::left<<std::setw(15)<< affiliation << "\n";
+				found++;
+			}
+			file >> id >> name >> phone >> mail >> affiliation;
+
+		}
+		file1.close();
+		file.close();
+		remove("ParticipantRecordEmpleados.txt");
+		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
+	}
+}
 
 
+Empleados::searchE()
+{
+	system("cls");
+	fstream file;
+	int found=0;
+	file.open("ParticipantRecordEmpleados.txt",ios::in);
+	if(!file)
+	{
+		cout<<"\n-------------------------Datos del Empleado buscado------------------------"<<endl;
+		cout<<"\n\t\t\tNo hay informacion...";
+	}
+	else
+	{
+		string participant_idEmpleado;
+		cout<<"\n-------------------------Datos del Empleado buscado------------------------"<<endl;
+		cout<<"\nIngrese DPI del Empleado que quiere buscar: ";
+		cin>>participant_idEmpleado;
+		file >> id >> name >> phone >> mail >> affiliation;
+		while(!file.eof())
+		{
+			if(participant_idEmpleado==id)
+			{
+				cout<<"\n\n\t\t\t DPI Empleado: "<<id<<endl;
+				cout<<"\t\t\t Nombre y Apellido Empleado: "<<name<<endl;
+				cout<<"\t\t\t Telefono Empleado: "<<phone<<endl;
+				cout<<"\t\t\t Correo Empleado: "<<mail<<endl;
+				cout<<"\t\t\t No.Afiliacion Empleado: "<<affiliation<<endl;
+				found++;
+			}
+			file >> id >> name >> phone >> mail >> affiliation;
+		}
+		if(found==0)
+		{
+			cout<<"\n\t\t\t Empleado no encontrado...";
+		}
+		file.close();
+	}
+}
 
+
+Empleados::deletE()
+{
+	system("cls");
+	fstream file,file1;
+	string participant_idEmpleado;
+	int found=0;
+	cout<<"\n-------------------------Detalles Empleado a Borrar-------------------------"<<endl;
+	file.open("ParticipantRecordEmpleados.txt",ios::in);
+	if(!file)
+	{
+		cout<<"\n\t\t\tNo hay informacion...";
+		file.close();
+	}
+	else
+	{
+		cout<<"\n Ingrese el DPI del Empleado que quiere borrar: ";
+		cin>>participant_idEmpleado;
+		file1.open("RecordEmpleados.txt",ios::app | ios::out);
+		file >> id >> name >> phone >> mail >> affiliation;
+		while(!file.eof())
+		{
+			if(participant_idEmpleado!= id)
+			{
+				file1<<std::left<<std::setw(15)<< id <<std::left<<std::setw(15)<< name <<std::left<<std::setw(15)<< phone <<std::left<<std::setw(15)<< mail <<std::left<<std::setw(15)<< affiliation << "\n";
+			}
+			else
+			{
+				found++;
+				cout << "\n\t\t\tBorrado de informacion exitoso";
+			}
+			file >> id >> name >> phone >> mail >> affiliation;
+		}
+		if(found==0)
+		{
+			cout<<"\n\t\t\t DPI Empleado no encontrado...";
+			getch();
+		}
+		file1.close();
+		file.close();
+		remove("ParticipantRecordEmpleados.txt");
+		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
+	}
+}
+
+
+ClsEmpresa::mMenuEmpresa()
+{
+    ClsEmpresa empresa;
+    int iseleccionMenuEmpresa;
+	do
+    {
+	system("cls");
+
+	cout<<"-------------------------------"<<endl;
+    cout<<"|   SISTEMA GESTION EMPRESA   |"<<endl;
+    cout<<"-------------------------------"<<endl;
+    cout<<"1. Ingreso Empresa"<<endl;
+    cout<<"2. Despliegue Empresa"<<endl;
+    cout<<"3. Modifica Empresa"<<endl;
+    cout<<"4. Busca Empresa"<<endl;
+    cout<<"5. Borra Empresa"<<endl;
+    cout<<"0. Volver al menu superior"<<endl;
+
+    cout<<"\t\t\t-------------------------------"<<endl;
+    cout<<"\t\t\tOpcion a escoger:[1/2/3/4/5/0]"<<endl;
+    cout<<"\t\t\t-------------------------------"<<endl;
+    cout<<"Ingresa tu Opcion: ";
+    cin>>iSeleccionMenuEmpresa;
+
+    switch(iseleccionMenuEmpresa)
+    {
+    case 1:
+        empresa.magregarEmpresa();
+        break;
+	case 2:
+		empresa.mdespliegueEmpresa();
+		break;
+	case 3:
+		empresa.mmodificarEmpresa();
+		break;
+	case 4:
+		empresa.mbuscarEmpresa();
+		break;
+	case 5:
+		empresa.meliminarEmpresa();
+		break;
+	case 0:
+		break;
+	default:
+		cout<<"Opcion invalida...Por favor prueba otra vez..";
+		getch();
+	}
+    }while(iseleccionMenuEmpresa!= 0);
+}*/
 
 
 ClsEmpresa::~ClsEmpresa()
