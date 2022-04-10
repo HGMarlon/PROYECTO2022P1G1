@@ -20,12 +20,13 @@
 	<fstream>
 	"Procesos.h"
 
-1649559795 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649607692 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
 	<string>
 	<iomanip>
+	<cstdlib>
 	"ClsEmpleados.h"
 	"ClsPuestos.h"
 
@@ -40,7 +41,7 @@
 	"Procesos.h"
 	"ClsEmpleados.h"
 
-1649554780 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+1649603568 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
 	"ClsEmpleados.h"
 	<conio.h>
 	<iomanip>
@@ -50,12 +51,13 @@
 	<cstdlib>
 	<cstring>
 
-1649553377 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+1649607692 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
 	<string>
+	<iostream>
 
 1649520215 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clsmenus.h
 
-1649553377 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+1649603568 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
 	"ClsEmpleados.h"
 	"ClsPuestos.h"
 	<conio.h>
@@ -64,10 +66,10 @@
 	<fstream>
 	<string>
 
-1649553377 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clspuestos.h
+1649603568 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\include\clspuestos.h
 	<string>
 
-1649553389 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clspuestos.cpp
+1649603568 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\menu_nominasprototipo\src\clspuestos.cpp
 	<conio.h>
 	<iomanip>
 	<iostream>
