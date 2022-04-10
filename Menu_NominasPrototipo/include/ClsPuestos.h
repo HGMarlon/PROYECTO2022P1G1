@@ -1,7 +1,7 @@
 #include<string>
 #ifndef PUESTO_H
 #define PUESTO_H
-using namespace std;
+/*using namespace std;
 
 class ClsPuestos
 {
@@ -55,6 +55,6 @@ class ClsPuestos
 
 };
 
-
+*/
 
 #endif // PUESTO_H

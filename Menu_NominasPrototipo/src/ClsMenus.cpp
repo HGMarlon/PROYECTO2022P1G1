@@ -1,5 +1,5 @@
 //Clases
-#include "ClsMenus.h"
+/*#include "ClsMenus.h"
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
 
@@ -70,4 +70,4 @@ ClsMenus::mmenuPorCategorias()
 ClsMenus::~ClsMenus()
 {
     //dtor
-}
+}*/

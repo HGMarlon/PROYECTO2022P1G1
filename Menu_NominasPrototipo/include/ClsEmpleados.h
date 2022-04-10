@@ -1,5 +1,6 @@
 //librerias
 #include<string>
+#include<iostream>
 
 //C++
 #ifndef CLSEMPLEADOS_H
@@ -13,13 +14,13 @@ class ClsEmpleados
     public:
 
         //metodos
-        ClsEmpleados( int = 0, string = "", string = "", string = "", string = "", string = "");
-        magregarEmpleado();
-        mdespliegueEmpleado();
+        ClsEmpleados( int = 0, string = ""/*, string = "", string = "", string = "", string = ""*/);
+        //magregarEmpleado();
+        /*mdespliegueEmpleado();
         mmodificarEmpleado();
         mbuscarEmpleado( int = 0);
         meliminarEmpleado();
-        mmenuEmpleado();
+        mmenuEmpleado();*/
 
         /*Funciones de los atibutos
             Fuciones de la clave del empleado*/
@@ -31,7 +32,7 @@ class ClsEmpleados
         string mobtenerNombre() const;
 
         //Funciones del dpi del empleado
-        void mestablecerDpi ( string );
+        /*void mestablecerDpi ( string );
         string mobtenerDpi() const;
 
         //Funciones de la direccion del empleado
@@ -44,10 +45,9 @@ class ClsEmpleados
 
         //Funciones del correo electronico del empleado
         void mestablecerCorreo ( string );
-        string mobtenerCorreo() const;
+        string mobtenerCorreo() const;*/
 
         //Destructor
-        virtual ~ClsEmpleados();
 
     protected:
 
@@ -56,10 +56,10 @@ class ClsEmpleados
         //Atributos
         int m_iclaveEmpleado;
         char m_snombreEmpleado[ 20 ];
-        char m_sdpiEmpleado[ 20 ];
+        /*char m_sdpiEmpleado[ 20 ];
         char m_sdireccionEmpleado[ 20 ];
         char m_stelefonoEmpleado[ 20 ];
-        char m_scorreoEmpleado[ 20 ];
+        char m_scorreoEmpleado[ 20 ];*/
 };
 
 #endif // CLSEMPLEADOS_H

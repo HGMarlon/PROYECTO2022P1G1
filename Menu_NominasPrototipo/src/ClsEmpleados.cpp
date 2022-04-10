@@ -13,14 +13,14 @@
 using namespace std;
 
 //constructor
-ClsEmpleados::ClsEmpleados(int ivalorClave, string svalorNombre, string svalorDpi, string svalorDireccion, string svalorTelefono, string svalorCorreo)
+ClsEmpleados::ClsEmpleados(int ivalorClave, string svalorNombre/*, string svalorDpi, string svalorDireccion, string svalorTelefono, string svalorCorreo*/)
 {
     mestablecerClave(ivalorClave);
     mestablecerNombre(svalorNombre);
-    mestablecerDpi(svalorDpi);
+    /*mestablecerDpi(svalorDpi);
     mestablecerDireccion(svalorDireccion);
     mestablecerTelefono(svalorTelefono);
-    mestablecerCorreo(svalorCorreo);
+    mestablecerCorreo(svalorCorreo);*/
 }
 
 //Funciones de la clave del empleado
@@ -54,7 +54,7 @@ void ClsEmpleados::mestablecerNombre( string scadenaNombre )
 }
 
 //Funciones del Dpi del empleado
-string ClsEmpleados::mobtenerDpi() const
+/*string ClsEmpleados::mobtenerDpi() const
 {
     return m_sdpiEmpleado;
 }
@@ -165,9 +165,9 @@ ClsEmpleados::magregarEmpleado()
         cin>>m_iclaveEmpleado;
     }
 	archivoEmpleados.close();
-}
+}*/
 
-ClsEmpleados::mdespliegueEmpleado()
+/*ClsEmpleados::mdespliegueEmpleado()
 {
 	system("cls");
 	ifstream archivoEmpleados("registrosempleados.dat", ios::in | ios:: binary);
@@ -276,8 +276,8 @@ ClsEmpleados::mbuscarEmpleado( int ivalorClave )
 		}
 		file.close();
 	}*/
-}
-ClsEmpleados::meliminarEmpleado()
+//}
+/*ClsEmpleados::meliminarEmpleado()
 {
 	/*system("cls");
 	fstream file,file1;
@@ -319,10 +319,10 @@ ClsEmpleados::meliminarEmpleado()
 		remove("ParticipantRecordEmpleados.txt");
 		rename("RecordEmpleados.txt","ParticipantRecordEmpleados.txt");
 	}*/
-}
+//}
 //Menu de gestion de los datos de empleado
 
-ClsEmpleados::mmenuEmpleado()
+/*ClsEmpleados::mmenuEmpleado()
 {
     ClsEmpleados empleado;
     int iseleccionMenuEmpleados;
@@ -370,8 +370,4 @@ ClsEmpleados::mmenuEmpleado()
 		getch();
 	}
     }while(iseleccionMenuEmpleados!= 0);
-}
-ClsEmpleados::~ClsEmpleados()
-{
-    //dtor
-}
+}*/
