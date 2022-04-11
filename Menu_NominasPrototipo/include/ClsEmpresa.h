@@ -13,9 +13,6 @@ class ClsEmpresa
     public:
         //metodos
         ClsEmpresa(string = "", string = "", string = "", string = "",string = "",string = "",int = 0,int = 0,int = 0);
-       /* mIngresarEmpresa();
-        mAgregarEmpresa();
-        mMenuEmpresa();*/
 
         /*virtual ~ClsEmpresa();*/
 
@@ -49,8 +46,9 @@ class ClsEmpresa
          int mobtenerNumeroEmpresa()const;
 
 
-        /*magregarEmpresa();
-        mdespliegueEmpresa();*/
+
+
+
 
     protected:
 
@@ -60,7 +58,7 @@ class ClsEmpresa
         char m_sCorreoEmpresa[20];
         char m_sNombreDirector[20];
         char m_sActividadEconomica[20];
-        char m_iNitEmpresa[13];
+        char m_iNitEmpresa[14];
         char m_iDireccionEmpresa[20];
         int m_iTelefonoEmpresa;
         int m_iNumeroEmpleados;

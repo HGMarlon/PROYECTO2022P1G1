@@ -121,7 +121,7 @@
 	<cstdlib>
 	<cstring>
 
-1649609979 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
+1649633499 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
@@ -132,14 +132,14 @@
 	"ClsPuestos.h"
 	"ClsEmpresa.h"
 
-1649567606 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
+1649613484 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempleados.h
 	<string>
 	<iostream>
 
-1649595243 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clspuestos.h
+1649613132 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clspuestos.h
 	<string>
 
-1649567606 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
+1649613484 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempleados.cpp
 	"ClsEmpleados.h"
 	<conio.h>
 	<iomanip>
@@ -149,7 +149,7 @@
 	<cstdlib>
 	<cstring>
 
-1649567606 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
+1649613132 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsmenus.cpp
 	"ClsEmpleados.h"
 	"ClsPuestos.h"
 	<conio.h>
@@ -158,7 +158,7 @@
 	<fstream>
 	<string>
 
-1649567606 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clspuestos.cpp
+1649613132 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clspuestos.cpp
 	<conio.h>
 	<iomanip>
 	<iostream>
@@ -167,11 +167,11 @@
 	<cstdlib>
 	<cstring>
 
-1649597879 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
+1649633499 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\include\clsempresa.h
 	<string>
 	<iostream>
 
-1649597879 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempresa.cpp
+1649613484 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\menu_nominasprototipo\src\clsempresa.cpp
 	"ClsEmpresa.h"
 	<conio.h>
 	<iomanip>

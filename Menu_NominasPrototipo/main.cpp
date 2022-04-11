@@ -17,6 +17,11 @@ void nuevoEmpleado( fstream& );
 void crearArchivoCredito();
 void consultarRegistro(fstream&);
 void mostrarLineaPantalla(const ClsEmpleados &);
+void actualizarRegistro(fstream&);
+void mostrarLinea( ostream&, const ClsEmpleados & );
+void imprimirRegistro( fstream& );
+void eliminarRegistro( fstream& );
+void buscarEmpleado( fstream& );
 
 //empresa
 int obtenerCuentaEmpresa( const char * const );
@@ -25,9 +30,9 @@ void crearArchivoCreditoEmpresa();
 void consultarRegistroEmpresa(fstream&);
 void mostrarLineaPantallaE(const ClsEmpresa &);
 void actualizarRegistroEmpresa(fstream&);
-void mostrarLineaEmpresa( ostream&, const ClsEmpresa & );
-void imprimirRegistroEmpresa( fstream& );
-void eliminarRegistroEmpresa( fstream& );
+void mostrarLineaE( ostream&, const ClsEmpresa & );
+void imprimirRegistroE( fstream& );
+void eliminarRegistroE( fstream& );
 void buscarEmpresa( fstream& );
 
 main(){
@@ -121,7 +126,7 @@ main(){
                             cout<<"|   SISTEMA GESTION EMPLEADOS  |"<<endl;
                             cout<<"-------------------------------"<<endl;
                             cout<<"1. Ingreso Empresa"<<endl;
-                            cout<<"2. Despliegue Empresa"<<endl;                             //----------cambios
+                            cout<<"2. Despliegue Empresa"<<endl;
                             cout<<"3. Modifica Empresa"<<endl;
                             cout<<"4. Imprimir Regisro de Empresa"<<endl;
                             cout<<"5. Borra Empresa"<<endl;
@@ -152,19 +157,19 @@ main(){
                                 }
                                 break;
                             case 3:
-                                actualizarRegistroEmpresa(archivoEmpresa);   //-------------------------cambios
+
 
                                 break;
                             case 4:
-                                imprimirRegistroEmpresa(archivoEmpresa);      //-------------------------cambios
+
 
                                 break;
                             case 5:
-                                eliminarRegistroEmpresa(archivoEmpresa);      //-------------------------cambios
+
 
                                 break;
                             case 6:
-                                buscarEmpresa(archivoEmpresa);               //-------------------------cambios
+
 
                                 break;
                             case 0:
@@ -195,44 +200,70 @@ main(){
                                 exit( EXIT_FAILURE );
                             }
 
-                            cout<<"\t\t\t-------------------------------"<<endl;
-                            cout<<"\t\t\t |   SISTEMA GESTION EMPRESA |"<<endl;
-                            cout<<"\t\t\t-------------------------------"<<endl;
-                            cout<<"\t\t\t 1. Ingreso Empresa"<<endl;
-                            cout<<"\t\t\t 2. Despliegue Empresa"<<endl;
-                            cout<<"\t\t\t 3. Modifica Empresa"<<endl;
-                            cout<<"\t\t\t 4. Busca Empresa"<<endl;
-                            cout<<"\t\t\t 5. Borra Empresa"<<endl;
-                            cout<<"\t\t\t 0. Volver al menu superior"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<" |   SISTEMA GESTION EMPRESA |"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"1. Ingreso Empresa"<<endl;
+                            cout<<"2. Despliegue Empresa"<<endl;
+                            cout<<"3. Modifica Empresa"<<endl;
+                            cout<<"4. Busca Empresa"<<endl;
+                            cout<<"5. Borra Empresa"<<endl;
+                            cout<<"6. Buscar Empresa"<<endl;
+                            cout<<"0. Volver al menu superior"<<endl;
 
-                            cout<<"\t\t\t-------------------------------"<<endl;
-                            cout<<"\t\t\tOpcion a escoger:[1/2/3/4/5/0]"<<endl;
-                            cout<<"\t\t\t-------------------------------"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/4/5/6/0]"<<endl;
+                            cout<<"------------------------------"<<endl;
                             cout<<"Ingresa tu Opcion: ";
                             cin>>iSeleccionMenuEmpresa;
 
                             switch(iSeleccionMenuEmpresa)
                             {
                                 case 1:
-                                    //agregando empresa
-                                    system("cls");
-                                    nuevaEmpresa(archivoEmpresa);
-
+                                    {
+                                        //agregando empresa
+                                        system("cls");
+                                        nuevaEmpresa(archivoEmpresa);
+                                    }
                                     break;
                                 case 2:
-                                    //Consultar empresa
-                                    system("cls");
-                                    consultarRegistroEmpresa(archivoEmpresa);
-                                    getch();
+                                    {
+                                        //Consultar empresa
+                                        system("cls");
+                                        consultarRegistroEmpresa(archivoEmpresa);
+                                        getch();
 
+                                    }
                                     break;
                                 case 3:
-
+                                    {
+                                        system("cls");
+                                        actualizarRegistroEmpresa(archivoEmpresa);
+                                        getch();
+                                    }
                                     break;
                                 case 4:
+                                    {
+
+                                        imprimirRegistroE(archivoEmpresa);
+
+                                    }
 
                                     break;
                                 case 5:
+                                    {
+
+                                        eliminarRegistroE(archivoEmpresa);
+
+                                    }
+
+                                    break;
+                                case 6:
+                                    {
+
+                                        buscarEmpresa(archivoEmpresa);
+
+                                    }
 
                                     break;
                                 case 0:
@@ -397,9 +428,9 @@ void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
       // el usuario introduce
       cout << "Escriba el nombre de la empresa:" << endl;
       cin >> setw( 20 ) >> m_sNombreEmpresa;
-      cout << "Escriba el nombre del correo de la empresa:" << endl;
+      cout << "Escriba el correo electronico de la empresa:" << endl;
       cin >> setw( 20 ) >> m_sCorreoEmpresa;
-      cout << "Escriba el nombre del director de la emprsa:" << endl;
+      cout << "Escriba el nombre del director de la empresa:" << endl;
       cin >> setw( 20 ) >> m_sNombreDirector;
       cout << "Escriba actividad economica de la empresa:" << endl;
       cin >> setw( 20 ) >>m_sActividadEconomica ;
@@ -519,7 +550,7 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
 //MOSTRAR EMPRESA
 void consultarRegistroEmpresa( fstream &leerDeArchivoEmpresa )
 {
-   cout << left << setw( 20 ) << "Nombre" << setw( 20 )<< "Correo"<< setw( 20 )<< "Director" << setw( 20 )<< "Actividad Economica "<< setw( 14 )<< "Nit "<< setw( 20 )<< "Direccion"<< setw( 9 )<< "Telefono "<< setw( 7 )<< "Empleados "<< setw( 20 )<< "Numero de Empresa "<< setw( 14 )<< endl;
+   cout << left << setw( 20 ) << "Nombre" << setw( 20 ) << "Correo"<< setw( 20 )<< "Director" << setw( 20 )<< "Actividad Economica "<< setw( 14 )<< "Nit "<< setw( 20 )<< "Direccion"<< setw( 9 )<< "Telefono "<< setw( 7 )<< "Empleados "<< setw( 20 )<< "Numero de Empresa "<< setw( 14 )<< endl;
 
 
    // colocar el apuntador de posición de archivo al principio del archivo de registros
@@ -569,11 +600,11 @@ void mostrarLineaPantallaE( const ClsEmpresa &registroEmpresa )
 void actualizarRegistroEmpresa( fstream &actualizarArchivoEmpresa )
 {
    // obtener el número de empresa a actualizar
-   int numeroEmpresa = obtenerNombreEmpresa( "Escriba la empresa que desea actualizar" );
+   int numeroEmpresa = obtenerCuentaEmpresa( "Escriba la empresa que desea actualizar" );
 
    // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
    actualizarArchivoEmpresa.seekg(
-      ( numeroEmpesa - 1 ) * sizeof( ClsEmpresa ) );
+      ( numeroEmpresa - 1 ) * sizeof( ClsEmpresa ) );
 
    // leer el primer registro del archivo
    ClsEmpresa empresa;
@@ -582,7 +613,7 @@ void actualizarRegistroEmpresa( fstream &actualizarArchivoEmpresa )
 
    // actualizar el registro
    if ( empresa.mobtenerNumeroEmpresa() != 0 ) {
-      mostrarLineaE( cout, empresa );
+      mostrarLineaE( cout , empresa);
 
       // solicitar al usuario que especifique la transacción
       cout << "\nEscriba el nombre: ";
@@ -614,15 +645,15 @@ void actualizarRegistroEmpresa( fstream &actualizarArchivoEmpresa )
 // mostrar registro individual
 void mostrarLineaE( ostream &salida, const ClsEmpresa &registroEmpresa )
 {
-   salida << left << setw( 20 ) << registroE.mobtenerNombreE().data()
-          << setw( 20 ) << registroE.mobtenerCorreoE().data()
-          << setw( 20 ) << registroE.mobtenerDirectorE().data()
-          << setw( 20 ) << registroE.mobtenerActividadE().data()
-          << setw( 14 ) << registroE.mobtenerNitE().data()
-          << setw( 20 ) << registroE.mobtenerDireccionE().data()
-          << setw( 9 ) << registroE.mobtenerTelefonoE()
-          << setw( 7 ) << registroE.mobtenerNumeroEmpleadosE()
-          << setw( 20 ) << registroE.mobtenerNumeroEmpresa()
+   salida << left << setw( 20 ) << registroEmpresa.mobtenerNombreE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerCorreoE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDirectorE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerActividadE().data()
+          << setw( 14 ) << registroEmpresa.mobtenerNitE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDireccionE().data()
+          << setw( 9 ) << registroEmpresa.mobtenerTelefonoE()
+          << setw( 7 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
+          << setw( 20 ) << registroEmpresa.mobtenerNumeroEmpresa()
           << endl;
 
 
@@ -658,7 +689,7 @@ void imprimirRegistroE( fstream &leerDeArchivoEmpresa )
          mostrarLineaE( archivoImprimirSalidaE , empresa );
 
       // leer siguiente registro del archivo de registros
-      leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empleado ),
+      leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
          sizeof( ClsEmpresa ) );
 
    } // fin de instrucción while
@@ -668,7 +699,7 @@ void imprimirRegistroE( fstream &leerDeArchivoEmpresa )
 void eliminarRegistroE( fstream &eliminarDeArchivoEmpresa)
 {
    // obtener número de cuenta a eliminar
-   int numeroEmpresa= obtenerNumeroEmpresa( "Escriba la empresa a eliminar" );
+   int numeroEmpresa= obtenerCuentaEmpresa( "Escriba la empresa a eliminar" );
 
    // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
    eliminarDeArchivoEmpresa.seekg(
@@ -709,7 +740,7 @@ void buscarEmpresa( fstream &leerDeArchivoEmpresa)
 {
 
    // obtener el número de cuenta a buscar
-   int numeroEmpresa= obtenerNumeroEmpresa( "Escriba la empresa que desea actualizar" );
+   int numeroEmpresa= obtenerCuentaEmpresa( "Escriba la empresa que desea actualizar" );
 
    // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
    leerDeArchivoEmpresa.seekg(
@@ -722,8 +753,8 @@ void buscarEmpresa( fstream &leerDeArchivoEmpresa)
     //cout<<empleado.mobtenerClave();
 
    // actualizar el registro
-   if ( empresa.mobtenerNombreEmpresa() != 0 ) {
-      mostrarLineaE( cout, empleado );
+   if ( empresa.mobtenerNumeroEmpresa() != 0 ) {
+      mostrarLineaE( cout, empresa );
    }
 
    // mostrar error si la cuenta no existe
