@@ -1,3 +1,29 @@
 Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 18   Minuto: 58   Segundo: 33   
 Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 19   Minuto: 1    Segundo: 27   
 Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 19   Minuto: 4    Segundo: 35   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 34   Segundo: 59   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 43   Segundo: 41   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 43   Segundo: 55   
+Codigo: 1    Accion: Sueldo Creado                 Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 43   Segundo: 55   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 43   Segundo: 55   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 43   Segundo: 55   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 45   Segundo: 26   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 46   Segundo: 31   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 47   Segundo: 47   
+Codigo: 1    Accion: Sueldo Consultado             Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 47   Segundo: 47   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 21   Minuto: 48   Segundo: 26   
