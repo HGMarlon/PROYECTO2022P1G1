@@ -1,21 +1,24 @@
 #include<string>
+#include<iostream>
+
 #ifndef PUESTO_H
 #define PUESTO_H
-/*using namespace std;
+
+using std::string;
 
 class ClsPuestos
 {
     public:
         ClsPuestos( int = 0, string = "", string = "", int = 0, string = "", string = "", string = "");
+         /* mIngresarPuestos();
         mAgregarPuestos();
-        mIngresarPuestos();
-        mMenuPuestos();
+        mMenuPuestos();*/
 
         void mestablecerNumero( int) ;
         int mobtenerNumero() const;
 
-        void mestablecerNombre( string );
-        string mobtenerNombre() const;
+        void mestablecerNombreP( string );
+        string mobtenerNombreP() const;
 
         void mestablecerDepartamento ( string );
         string mobtenerDepartamento() const;
@@ -23,7 +26,7 @@ class ClsPuestos
         void mestablecerSalario( int );
         int mobtenerSalario() const;
 
-        void mestablecerNivAcademico( string );
+        void mestablecerNivelAcademico( string );
         string mobtenerNivAcademico() const;
 
         void mestablecerHoraEntrada ( string );
@@ -33,13 +36,13 @@ class ClsPuestos
         string mobtenerHoraSalida() const;
 
 
-         mDesplieguePuestos();
+        /* mDesplieguePuestos();
         modify();
         searchP();
-        deletP();
+        deletP();*/
 
 
-        virtual ~ClsPuestos();
+        /*virtual ~ClsPuestos();*/
 
     protected:
 
@@ -55,6 +58,7 @@ class ClsPuestos
 
 };
 
-*/
+
 
 #endif // PUESTO_H
+
