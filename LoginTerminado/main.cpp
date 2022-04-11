@@ -9,6 +9,7 @@
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
+#include "ClsBancos.h"
 #include "Clslogin.h"
 #include "Clsbitacora.h"
 
@@ -30,6 +31,32 @@ void nuevoUsuario( fstream& );
 string obtenerNombreUsuario();
 void escribirBitacora(int, string);
 
+//puestos
+int obtenerCuentaPuesto( const char * const );
+void nuevoPuesto( fstream& );
+void crearArchivoCreditoPuestos();
+void consultarRegistroPuestos(fstream&);
+void mostrarLineaPantallaP(const ClsPuestos &);
+void actualizarRegistroP(fstream&);
+void mostrarLineaP( ostream&, const ClsPuestos & );
+void imprimirRegistroP( fstream& );
+void eliminarRegistroP( fstream& );
+void buscarPuesto( fstream& );
+void escribirBitacoraPuestos(int, string);
+
+//Bancos
+int obtenerCuentaBanco( const char * const );
+void nuevoBanco( fstream& );
+void crearArchivoCreditoBanco();
+void consultarRegistroBanco(fstream&);
+void mostrarLineaPantallaB(const ClsBancos &);
+void actualizarRegistroB(fstream&);
+void mostrarLineaB( ostream&, const ClsBancos & );
+void imprimirRegistroB( fstream& );
+void eliminarRegistroB( fstream& );
+void buscarBanco( fstream& );
+void escribirBitacoraBancos(int, string);
+
 main(){
     //Creando objeto
     Clsbitacora bitacora;
@@ -46,6 +73,23 @@ main(){
     int codigoa=0;
     string accion="";
     string ingresoUsuario;
+
+    //variables puesto
+    int m_iNumeroPuesto=0;
+    char m_sNombrePuesto[ 0 ];
+    char m_sNombreDepartamento[ 0 ];
+    char m_sNivelAcademico[ 0 ];
+    int  m_iSalario=0;
+    char m_sHoraEntrada[ 0 ];
+    char m_sHoraSalida[ 0 ];
+
+     //variables banco
+    char m_sNombreBanco[20];
+    int m_iNumeroCuenta;
+    char m_sNombreUsuario[20];
+    int m_iSaldoCuenta;
+    char m_sTipoCuenta[20];
+
 
     //tiempo
     time_t t;
@@ -357,10 +401,376 @@ main(){
                     }
                     break;
                 case 3:
+                    {
+                        int choice3;
+                        do
+                        {
+                            system("cls");
+                            //archivopuestos
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoPuestos("registrospuestos.dat", ios::in | ios::out | ios::binary);
+
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoPuestos ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                crearArchivoCreditoPuestos();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );
+                                exit( EXIT_FAILURE );
+                            }
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"|   SISTEMA GESTION PUESTOS   |"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"1. Ingreso Puestos"<<endl;
+                            cout<<"2. Despliegue Puestos"<<endl;
+                            cout<<"3. Modifica Puestos"<<endl;
+                            cout<<"4. Imprimir Regisro de Puestos"<<endl;
+                            cout<<"5. Borra Puestos"<<endl;
+                            cout<<"6. Buscar Puestos"<<endl;
+                            cout<<"0. Volver al menu superior"<<endl;
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/4/5/6/0]"<<endl;
+                            cout<<"------------------------------"<<endl;
+                            cin>>choice3;
+
+                            switch(choice3)
+                            {
+                                case 1:
+                                   {
+                                        //agregando puestos
+                                        system("cls");
+                                        nuevoPuesto(archivoPuestos);
+                                        getch();
+                                        accion="Puesto Creado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+
+                                   }
+                                    break;
+                                case 2:
+                                    {
+                                        //Consultar puestos
+                                        system("cls");
+                                        consultarRegistroPuestos(archivoPuestos);
+                                        getch();
+                                        accion="Consulta puestos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+
+                                    }
+                                    break;
+                                case 3:
+                                     {
+                                        system("cls");
+                                        actualizarRegistroP(archivoPuestos);
+                                        getch();
+                                        accion="Modificacion Puestos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                     }
+
+                                    break;
+                                case 4:
+                                    {
+                                        system("cls");
+                                        imprimirRegistroP(archivoPuestos);
+                                        cout<<"sus archivos han sido guardados correctamente"<<endl;
+                                        getch();
+                                        accion="Imprimir Puestos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+
+                                    break;
+                                case 5:
+                                    {
+                                         system("cls");
+                                         eliminarRegistroP(archivoPuestos);
+                                         getch();
+                                         accion="Eliminar Puestos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+
+                                    break;
+                                case 6:
+                                    {
+                                         system("cls");
+                                         buscarPuesto(archivoPuestos);
+                                         getch();
+                                         accion="Buscar Puestos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
+                                    getch();
+                            }
+                        //getch();
+                        }while(choice3!= 0);
+                    }
 
                     break;
                 case 4:
                     {
+
+                    }
+                    break;
+                case 5:
+                    {
+
+                    }
+                    break;
+                case 6:
+                    {
+                        int choice6;
+                        do
+                        {
+                            system("cls");
+                            //archivopuestos
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoBancos("registrosbancos.dat", ios::in | ios::out | ios::binary);
+
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoBancos ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                crearArchivoCreditoBanco();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );
+                                exit( EXIT_FAILURE );
+                            }
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"|   SISTEMA GESTION BANCOS    |"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"1. Ingreso Bancos"<<endl;
+                            cout<<"2. Despliegue Bancos"<<endl;
+                            cout<<"3. Modifica Bancos"<<endl;
+                            cout<<"4. Imprimir Regisro de Bancos"<<endl;
+                            cout<<"5. Borra Bancos"<<endl;
+                            cout<<"6. Buscar Bancos"<<endl;
+                            cout<<"0. Volver al menu superior"<<endl;
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/4/5/6/0]"<<endl;
+                            cout<<"------------------------------"<<endl;
+                            cin>>choice6;
+
+                            switch(choice6)
+                            {
+                                case 1:
+                                   {
+                                        //agregando puestos
+                                        system("cls");
+                                        nuevoBanco(archivoBancos);
+                                        getch();
+                                        accion="Banco Creado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+
+                                   }
+                                    break;
+                                case 2:
+                                    {
+                                        //Consultar puestos
+                                        system("cls");
+                                        consultarRegistroBanco(archivoBancos);
+                                        getch();
+                                        accion="Consulta Bancos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+
+                                    }
+                                    break;
+                                case 3:
+                                     {
+                                        system("cls");
+                                        actualizarRegistroB(archivoBancos);
+                                        getch();
+                                        accion="Modificacion Bancos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                     }
+
+                                    break;
+                                case 4:
+                                    {
+                                        system("cls");
+                                        imprimirRegistroB(archivoBancos);
+                                        cout<<"sus archivos han sido guardados correctamente"<<endl;
+                                        getch();
+                                        accion="Imprimir Bancos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+
+                                    break;
+                                case 5:
+                                    {
+                                         system("cls");
+                                         eliminarRegistroB(archivoBancos);
+                                         getch();
+                                         accion="Eliminar Bancos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+
+                                    break;
+                                case 6:
+                                    {
+                                         system("cls");
+                                         buscarBanco(archivoBancos);
+                                         getch();
+                                         accion="Buscar Bancos";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    }
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
+                                    getch();
+                            }
+                        //getch();
+                        }while(choice6!= 0);
 
                     }
                     break;
@@ -480,6 +890,195 @@ void crearArchivoCredito()
         archivoEmpleados.write(reinterpret_cast<const char * > (&empleadoEnBlanco), sizeof(ClsEmpleados));
     }
 }
+
+void nuevoPuesto( fstream &insertarEnArchivoPuesto )
+{
+   // obtener el número de puesto a crear
+   int m_iNumeroPuesto = obtenerCuentaPuesto( "Escriba el nuevo numero de cuenta" );
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivoPuesto.seekg(
+      ( m_iNumeroPuesto - 1 ) * sizeof( ClsPuestos ) );
+
+   // leer el registro del archivo puesto
+   ClsPuestos puesto;
+   insertarEnArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+
+   // crear el registro, si éste no existe ya
+   if ( puesto.mobtenerNumero() == 0 ) {
+///////////////////////////////////////////////////////////////////////
+      char m_sNombrePuesto[ 20 ];
+      char m_sNombreDepartamento[ 20 ];
+      char m_sNivelAcademico[ 20 ];
+      int  m_iSalario;
+      char m_sHoraEntrada[20];
+      char m_sHoraSalida[ 20 ];
+
+      // el usuario introducela información
+      cout << "Escriba el nombre del puesto: " << endl;
+      cin >> setw( 20 ) >> m_sNombrePuesto;
+      cout << "Escriba el nombre del departamento correspondiente: " << endl;
+      cin >> setw( 20 ) >> m_sNombreDepartamento;
+      cout << "Escriba el nivel academico requerido: " << endl;
+      cin >> setw( 20 ) >> m_sNivelAcademico;
+      cout << "Escriba el total de salario: " << endl;
+      cin >> setw( 9 ) >>m_iSalario ;
+      cout << "Escriba la hora de entrada: " << endl;
+      cin >> setw( 20 ) >> m_sHoraEntrada;
+      cout << "Escriba la hora de salida: " << endl;
+      cin >> setw( 20 ) >> m_sHoraSalida;
+
+      // usar valores para llenar los valores de la cuenta
+      puesto.mestablecerNumero( m_iNumeroPuesto );
+      puesto.mestablecerNombreP( m_sNombrePuesto );
+      puesto.mestablecerDepartamento(m_sNombreDepartamento);
+      puesto.mestablecerNivelAcademico(m_sNivelAcademico);
+      puesto.mestablecerSalario(m_iSalario);
+      puesto.mestablecerHoraEntrada(m_sHoraEntrada);
+      puesto.mestablecerHoraSalida(m_sHoraSalida);
+
+      //seguir agragando
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivoPuesto.seekp( ( m_iNumeroPuesto - 1 ) *
+         sizeof( ClsPuestos ) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivoPuesto.write(
+         reinterpret_cast< const char * >( &puesto ),
+         sizeof( ClsPuestos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "el numero#" << m_iNumeroPuesto
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerCuentaPuesto( const char * const indicadorPuesto )
+{
+   int m_iNumeroPuesto;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicadorPuesto << " (1 - 100): ";
+      cin >> m_iNumeroPuesto;
+
+   } while ( m_iNumeroPuesto < 1 || m_iNumeroPuesto > 100 );
+
+   return m_iNumeroPuesto;
+
+} // fin de la función obtenerCuenta
+
+void crearArchivoCreditoPuestos()
+{
+    ofstream archivoPuestos("registrospuestos.dat", ios::out | ios::binary);
+    if(!archivoPuestos)
+    {
+        cerr<<"No se abrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsPuestos PuestoEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoPuestos.write(reinterpret_cast<const char * > (&PuestoEnBlanco), sizeof(ClsPuestos));
+    }
+}
+
+
+void nuevoBanco( fstream &insertarEnArchivoBanco )
+{
+   // obtener el número de puesto a crear
+   int m_iNumeroCuenta = obtenerCuentaBanco( "Escriba el nuevo numero de cuenta" );
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivoBanco.seekg(
+      ( m_iNumeroCuenta - 1 ) * sizeof( ClsBancos ) );
+
+   // leer el registro del archivo puesto
+   ClsBancos banco;
+   insertarEnArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+
+   // crear el registro, si éste no existe ya
+   if ( banco.mobtenerNumeroB() == 0 ) {
+      char m_sNombreBanco[20];
+      char m_sNombreUsuario[20];
+      int m_iSaldoCuenta;
+      char m_sTipoCuenta[20];
+
+      // el usuario introducela información
+      cout << "Escriba el nombre del Banco: " << endl;
+      cin >> setw( 20 ) >> m_sNombreBanco;
+      cout << "Escriba el nombre del propietario de la cuenta: " << endl;
+      cin >> setw( 20 ) >> m_sNombreUsuario;
+      cout << "Escriba el total de saldo en la cuenta: " << endl;
+      cin >> setw( 9 ) >>m_iSaldoCuenta ;
+      cout << "Escriba el tipo de cuenta: " << endl;
+      cin >> setw( 20 ) >> m_sTipoCuenta;
+
+
+      // usar valores para llenar los valores de la cuenta
+      banco.mestablecerNombreBanco(m_sNombreBanco);
+      banco.mestablecerNumeroCuenta(m_iNumeroCuenta);
+      banco.mestablecerNombreUsuario(m_sNombreUsuario);
+      banco.mestablecerSaldoCuenta(m_iSaldoCuenta);
+      banco.mestablecerTipoCuenta(m_sTipoCuenta);
+
+
+      //seguir agragando
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivoBanco.seekp( ( m_iNumeroCuenta - 1 ) *
+         sizeof( ClsBancos ) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivoBanco.write(
+         reinterpret_cast< const char * >( &banco ),
+         sizeof( ClsBancos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "el numero#" << m_iNumeroCuenta
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerCuentaBanco( const char * const indicadorBanco )
+{
+   int m_iNumeroCuenta;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicadorBanco << " (1 - 100): ";
+      cin >> m_iNumeroCuenta;
+
+   } while ( m_iNumeroCuenta < 1 || m_iNumeroCuenta > 100 );
+
+   return m_iNumeroCuenta;
+
+} // fin de la función obtenerCuenta
+
+void crearArchivoCreditoBanco()
+{
+    ofstream archivoBancos("registrosbancos.dat", ios::out | ios::binary);
+    if(!archivoBancos)
+    {
+        cerr<<"No se abrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsBancos BancoEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoBancos.write(reinterpret_cast<const char * > (&BancoEnBlanco), sizeof(ClsBancos));
+    }
+}
+
+
+
 //MOSTRAR
 void consultarRegistro( fstream &leerDeArchivo )
 {
@@ -517,6 +1116,97 @@ void mostrarLineaPantalla( const ClsEmpleados &registro )
           << endl;
 
 } // fin de la función mostrarLineaPantalla
+
+//MOSTRAR PUESTOS
+void consultarRegistroPuestos( fstream &leerDeArchivoPuesto )
+{
+
+   cout << left << setw( 9 ) << "Numero" << setw( 20 )<< "Nombre"<< setw( 20 )<< "Departamento" << setw( 20 )<< "NivelAcademico"<< setw( 9 )<< "Salario"<< setw( 20 )<< "HoraEntrada"<< setw( 20 )<< "HoraSalida" << setw( 14 )<< endl;
+
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoPuesto.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsPuestos puesto;
+   leerDeArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoPuesto.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( puesto.mobtenerNumero() != 0 )
+         mostrarLineaPantallaP(puesto);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+         sizeof( ClsPuestos ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantallaP( const ClsPuestos &registroPuesto )
+{
+   cout << left << setw( 9 ) << registroPuesto.mobtenerNumero()
+          << setw( 20 ) << registroPuesto.mobtenerNombreP().data()
+          << setw( 20 ) << registroPuesto.mobtenerDepartamento().data()
+          << setw( 20 ) << registroPuesto.mobtenerNivAcademico().data()
+          << setw( 9 ) << registroPuesto.mobtenerSalario()
+          << setw( 20 ) << registroPuesto.mobtenerHoraEntrada().data()
+          << setw( 20 ) << registroPuesto.mobtenerHoraSalida().data()
+          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
+          << setw( 10 ) << setprecision( 2 ) << right << fixed
+          << showpoint << registro.obtenerSaldo() <<*/ <<endl;
+
+} // fin de la función mostrarLineaPantalla
+
+
+//MOSTRAR BANCOS
+void consultarRegistroBanco( fstream &leerDeArchivoBanco )
+{
+
+   cout << left << setw( 9 ) << "NumeroCuenta" << setw( 20 )<< "NombreBanco"<< setw( 20 )<< "NombreUsuario" << setw( 9 )<< "Saldo"<< setw( 20 )<< "TipoCuenta"<<  endl;
+
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoBanco.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsBancos banco;
+   leerDeArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoBanco.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( banco.mobtenerNumeroB() != 0 )
+        mostrarLineaPantallaB(banco);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+         sizeof( ClsBancos ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantallaB( const ClsBancos &registroBanco )
+{
+   cout << left << setw( 9 ) << registroBanco.mobtenerNumeroB()
+          << setw( 20 ) << registroBanco.mobtenerNombreB().data()
+          << setw( 20 ) << registroBanco.mobtenerUsuarioB().data()
+          << setw( 9  ) << registroBanco.mobtenerSaldoB()
+          << setw( 20 ) << registroBanco.mobtenerTipoB().data()
+
+          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
+          << setw( 10 ) << setprecision( 2 ) << right << fixed
+          << showpoint << registro.obtenerSaldo() <<*/ <<endl;
+
+} // fin de la función mostrarLineaPantalla
+
 
 //ACTUALIZAR
 void actualizarRegistro( fstream &actualizarArchivo )
@@ -564,11 +1254,131 @@ void actualizarRegistro( fstream &actualizarArchivo )
 
 } // fin de la función actualizarRegistro
 
+//ACTUALIZAR PUESTOS
+void actualizarRegistroP( fstream &actualizarArchivoPuesto )
+{
+   // obtener el número de cuenta a actualizar
+   int NumeroPuesto = obtenerCuentaPuesto( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   actualizarArchivoPuesto.seekg(
+      ( NumeroPuesto - 1 ) * sizeof( ClsPuestos ) );
+
+   // leer el primer registro del archivo
+   ClsPuestos puesto;
+   actualizarArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+
+   // actualizar el registro
+   if (puesto.mobtenerNumero() != 0 ) {
+      mostrarLineaP( cout, puesto );
+
+      // solicitar al usuario que especifique la transacción
+      cout << "\nEscriba el nombre del puesto: ";
+      char m_sNombrePuesto [ 20 ];
+      cin >> m_sNombrePuesto;
+
+      // actualizar el saldo del registro
+      puesto.mestablecerNombreP( m_sNombrePuesto );
+      mostrarLineaP( cout, puesto );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      actualizarArchivoPuesto.seekp(
+         ( NumeroPuesto - 1 ) * sizeof( ClsPuestos ) );
+
+      // escribir el registro actualizado sobre el registro anterior en el archivo
+      actualizarArchivoPuesto.write(
+         reinterpret_cast< const char * >( &puesto ),
+         sizeof( ClsPuestos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta no existe
+   else
+      cerr << "El puesto #" << NumeroPuesto
+         << " no tiene informacion." << endl;
+
+} // fin de la función actualizarRegistro
+
+
+//ACTUALIZAR BANCOS
+void actualizarRegistroB( fstream &actualizarArchivoBanco )
+{
+   // obtener el número de cuenta a actualizar
+   int NumeroCuenta = obtenerCuentaBanco( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   actualizarArchivoBanco.seekg(
+      ( NumeroCuenta - 1 ) * sizeof( ClsBancos ) );
+
+   // leer el primer registro del archivo
+   ClsBancos banco;
+   actualizarArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+
+   // actualizar el registro
+   if (banco.mobtenerNumeroB() != 0 ) {
+      mostrarLineaB( cout, banco );
+
+      // solicitar al usuario que especifique la transacción
+      cout << "\nEscriba el nombre del Banco ";
+      char m_sNombreBanco [ 20 ];
+      cin >> m_sNombreBanco;
+
+      // actualizar el saldo del registro
+      banco.mestablecerNombreBanco( m_sNombreBanco );
+      mostrarLineaB( cout, banco );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      actualizarArchivoBanco.seekp(
+         ( NumeroCuenta - 1 ) * sizeof( ClsBancos ) );
+
+      // escribir el registro actualizado sobre el registro anterior en el archivo
+      actualizarArchivoBanco.write(
+         reinterpret_cast< const char * >( &banco ),
+         sizeof( ClsBancos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta no existe
+   else
+      cerr << "La cuenta #" << NumeroCuenta
+         << " no tiene informacion." << endl;
+
+} // fin de la función actualizarRegistro
+
+
 // mostrar registro individual
 void mostrarLinea( ostream &salida, const ClsEmpleados &registro )
 {
    salida << left << setw( 10 ) << registro.mobtenerClave()
           << setw( 20 ) << registro.mobtenerNombre().data()
+          << endl;
+
+} // fin de la función mostrarLinea
+// mostrar registro puestos individual
+void mostrarLineaP( ostream &salida, const ClsPuestos &registroPuesto )
+{
+   salida << left << setw( 9 ) <<registroPuesto.mobtenerNumero()
+          << setw( 20 ) << registroPuesto.mobtenerNombreP().data()
+          << setw( 20 ) << registroPuesto.mobtenerDepartamento().data()
+          << setw( 20 ) << registroPuesto.mobtenerNivAcademico().data()
+          << setw( 9 ) << registroPuesto.mobtenerSalario()
+          << setw( 20 ) << registroPuesto.mobtenerHoraEntrada().data()
+          << setw( 20 ) << registroPuesto.mobtenerHoraSalida().data()
+          << endl;
+
+} // fin de la función mostrarLinea
+
+
+// mostrar registro Bancos individual
+void mostrarLineaB( ostream &salida, const ClsBancos &registroBanco )
+{
+   salida << left << setw( 9 ) <<registroBanco.mobtenerNumeroB()
+          << setw( 20 ) << registroBanco.mobtenerNombreB().data()
+          << setw( 20 ) << registroBanco.mobtenerUsuarioB().data()
+          << setw( 9 ) << registroBanco.mobtenerSaldoB()
+          << setw( 20 ) << registroBanco.mobtenerTipoB().data()
           << endl;
 
 } // fin de la función mostrarLinea
@@ -610,6 +1420,81 @@ void imprimirRegistro( fstream &leerDeArchivo )
    } // fin de instrucción while
 
 } // fin de la función imprimirRegistro
+void imprimirRegistroP( fstream &leerDeArchivoPuesto )
+{
+   // crear archivo de texto
+   ofstream archivoImprimirSalidaP( "imprimir.txt", ios::out );
+
+   // salir del programa si ofstream no puede crear el archivo
+   if ( !archivoImprimirSalidaP ) {
+      cerr << "No se pudo crear el archivo." << endl;
+      exit( 1 );
+
+   } // fin de instrucción if
+
+   archivoImprimirSalidaP << left << setw( 9 ) << "Numero" << setw( 20 )<< "Nombre"<< setw( 20 )<< "Departamento" << setw( 20 )<< "NivelAcademico"<< setw( 9 )<< "Salario"<< setw( 20 )<< "HoraEntrada"<< setw( 20 )<< "HoraSalida" << setw( 14 )<< endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoPuesto.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsPuestos puesto;
+   leerDeArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoPuesto.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( puesto.mobtenerNumero() != 0 )
+         mostrarLineaP( archivoImprimirSalidaP, puesto );
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+         sizeof( ClsPuestos ) );
+      getch();
+   } // fin de instrucción while
+
+} // fin de la función imprimirRegistro
+
+
+void imprimirRegistroB( fstream &leerDeArchivoBanco )
+{
+   // crear archivo de texto
+   ofstream archivoImprimirSalidaB( "imprimir.txt", ios::out );
+
+   // salir del programa si ofstream no puede crear el archivo
+   if ( !archivoImprimirSalidaB ) {
+      cerr << "No se pudo crear el archivo." << endl;
+      exit( 1 );
+
+   } // fin de instrucción if
+
+   archivoImprimirSalidaB << left << setw( 9 ) << "NumeroCuenta" << setw( 20 )<< "NombreBanco"<< setw( 20 )<< "NombreUsuario" << setw( 9 )<< "Saldo"<< setw( 20 )<< "TipoCuenta"<<  endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoBanco.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsBancos banco;
+   leerDeArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoBanco.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( banco.mobtenerNumeroB() != 0 )
+         mostrarLineaB( archivoImprimirSalidaB, banco );
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+         sizeof( ClsBancos ) );
+      getch();
+   } // fin de instrucción while
+
+} // fin de la función imprimirRegistro
+
 
 void eliminarRegistro( fstream &eliminarDeArchivo )
 {
@@ -650,6 +1535,87 @@ void eliminarRegistro( fstream &eliminarDeArchivo )
    getch();
 
 } // fin de eliminarRegistro
+void eliminarRegistroP (fstream &eliminarDeArchivoPuestos )
+{
+   // obtener número de cuenta a eliminar
+   int numeroPuesto= obtenerCuentaPuesto( "Escriba el puesto a eliminar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   eliminarDeArchivoPuestos.seekg(
+      ( numeroPuesto - 1 ) * sizeof( ClsPuestos ) );
+
+   // leer el registro del archivo
+   ClsPuestos puesto;
+   eliminarDeArchivoPuestos.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+
+   // eliminar el registro, si es que existe en el archivo
+   if ( puesto.mobtenerNumero() != 0 ) {
+      ClsPuestos puestosEnBlanco;
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      eliminarDeArchivoPuestos.seekp( ( numeroPuesto - 1 ) *
+         sizeof( ClsPuestos ) );
+
+      // reemplazar el registro existente con un registro en blanco
+      eliminarDeArchivoPuestos.write(
+         reinterpret_cast< const char * >( &puestosEnBlanco ),
+         sizeof( ClsPuestos ) );
+
+      cout << "El puesto #" << numeroPuesto << " eliminado correctamente.\n";
+
+   } // fin de instrucción if
+
+   // mostrar error si el registro no existe
+   else
+   {
+       cerr << "El puesto #" << numeroPuesto << " esta vacia.\n";
+   }
+   getch();
+
+} // fin de eliminarRegistro
+
+
+void eliminarRegistroB (fstream &eliminarDeArchivoBancos )
+{
+   // obtener número de cuenta a eliminar
+   int numeroCuenta= obtenerCuentaBanco( "Escriba el cuenta a eliminar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   eliminarDeArchivoBancos.seekg(
+      ( numeroCuenta - 1 ) * sizeof( ClsBancos ) );
+
+   // leer el registro del archivo
+   ClsBancos banco;
+   eliminarDeArchivoBancos.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+
+   // eliminar el registro, si es que existe en el archivo
+   if ( banco.mobtenerNumeroB() != 0 ) {
+      ClsBancos BancoEnBlanco;
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      eliminarDeArchivoBancos.seekp( ( numeroCuenta - 1 ) *
+         sizeof( ClsBancos ) );
+
+      // reemplazar el registro existente con un registro en blanco
+      eliminarDeArchivoBancos.write(
+         reinterpret_cast< const char * >( &BancoEnBlanco ),
+         sizeof( ClsBancos ) );
+
+      cout << "La cuenta #" << numeroCuenta << " eliminado correctamente.\n";
+
+   } // fin de instrucción if
+
+   // mostrar error si el registro no existe
+   else
+   {
+       cerr << "La cuenta #" << numeroCuenta << " esta vacia.\n";
+   }
+   getch();
+
+} // fin de eliminarRegistro
+
 
 void buscarEmpleado( fstream &leerDeArchivo )
 {
@@ -681,8 +1647,70 @@ void buscarEmpleado( fstream &leerDeArchivo )
    getch();
 
 } // fin de la función consultarRegistro
+void buscarPuesto( fstream &leerDeArchivoPuesto )
+{
 
+   // obtener el número de cuenta a buscar
+   int numeroPuesto = obtenerCuentaPuesto( "Escriba el puesto que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivoPuesto.seekg(
+      ( numeroPuesto - 1 ) * sizeof( ClsPuestos ) );
+
+   // leer el primer registro del archivo
+   ClsPuestos puesto;
+   leerDeArchivoPuesto.read( reinterpret_cast< char * >( &puesto ),
+      sizeof( ClsPuestos ) );
+    //cout<<empleado.mobtenerClave();
+
+   // actualizar el registro
+   if ( puesto.mobtenerNumero() != 0 ) {
+      mostrarLineaP( cout, puesto );
+   }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr << "El puesto #" << numeroPuesto
+         << " no tiene informacion." << endl;
+   }
+   getch();
+
+} // fin de la función consultarRegistro
+
+
+void buscarBanco( fstream &leerDeArchivoBanco )
+{
+
+   // obtener el número de cuenta a buscar
+   int numeroCuenta = obtenerCuentaBanco( "Escriba el banco que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivoBanco.seekg(
+      ( numeroCuenta - 1 ) * sizeof( ClsBancos ) );
+
+   // leer el primer registro del archivo
+   ClsBancos banco;
+   leerDeArchivoBanco.read( reinterpret_cast< char * >( &banco ),
+      sizeof( ClsBancos ) );
+    //cout<<empleado.mobtenerClave();
+
+   // actualizar el registro
+   if ( banco.mobtenerNumeroB() != 0 ) {
+      mostrarLineaB( cout, banco );
+   }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr << "la cuenta  #" << numeroCuenta
+         << " no tiene informacion." << endl;
+   }
+   getch();
+
+} // fin de la función consultarRegistro
 // crear e insertar registro
+
 void nuevoUsuario( fstream &insertarEnArchivo )
 {
 //Clslogin usuario;
