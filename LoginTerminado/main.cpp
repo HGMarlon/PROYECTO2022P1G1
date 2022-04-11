@@ -9,6 +9,7 @@
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
 #include "Clslogin.h"
+#include "Clsbitacora.h"
 
 using namespace std;
 
@@ -25,10 +26,12 @@ void imprimirRegistro( fstream& );
 void eliminarRegistro( fstream& );
 void buscarEmpleado( fstream& );
 void nuevoUsuario( fstream& );
-int buscarUsuario( fstream&, int );
 string obtenerNombreUsuario();
+void escribirBitacora(int, string);
 
 main(){
+    //Creando objeto
+    Clsbitacora bitacora;
     //Variables
     int imenuPrincipal;
     int m_iclaveEmpleado=0;
@@ -37,6 +40,9 @@ main(){
     char snombreUsuario[ 20 ];
     int isesion = 0;
     int a=1;
+    int codigo;
+    int codigoa=0;
+    string accion="";
     string ingresoUsuario;
     /*Login
        abrir el archivo en modo de lectura y escritura*/
@@ -58,12 +64,53 @@ main(){
         nuevoUsuario(archivoUsuarios);
     }
 
-    a=buscarUsuario(archivoUsuarios, a);
+   system("cls");
+   cout<<"Ingrese su nombre de usuario :";
+   cin>>snombreUsuario;
+   string nombreUsuario;
+   // obtener el número de cuenta a buscar
+   int numeroUsuario = obtenerUsuario("Escriba su codigo : ");
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   archivoUsuarios.seekg(
+      ( numeroUsuario - 1 ) * sizeof( Clslogin ) );
+
+   // leer el primer registro del archivo
+   Clslogin usuario;
+   archivoUsuarios.read( reinterpret_cast< char * >( &usuario ),
+      sizeof( Clslogin ) );
+
+
+
+   if ( usuario.mobtenerIngreso() != 0 )
+    {
+        nombreUsuario=usuario.mobtenernombreUsuario();
+    }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr <<"No esta registrado." << endl;
+   }
+   if (nombreUsuario==snombreUsuario)
+    {
+        cout<<"Acceso concedido";
+        a=0;
+    }
+    else
+    {
+        cout <<"Acceso denegado";
+        getch();
+    }
 
     if(a==0){
 
         getch();
 
+    //Bitacora
+    codigo = numeroUsuario;
+    accion = "Ingreso al sistema";
+    escribirBitacora(codigo, accion);
 
 	//Menu principal
 	do
@@ -131,7 +178,6 @@ main(){
                                 crearArchivoCredito();
                                 cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
                                 exit ( 1 );
-                                exit( EXIT_FAILURE );
 
                                } // fin de instrucción if
                             //Menu tercer nivel
@@ -159,6 +205,8 @@ main(){
                                     //agregando empleados
                                     system("cls");
                                     nuevoEmpleado(archivoEmpleados);
+                                    accion="Empleado Creado";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 2:
@@ -167,26 +215,36 @@ main(){
                                     system("cls");
                                     consultarRegistro(archivoEmpleados);
                                     getch();
+                                    accion="Consulta empleados";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 3:
                                 {
                                     actualizarRegistro(archivoEmpleados);
+                                    accion="Modificacion Empleados";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 4:
                                 {
                                     imprimirRegistro(archivoEmpleados);
+                                    accion="Imprimir Empleados";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 5:
                                 {
                                     eliminarRegistro(archivoEmpleados);
+                                    accion="Eliminar Empleados";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 6:
                                 {
                                     buscarEmpleado(archivoEmpleados);
+                                    accion="Buscar Empleados";
+                                    escribirBitacora(codigo, accion);
                                 }
                                 break;
                             case 0:
@@ -199,10 +257,17 @@ main(){
                     }
                     break;
                 case 2:
+                    {
 
+                    }
                     break;
                 case 3:
 
+                    break;
+                case 4:
+                    {
+
+                    }
                     break;
                 case 0:
 
@@ -599,45 +664,15 @@ int obtenerUsuario( const char * const indicador )
 
 } // fin de la función obtenerCuenta
 
-int buscarUsuario( fstream &leerDeArchivo, int a )
+void escribirBitacora(int codigo, string accion)
 {
-    system("cls");
-   char snombreUsuario[ 20 ];
-   cout<<"Ingrese su nombre de usuario :";
-   cin>>snombreUsuario;
-   string nombreUsuario;
-   // obtener el número de cuenta a buscar
-   int numeroUsuario = obtenerUsuario("Escriba su codigo : ");
-
-   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
-   leerDeArchivo.seekg(
-      ( numeroUsuario - 1 ) * sizeof( Clslogin ) );
-
-   // leer el primer registro del archivo
-   Clslogin usuario;
-   leerDeArchivo.read( reinterpret_cast< char * >( &usuario ),
-      sizeof( Clslogin ) );
-
-   if ( usuario.mobtenerIngreso() != 0 )
+    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+    if (!bitacora)
     {
-        nombreUsuario=usuario.mobtenernombreUsuario();
+        cerr << "No se pudo abrir el archivo." << endl;
+        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+        exit ( 3 );
     }
-
-   // mostrar error si la cuenta no existe
-   else
-   {
-       cerr <<"No esta registrado." << endl;
-   }
-   if (nombreUsuario==snombreUsuario)
-    {
-        cout<<"Acceso concedido";
-        return a=0;
-    }
-    else
-    {
-        cout <<"Acceso denegado";
-    }
-   getch();
-
-} // fin de la función consultarRegistro
-
+	bitacora<<left<<setw(10)<< codigo <<left<<setw(40)<< accion /*<<left<<setw(40)<< tiempo*/ << endl;
+	bitacora.close();
+}
