@@ -12,6 +12,7 @@
 #include "ClsBancos.h"
 #include "Clslogin.h"
 #include "Clsbitacora.h"
+#include "ClsEmpresa.h"
 
 using namespace std;
 
@@ -57,6 +58,20 @@ void eliminarRegistroB( fstream& );
 void buscarBanco( fstream& );
 void escribirBitacoraBancos(int, string);
 
+//empresa
+int obtenerCuentaEmpresa( const char * const );
+void nuevaEmpresa( fstream& );
+void crearArchivoCreditoEmpresa();
+void consultarRegistroEmpresa(fstream&);
+void mostrarLineaPantallaE(const ClsEmpresa &);
+void actualizarRegistroEmpresa(fstream&);
+void mostrarLineaE( ostream&, const ClsEmpresa & );
+void imprimirRegistroE( fstream& );
+void eliminarRegistroE( fstream& );
+void buscarEmpresa( fstream& );
+void escribirBitacoraEmpresa(int, string);
+
+
 main(){
     //Creando objeto
     Clsbitacora bitacora;
@@ -89,6 +104,18 @@ main(){
     char m_sNombreUsuario[20];
     int m_iSaldoCuenta;
     char m_sTipoCuenta[20];
+
+
+    //variables empresa
+    char m_sNombreEmpresa[0];
+    char m_sCorreoEmpresa[0];
+    char m_sNombreDirector[0];
+    char m_sActividadEconomica[0];
+    char m_iNitEmpresa[0];
+    char m_iDireccionEmpresa[0];
+    int m_iTelefonoEmpresa=0;
+    int m_iNumeroEmpleados=0;
+    int m_iNumeroDeEmpresa=0;
 
 
     //tiempo
@@ -397,8 +424,184 @@ main(){
                     break;
                 case 2:
                     {
+                         int iSeleccionMenuEmpresa;
+                        do
+                        {
+                            system("cls");
+                            //archivoempresa
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoEmpresa("registrosempresa.dat", ios::in | ios::out | ios::binary);
 
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoEmpresa ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                crearArchivoCreditoEmpresa();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );
+                                exit( EXIT_FAILURE );
+                            }
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<" |   SISTEMA GESTION EMPRESA |"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"1. Ingreso Empresa"<<endl;
+                            cout<<"2. Despliegue Empresa"<<endl;
+                            cout<<"3. Modifica Empresa"<<endl;
+                            cout<<"4. Imprimir Registro de Empresa"<<endl;
+                            cout<<"5. Borra Empresa"<<endl;
+                            cout<<"6. Buscar Empresa"<<endl;
+                            cout<<"0. Volver al menu superior"<<endl;
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/4/5/6/0]"<<endl;
+                            cout<<"------------------------------"<<endl;
+                            cout<<"Ingresa tu Opcion: ";
+                            cin>>iSeleccionMenuEmpresa;
+
+                            switch(iSeleccionMenuEmpresa)
+                            {
+                                case 1:
+                                    {
+                                        //agregando empresa
+                                        system("cls");
+                                        nuevaEmpresa(archivoEmpresa);
+                                        accion="Empresa Creado";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+                                    }
+                                    break;
+                                case 2:
+                                    {
+                                        //Consultar empresa
+                                        system("cls");
+                                        consultarRegistroEmpresa(archivoEmpresa);
+                                        getch();
+                                        accion="Consulta empresa";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+
+
+                                    }
+                                    break;
+                                case 3:
+                                    {
+                                        system("cls");
+                                        actualizarRegistroEmpresa(archivoEmpresa);
+                                        getch();
+                                        accion="Modificacion Empresa";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+                                    }
+                                    break;
+                                case 4:
+                                    {
+
+                                        imprimirRegistroE(archivoEmpresa);
+                                        accion="Imprimir Empresa";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+
+                                    }
+
+                                    break;
+                                case 5:
+                                    {
+
+                                        eliminarRegistroE(archivoEmpresa);
+                                        accion="Eliminar Empresa";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+
+                                    }
+
+                                    break;
+                                case 6:
+                                    {
+
+                                        buscarEmpresa(archivoEmpresa);
+                                        accion="Buscar Empresa";
+                                        ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                        if (!bitacora)
+                                        {
+                                            cerr << "No se pudo abrir el archivo." << endl;
+                                            cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                            exit ( 3 );
+                                        }
+
+                                        bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                        <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                        <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                        <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                        bitacora.close();
+
+                                    }
+
+                                    break;
+                                case 0:
+                                    break;
+                                default:
+                                    cout<<"\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
+                                    getch();
+                            }
+                        //getch();
+                        }while(iSeleccionMenuEmpresa!=0);
                     }
+
                     break;
                 case 3:
                     {
@@ -1078,6 +1281,113 @@ void crearArchivoCreditoBanco()
 }
 
 
+// crear e insertar registro empresa
+void nuevaEmpresa( fstream &insertarEnArchivoEmpresa)
+{
+   // obtener nombre de empresa a crear
+   int m_iNumeroDeEmpresa= obtenerCuentaEmpresa( "Escriba el nombre de la empresa");
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivoEmpresa.seekg(
+      ( m_iNumeroDeEmpresa- 1 ) * sizeof( ClsEmpresa) );
+
+   // leer el registro del archivo
+   ClsEmpresa empresa;
+   insertarEnArchivoEmpresa.read( reinterpret_cast< char * >( &empresa),
+      sizeof( ClsEmpresa) );
+
+   // crear el registro, si éste no existe ya
+   if ( empresa.mobtenerNumeroEmpresa() == 0 ) {
+///////////////////////////////////////////////////////////////////////
+        char m_sNombreEmpresa[20];
+        char m_sCorreoEmpresa[20];
+        char m_sNombreDirector[20];
+        char m_sActividadEconomica[20];
+        char m_iNitEmpresa[14];
+        char m_iDireccionEmpresa[20];
+        int m_iTelefonoEmpresa;
+        int m_iNumeroEmpleados;
+        int m_iNumeroDeEmpresa;
+
+      // el usuario introduce
+      cout << "Escriba el nombre de la empresa:" << endl;
+      cin >> setw( 20 ) >> m_sNombreEmpresa;
+      cout << "Escriba el correo electronico de la empresa:" << endl;
+      cin >> setw( 20 ) >> m_sCorreoEmpresa;
+      cout << "Escriba el nombre del director de la empresa:" << endl;
+      cin >> setw( 20 ) >> m_sNombreDirector;
+      cout << "Escriba actividad economica de la empresa:" << endl;
+      cin >> setw( 20 ) >>m_sActividadEconomica ;
+      cout << "Escriba el nit de la empresa:" << endl;
+      cin >> setw( 14 ) >>m_iNitEmpresa;
+      cout << "Escriba la direccion de la empresa:" << endl;
+      cin >> setw( 20 ) >>m_iDireccionEmpresa;
+      cout << "Escriba el telefono de la empresa:" << endl;
+      cin >> setw( 9 ) >>m_iTelefonoEmpresa;
+      cout << "Escriba el numero de empleados:" << endl;
+      cin >> setw( 7 ) >>m_iNumeroEmpleados;
+      cout << "Escriba el numero de empresa:" << endl;
+      cin >> setw( 20 ) >>m_iNumeroDeEmpresa;
+
+
+      empresa.mestablecerNombreE(m_sNombreEmpresa);
+      empresa.mestablecerCorreoE(m_sCorreoEmpresa);
+      empresa.mestablecerDirectorE(m_sNombreDirector);
+      empresa.mestablecerActividadE(m_sActividadEconomica);
+      empresa.mestablecerNitE(m_iNitEmpresa);
+      empresa.mestablecerDireccionE(m_iDireccionEmpresa);
+      empresa.mestablecerTelefonoE(m_iTelefonoEmpresa);
+      empresa.mestablecerNumeroEmpleadosE(m_iNumeroEmpleados);
+      empresa.mestablecerNumeroEmpresa(m_iNumeroDeEmpresa);
+
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivoEmpresa.seekp( ( m_iNumeroDeEmpresa - 1 ) *
+         sizeof( ClsEmpresa) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivoEmpresa.write(
+         reinterpret_cast< const char * >( &empresa ),
+         sizeof( ClsEmpresa) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "el numero#" << m_iNumeroDeEmpresa
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerCuentaEmpresa( const char * const indicadorEmpresa )
+{
+   int m_iNumeroDeEmpresa;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicadorEmpresa << " (1 - 100): ";
+      cin >> m_iNumeroDeEmpresa;
+
+   } while ( m_iNumeroDeEmpresa < 1 || m_iNumeroDeEmpresa > 100 );
+
+   return m_iNumeroDeEmpresa;
+
+} // fin de la función obtenerCuenta
+
+void crearArchivoCreditoEmpresa()
+{
+    ofstream archivoEmpresa("registrosempresa.dat", ios::out | ios::binary);
+    if(!archivoEmpresa)
+    {
+        cerr<<"No se abrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsEmpresa EmpresaEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoEmpresa.write(reinterpret_cast<const char * > (&EmpresaEnBlanco), sizeof(ClsEmpresa));
+    }
+}
+
 
 //MOSTRAR
 void consultarRegistro( fstream &leerDeArchivo )
@@ -1201,6 +1511,53 @@ void mostrarLineaPantallaB( const ClsBancos &registroBanco )
           << setw( 9  ) << registroBanco.mobtenerSaldoB()
           << setw( 20 ) << registroBanco.mobtenerTipoB().data()
 
+          /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
+          << setw( 10 ) << setprecision( 2 ) << right << fixed
+          << showpoint << registro.obtenerSaldo() <<*/ <<endl;
+
+} // fin de la función mostrarLineaPantalla
+
+
+//MOSTRAR EMPRESA
+void consultarRegistroEmpresa( fstream &leerDeArchivoEmpresa )
+{
+   cout << left << setw( 20 ) << "Nombre" << setw( 20 ) << "Correo"<< setw( 20 )<< "Director" << setw( 20 )<< "Actividad Economica "<< setw( 14 )<< "Nit "<< setw( 20 )<< "Direccion"<< setw( 9 )<< "Telefono "<< setw( 7 )<< "Empleados "<< setw( 20 )<< "Numero de Empresa "<< setw( 14 )<< endl;
+
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoEmpresa.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsEmpresa empresa;
+   leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+      sizeof( ClsEmpresa ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoEmpresa.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( empresa.mobtenerNumeroEmpresa() != 0 )
+         mostrarLineaPantallaE(empresa);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+         sizeof( ClsEmpresa ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantallaE( const ClsEmpresa &registroEmpresa )
+{
+   cout << left << setw( 20 ) << registroEmpresa.mobtenerNombreE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerCorreoE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDirectorE().data()
+          << setw( 20 ) << registroEmpresa. mobtenerActividadE().data()
+          << setw( 14 ) << registroEmpresa.mobtenerNitE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDireccionE().data()
+          << setw( 9 ) << registroEmpresa.mobtenerTelefonoE()
+          << setw( 7 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
+          << setw( 20 ) << registroEmpresa.mobtenerNumeroEmpresa()
           /*<< setw( 14 ) << registro.obtenerPrimerNombre().data() //.data string sin .data int
           << setw( 10 ) << setprecision( 2 ) << right << fixed
           << showpoint << registro.obtenerSaldo() <<*/ <<endl;
@@ -1709,6 +2066,178 @@ void buscarBanco( fstream &leerDeArchivoBanco )
    getch();
 
 } // fin de la función consultarRegistro
+
+//ACTUALIZAR EMPRESA
+void actualizarRegistroEmpresa( fstream &actualizarArchivoEmpresa )
+{
+   // obtener el número de empresa a actualizar
+   int numeroEmpresa = obtenerCuentaEmpresa( "Escriba la empresa que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   actualizarArchivoEmpresa.seekg(
+      ( numeroEmpresa - 1 ) * sizeof( ClsEmpresa ) );
+
+   // leer el primer registro del archivo
+   ClsEmpresa empresa;
+   actualizarArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+      sizeof( ClsEmpresa ) );
+
+   // actualizar el registro
+   if ( empresa.mobtenerNumeroEmpresa() != 0 ) {
+      mostrarLineaE( cout , empresa);
+
+      // solicitar al usuario que especifique la transacción
+      cout << "\nEscriba el nombre: ";
+      char m_snombreEmpresa [ 20 ];
+      cin >> m_snombreEmpresa;
+
+      // actualizar el saldo del registro
+      empresa.mestablecerNombreE( m_snombreEmpresa );
+      mostrarLineaE( cout, empresa );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      actualizarArchivoEmpresa.seekp(
+         ( numeroEmpresa - 1 ) * sizeof( ClsEmpresa ) );
+
+      // escribir el registro actualizado sobre el registro anterior en el archivo
+      actualizarArchivoEmpresa.write(
+         reinterpret_cast< const char * >( &empresa ),
+         sizeof( ClsEmpresa ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la empresa no existe
+   else
+      cerr << "La empresa #" << numeroEmpresa
+         << " no tiene informacion." << endl;
+
+} // fin de la función actualizarRegistro
+
+// mostrar registro individual
+void mostrarLineaE( ostream &salida, const ClsEmpresa &registroEmpresa )
+{
+   salida << left << setw( 20 ) << registroEmpresa.mobtenerNombreE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerCorreoE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDirectorE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerActividadE().data()
+          << setw( 14 ) << registroEmpresa.mobtenerNitE().data()
+          << setw( 20 ) << registroEmpresa.mobtenerDireccionE().data()
+          << setw( 9 ) << registroEmpresa.mobtenerTelefonoE()
+          << setw( 7 ) << registroEmpresa.mobtenerNumeroEmpleadosE()
+          << setw( 20 ) << registroEmpresa.mobtenerNumeroEmpresa()
+          << endl;
+
+
+} // fin de la función mostrarLinea
+
+void imprimirRegistroE( fstream &leerDeArchivoEmpresa )
+{
+   // crear archivo de texto
+   ofstream archivoImprimirSalidaE( "imprimirE.txt", ios::out );
+
+   // salir del programa si ofstream no puede crear el archivo
+   if ( !archivoImprimirSalidaE ) {
+      cerr << "No se pudo crear el archivo." << endl;
+      exit( 1 );
+
+   } // fin de instrucción if
+
+   archivoImprimirSalidaE << left << left << setw( 20 ) << "Nombre" << setw( 20 )<< "Correo"<< setw( 20 )<< "Director" << setw( 20 )<< "Actividad Economica "<< setw( 14 )<< "Nit "<< setw( 20 )<< "Direccion"<< setw( 9 )<< "Telefono "<< setw( 7 )<< "Empleados "<< setw( 20 )<< "Numero de Empresa "<< setw( 14 )<< endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoEmpresa.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsEmpresa empresa;
+   leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+      sizeof( ClsEmpresa ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoEmpresa.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( empresa.mobtenerNumeroEmpresa() != 0 )
+         mostrarLineaE( archivoImprimirSalidaE , empresa );
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+         sizeof( ClsEmpresa ) );
+
+   } // fin de instrucción while
+
+} // fin de la función imprimirRegistro
+
+void eliminarRegistroE( fstream &eliminarDeArchivoEmpresa)
+{
+   // obtener número de cuenta a eliminar
+   int numeroEmpresa= obtenerCuentaEmpresa( "Escriba la empresa a eliminar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   eliminarDeArchivoEmpresa.seekg(
+      ( numeroEmpresa- 1 ) * sizeof( ClsEmpresa) );
+
+   // leer el registro del archivo
+   ClsEmpresa empresa;
+   eliminarDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa),
+      sizeof(  ClsEmpresa ) );
+
+   // eliminar el registro, si es que existe en el archivo
+   if ( empresa.mobtenerNumeroEmpresa() != 0 ) {
+      ClsEmpresa empresaEnBlanco;
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      eliminarDeArchivoEmpresa.seekp( ( numeroEmpresa- 1 ) *
+         sizeof( ClsEmpresa ) );
+
+      // reemplazar el registro existente con un registro en blanco
+      eliminarDeArchivoEmpresa.write(
+         reinterpret_cast< const char * >( &empresaEnBlanco ),
+         sizeof( ClsEmpresa ) );
+
+      cout << "Empresa #" << numeroEmpresa<< " eliminado correctamente.\n";
+
+   } // fin de instrucción if
+
+   // mostrar error si el registro no existe
+   else
+   {
+       cerr << "Empresa #" << numeroEmpresa << " esta vacia.\n";
+   }
+   getch();
+
+} // fin de eliminarRegistro
+
+void buscarEmpresa( fstream &leerDeArchivoEmpresa)
+{
+
+   // obtener el número de cuenta a buscar
+   int numeroEmpresa= obtenerCuentaEmpresa( "Escriba la empresa que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivoEmpresa.seekg(
+      ( numeroEmpresa - 1 ) * sizeof( ClsEmpresa) );
+
+   // leer el primer registro del archivo
+   ClsEmpresa empresa;
+   leerDeArchivoEmpresa.read( reinterpret_cast< char * >( &empresa ),
+      sizeof( ClsEmpresa ) );
+    //cout<<empleado.mobtenerClave();
+
+   // actualizar el registro
+   if ( empresa.mobtenerNumeroEmpresa() != 0 ) {
+      mostrarLineaE( cout, empresa );
+   }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr << "La empresa #" << numeroEmpresa
+         << " no tiene informacion." << endl;
+   }
+   getch();
+
+} // fin de la función consultarRegistro
+
 // crear e insertar registro
 
 void nuevoUsuario( fstream &insertarEnArchivo )

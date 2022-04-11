@@ -335,3 +335,102 @@
 	<cstdlib>
 	<cstring>
 
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clsbancos.cpp
+	"ClsBancos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649644027 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clsbancos.h
+	<string>
+	<iostream>
+
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clsbitacora.cpp
+	"Clsbitacora.h"
+
+1649644027 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clsbitacora.h
+
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649644027 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clsempleados.h
+	<string>
+	<iostream>
+
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clslogin.cpp
+	"Clslogin.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649644027 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clslogin.h
+	<string>
+	<iostream>
+
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clsmenus.cpp
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
+1649644027 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clspuestos.h
+	<string>
+	<iostream>
+
+1649644027 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clspuestos.cpp
+	"ClsPuestos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649645771 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	<string>
+	<iomanip>
+	<cstdlib>
+	<ctime>
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	"ClsBancos.h"
+	"Clslogin.h"
+	"Clsbitacora.h"
+	"ClsEmpresa.h"
+
+1649645771 c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\include\clsempresa.h
+	<string>
+	<iostream>
+
+1649645771 source:c:\users\dell\progra\proyectofinal\proyecto2022p1g1\loginterminado\src\clsempresa.cpp
+	"ClsEmpresa.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
