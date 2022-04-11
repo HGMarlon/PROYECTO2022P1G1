@@ -198,3 +198,69 @@
 	"ClsPuestos.h"
 	"Clslogin.h"
 
+1649630884 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clsempleados.cpp
+	"ClsEmpleados.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649630884 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clsempleados.h
+	<string>
+	<iostream>
+
+1649630884 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clslogin.cpp
+	"Clslogin.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649630884 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clslogin.h
+	<string>
+	<iostream>
+
+1649630884 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clsmenus.cpp
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+
+1649630884 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clspuestos.h
+	<string>
+
+1649630884 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clspuestos.cpp
+	<conio.h>
+	<iomanip>
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<cstring>
+
+1649635907 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\main.cpp
+	<conio.h>
+	<iostream>
+	<fstream>
+	<string>
+	<iomanip>
+	<cstdlib>
+	"ClsEmpleados.h"
+	"ClsPuestos.h"
+	"Clslogin.h"
+	"Clsbitacora.h"
+
+1649634220 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clsbitacora.cpp
+	"Clsbitacora.h"
+
+1649634220 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clsbitacora.h
+

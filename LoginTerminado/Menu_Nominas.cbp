@@ -36,11 +36,13 @@
 		<Unit filename="include/ClsEmpleados.h" />
 		<Unit filename="include/ClsMenus.h" />
 		<Unit filename="include/ClsPuestos.h" />
+		<Unit filename="include/Clsbitacora.h" />
 		<Unit filename="include/Clslogin.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ClsEmpleados.cpp" />
 		<Unit filename="src/ClsMenus.cpp" />
 		<Unit filename="src/ClsPuestos.cpp" />
+		<Unit filename="src/Clsbitacora.cpp" />
 		<Unit filename="src/Clslogin.cpp" />
 		<Extensions />
 	</Project>
