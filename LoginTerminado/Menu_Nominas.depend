@@ -247,20 +247,21 @@
 	<cstdlib>
 	<cstring>
 
-1649635907 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\main.cpp
+1649638712 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\main.cpp
 	<conio.h>
 	<iostream>
 	<fstream>
 	<string>
 	<iomanip>
 	<cstdlib>
+	<ctime>
 	"ClsEmpleados.h"
 	"ClsPuestos.h"
 	"Clslogin.h"
 	"Clsbitacora.h"
 
-1649634220 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clsbitacora.cpp
+1649636459 source:c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\src\clsbitacora.cpp
 	"Clsbitacora.h"
 
-1649634220 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clsbitacora.h
+1649636459 c:\users\user\onedrive\documentos\mariano\proyectosprograi\proyecto2022p1g1\loginterminado\include\clsbitacora.h
 
