@@ -1,3 +1,3 @@
-1         Ingreso al sistema                      
-1         Ingreso al sistema                      
-2         Ingreso al sistema                      
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 18   Minuto: 58   Segundo: 33   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 19   Minuto: 1    Segundo: 27   
+Codigo: 1    Accion: Ingreso al sistema            Dia: 10   Mes: 4    Año: 2022  Hora: 19   Minuto: 4    Segundo: 35   

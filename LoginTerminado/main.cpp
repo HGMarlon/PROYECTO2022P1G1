@@ -5,6 +5,7 @@
 #include<string>
 #include<iomanip>
 #include<cstdlib>
+#include<ctime>
 //Clases
 #include "ClsEmpleados.h"
 #include "ClsPuestos.h"
@@ -32,6 +33,7 @@ void escribirBitacora(int, string);
 main(){
     //Creando objeto
     Clsbitacora bitacora;
+
     //Variables
     int imenuPrincipal;
     int m_iclaveEmpleado=0;
@@ -44,6 +46,13 @@ main(){
     int codigoa=0;
     string accion="";
     string ingresoUsuario;
+
+    //tiempo
+    time_t t;
+    t = time(NULL);
+    struct tm *fecha;
+    fecha = localtime(&t);
+
     /*Login
        abrir el archivo en modo de lectura y escritura*/
     fstream archivoUsuarios("registrousuarios.dat", ios::in | ios::out | ios::binary);
@@ -110,7 +119,21 @@ main(){
     //Bitacora
     codigo = numeroUsuario;
     accion = "Ingreso al sistema";
-    escribirBitacora(codigo, accion);
+    //escribirBitacora(codigo, accion);
+
+    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+    if (!bitacora)
+    {
+        cerr << "No se pudo abrir el archivo." << endl;
+        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+        exit ( 3 );
+    }
+
+	bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+	<<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+	<<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+	<<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+	bitacora.close();
 
 	//Menu principal
 	do
@@ -206,7 +229,19 @@ main(){
                                     system("cls");
                                     nuevoEmpleado(archivoEmpleados);
                                     accion="Empleado Creado";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 2:
@@ -216,35 +251,95 @@ main(){
                                     consultarRegistro(archivoEmpleados);
                                     getch();
                                     accion="Consulta empleados";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 3:
                                 {
                                     actualizarRegistro(archivoEmpleados);
                                     accion="Modificacion Empleados";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 4:
                                 {
                                     imprimirRegistro(archivoEmpleados);
                                     accion="Imprimir Empleados";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 5:
                                 {
                                     eliminarRegistro(archivoEmpleados);
                                     accion="Eliminar Empleados";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 6:
                                 {
                                     buscarEmpleado(archivoEmpleados);
                                     accion="Buscar Empleados";
-                                    escribirBitacora(codigo, accion);
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
                                 }
                                 break;
                             case 0:
@@ -663,16 +758,3 @@ int obtenerUsuario( const char * const indicador )
    return m_iingresoUsuario;
 
 } // fin de la función obtenerCuenta
-
-void escribirBitacora(int codigo, string accion)
-{
-    ofstream bitacora("bitacora.txt", ios::app | ios::out);
-    if (!bitacora)
-    {
-        cerr << "No se pudo abrir el archivo." << endl;
-        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
-        exit ( 3 );
-    }
-	bitacora<<left<<setw(10)<< codigo <<left<<setw(40)<< accion /*<<left<<setw(40)<< tiempo*/ << endl;
-	bitacora.close();
-}
