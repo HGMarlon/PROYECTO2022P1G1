@@ -13,6 +13,7 @@
 #include "Clslogin.h"
 #include "Clsbitacora.h"
 #include "ClsEmpresa.h"
+#include "ClsConceptos.h"
 
 using namespace std;
 
@@ -71,6 +72,18 @@ void eliminarRegistroE( fstream& );
 void buscarEmpresa( fstream& );
 void escribirBitacoraEmpresa(int, string);
 
+///////////////////////////SUELDOS//////////////////
+int obtenerSueldo( const char * const );
+void nuevoEmpleadoSueldo( fstream& );
+void crearArchivoSueldo();
+void consultarRegistroSueldo(fstream&);
+void mostrarLineaPantallaSueldo(const ClsConceptos &);
+void actualizarRegistroSueldo(fstream&);
+void mostrarLineaSueldo( ostream&, const ClsConceptos & );
+void imprimirRegistroSueldo( fstream& );
+void eliminarRegistroSueldo( fstream& );
+void buscarEmpleadoSueldo( fstream& );
+void escribirBitacora(int, string);
 
 main(){
     //Creando objeto
@@ -116,6 +129,12 @@ main(){
     int m_iTelefonoEmpresa=0;
     int m_iNumeroEmpleados=0;
     int m_iNumeroDeEmpresa=0;
+
+        //Variables Sueldo
+    int m_iclaveEmpleadoSueldo=0;
+    char m_snombreEmpleadoSueldo[0];
+    char m_sSueldo[0];
+    char m_sBono[0];
 
 
     //tiempo
@@ -787,7 +806,171 @@ main(){
                     break;
                 case 4:
                     {
+                        int iseleccionMenuSueldos;
+                        do
+                        {
+                            system("cls");
+                            //archivoempleados
+                            // abrir el archivo en modo de lectura y escritura
+                            fstream archivoSueldos("RegistroSueldos.dat", ios::in | ios::out | ios::binary);
 
+                            // salir del programa si fstream no puede abrir el archivo
+                            if ( !archivoSueldos ) {
+                                cerr << "No se pudo abrir el archivo." << endl;
+                                crearArchivoSueldo();
+                                cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                exit ( 1 );
+                                exit( EXIT_FAILURE );
+
+                               } // fin de instrucción if
+                            //Menu tercer nivel
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"|   SISTEMA GESTION SUELDOS  |"<<endl;
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"1. Ingreso Sueldos"<<endl;
+                            cout<<"2. Modificar Sueldos"<<endl;
+                            cout<<"3. Mostrar Sueldos"<<endl;
+                            cout<<"4. Eliminar Sueldos"<<endl;
+                            cout<<"5. Buscar Sueldos"<<endl;
+                            cout<<"6. Imprimir Registro Sueldos"<<endl;
+                            cout<<"0. Volver al menu superior"<<endl;
+
+                            cout<<"-------------------------------"<<endl;
+                            cout<<"Opcion a escoger:[1/2/3/0]"<<endl;
+                            cout<<"------------------------------"<<endl;
+                            cout<<"Ingresa tu Opcion: ";
+                            cin>>iseleccionMenuSueldos;
+                            //menu tercer nivel
+                            switch(iseleccionMenuSueldos)
+                            {
+                            case 1:
+                                {
+                                    system("cls");
+                                    nuevoEmpleadoSueldo(archivoSueldos);
+                                    accion="Sueldo Creado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                }
+                                break;
+                            case 2:
+                                {
+                                    system("cls");
+                                    actualizarRegistroSueldo(archivoSueldos);
+                                    accion="Sueldo Actualizada";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                }
+                                break;
+                            case 3:
+                                {
+                                    system("cls");
+                                    consultarRegistroSueldo(archivoSueldos);
+                                    accion="Sueldo Consultado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                    getch();
+                                }
+                                break;
+                            case 4:
+                                {
+                                    system("cls");
+                                    eliminarRegistroSueldo(archivoSueldos);
+                                    accion="Sueldo Eliminado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                }
+                                break;
+                            case 5:
+                                {
+                                    system("cls");
+                                    buscarEmpleadoSueldo(archivoSueldos);
+                                    accion="Sueldo Buscado";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                }
+                                break;
+                            case 6:
+                                {
+                                    system("cls");
+                                    imprimirRegistroSueldo(archivoSueldos);
+                                    accion="Sueldo Impreso";
+                                    ofstream bitacora("bitacora.txt", ios::app | ios::out);
+                                    if (!bitacora)
+                                    {
+                                        cerr << "No se pudo abrir el archivo." << endl;
+                                        cout <<  "Archivo creado satisfactoriamente, pruebe de nuevo";
+                                        exit ( 3 );
+                                    }
+
+                                    bitacora<<left<<setw(8)<< "Codigo:" <<left<<setw(5)<< codigo <<left<<setw(8)<< "Accion:" <<left<<setw(30)<< accion
+                                    <<left<<setw(5)<< "Dia:" <<left<<setw(5)<< fecha->tm_mday <<left<<setw(5)<< "Mes:" <<left<<setw(5)<< fecha->tm_mon+1
+                                    <<left<<setw(5)<< "Año:" <<left<<setw(6)<< fecha->tm_year+1900 <<left<<setw(6)<< "Hora:" <<left<<setw(5)<< fecha->tm_hour
+                                    <<left<<setw(8)<< "Minuto:" <<left<<setw(5)<< fecha->tm_min <<left<<setw(9)<< "Segundo:" <<left<<setw(5)<< fecha->tm_sec << endl;
+                                    bitacora.close();
+                                }
+                                break;
+                            case 0:
+                                break;
+                            default:
+                                cout<<"Opcion invalida...Por favor prueba otra vez..";
+                                getch();
+                            }
+                        }while(iseleccionMenuSueldos!= 0);
                     }
                     break;
                 case 5:
@@ -2315,3 +2498,303 @@ int obtenerUsuario( const char * const indicador )
    return m_iingresoUsuario;
 
 } // fin de la función obtenerCuenta
+
+
+////////////////////////////////////////////////////SUELDOS////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////crear e insertar registro
+void nuevoEmpleadoSueldo( fstream &insertarEnArchivoSueldo )
+{
+   // obtener el número de cuenta a crear
+   int m_iclaveEmpleadoSueldo = obtenerCuenta( "Escriba el nuevo numero de cuenta" );
+
+   // desplazar el apuntador de posición del archivo hasta el registro correcto en el archivo
+   insertarEnArchivoSueldo.seekg(
+      ( m_iclaveEmpleadoSueldo - 1 ) * sizeof( ClsConceptos ) );
+
+   // leer el registro del archivo
+   ClsConceptos sueldo;
+   insertarEnArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+
+   // crear el registro, si éste no existe ya
+   if ( sueldo.mobtenerCodigo() == 0 ) {
+
+      char m_snombreEmpleadoSueldo[ 20 ];
+      char m_sSueldo[20];
+      char m_sBono[20];
+
+      // el usuario introduce el apellido, primer nombre y saldo
+      cout << "Escriba el nombre: " << endl;
+      cin >> setw( 20 ) >> m_snombreEmpleadoSueldo;
+      cout << "Escriba el Sueldo: " << endl;
+      cin >> setw( 20 ) >> m_sSueldo;
+      cout << "Escriba el Bono: " << endl;
+      cin >> setw( 20 ) >> m_sBono;
+
+      // usar valores para llenar los valores de la cuenta
+      sueldo.mestablecerNombreSueldo( m_snombreEmpleadoSueldo );
+      sueldo.mestablecerCodigo( m_iclaveEmpleadoSueldo );
+      sueldo.mestablecerSueldo( m_sSueldo );
+      sueldo.mestablecerBono( m_sBono );
+
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      insertarEnArchivoSueldo.seekp( ( m_iclaveEmpleadoSueldo - 1 ) *
+         sizeof( ClsConceptos ) );
+
+      // insertar el registro en el archivo
+      insertarEnArchivoSueldo.write(
+         reinterpret_cast< const char * >( &sueldo ),
+         sizeof( ClsConceptos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta ya existe
+   else
+      cerr << "La cuenta #" << m_iclaveEmpleadoSueldo
+           << " ya contiene informacion." << endl;
+
+} // fin de la función nuevoRegistro
+int obtenerSueldo( const char * const indicadorSueldo )
+{
+   int m_iclaveEmpleadoSueldo;
+
+   // obtener el valor del número de cuenta
+   do {
+      cout << indicadorSueldo << " (1 - 100): ";
+      cin >> m_iclaveEmpleadoSueldo;
+
+   } while ( m_iclaveEmpleadoSueldo < 1 || m_iclaveEmpleadoSueldo > 100 );
+
+   return m_iclaveEmpleadoSueldo;
+
+} // fin de la función obtenerCuenta
+
+///////////////////////////////////////////////////////////////CREACION ARCHIVO SUELDOS
+void crearArchivoSueldo()
+{
+    ofstream archivoSueldos("RegistroSueldos.dat", ios::out | ios::binary);
+    if(!archivoSueldos)
+    {
+        cerr<<"No se habrio el archivo"<<endl;
+        exit(1);
+    }
+    ClsConceptos sueldoEnBlanco;
+    for(int i=0; i<100; i++)
+    {
+        archivoSueldos.write(reinterpret_cast<const char * > (&sueldoEnBlanco), sizeof(ClsConceptos));
+    }
+}
+/////////////////////////////////////////////////////////////////MOSTRAR DATOS SUELDOS
+////////////////////////////////////////////////////////MOSTRAR
+void consultarRegistroSueldo( fstream &leerDeArchivoSueldos )
+{
+
+   cout << left << setw( 9 ) << "Codigo" << setw( 20 )
+       << "Nombre" << setw( 20 ) << "Sueldo"
+       << setw( 20 ) << "Bono" << endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoSueldos.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsConceptos sueldo;
+   leerDeArchivoSueldos.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoSueldos.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( sueldo.mobtenerCodigo() != 0 )
+         mostrarLineaPantallaSueldo(sueldo);
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoSueldos.read( reinterpret_cast< char * >( &sueldo ),
+         sizeof( ClsConceptos ) );
+
+   } // fin de instrucción while
+
+} // fin de la función consultarRegistro
+
+void mostrarLineaPantallaSueldo( const ClsConceptos &registroSueldo )
+{
+   cout << left << setw( 10 ) << registroSueldo.mobtenerCodigo()
+          << setw( 20 ) << registroSueldo.mobtenerNombreSueldo().data()
+          << setw( 20 ) << registroSueldo.mobtenerSueldo().data()
+          << setw( 20 ) << registroSueldo.mobtenerBono().data() << endl;
+
+} // fin de la función mostrarLineaPantalla
+
+///////////////////////////////////////////////////////////////////////////////////////////ACTUALIZAR
+void actualizarRegistroSueldo( fstream &actualizarArchivoSueldo )
+{
+   // obtener el número de cuenta a actualizar
+   int numeroCodigo = obtenerSueldo( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   actualizarArchivoSueldo.seekg(
+      ( numeroCodigo - 1 ) * sizeof( ClsConceptos ) );
+
+   // leer el primer registro del archivo
+   ClsConceptos sueldo;
+   actualizarArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+
+   // actualizar el registro
+   if ( sueldo.mobtenerCodigo() != 0 ) {
+      mostrarLineaSueldo( cout, sueldo );
+
+      // solicitar al usuario que especifique la transacción
+      cout << "\nEscriba el nombre: ";
+      char m_snombreEmpleadoSueldo [ 20 ];
+      cin >> m_snombreEmpleadoSueldo;
+
+      cout << "\nEscriba el sueldo: ";
+      char m_sSueldo [ 20 ];
+      cin >> m_sSueldo;
+
+      cout << "\nEscriba el bono: ";
+      char m_sBono [ 20 ];
+      cin >> m_sBono;
+
+      // actualizar el saldo del registro
+      sueldo.mestablecerNombreSueldo( m_snombreEmpleadoSueldo );
+      mostrarLineaSueldo( cout, sueldo );
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      actualizarArchivoSueldo.seekp(
+         ( numeroCodigo - 1 ) * sizeof( ClsConceptos ) );
+
+      // escribir el registro actualizado sobre el registro anterior en el archivo
+      actualizarArchivoSueldo.write(
+         reinterpret_cast< const char * >( &sueldo ),
+         sizeof( ClsConceptos ) );
+
+   } // fin de instrucción if
+
+   // mostrar error si la cuenta no existe
+   else
+      cerr << "La cuenta #" << numeroCodigo
+         << " no tiene informacion." << endl;
+
+} // fin de la función actualizarRegistro
+
+void mostrarLineaSueldo( ostream &salidaSueldo, const ClsConceptos &registroSueldo )
+{
+   salidaSueldo << left << setw( 9 ) << registroSueldo.mobtenerCodigo()
+          << setw( 20 ) << registroSueldo.mobtenerNombreSueldo().data()
+          << setw( 20 ) << registroSueldo.mobtenerSueldo().data()
+          << setw( 20 ) << registroSueldo.mobtenerBono().data()
+          << endl;
+
+} // fin de la función mostrarLinea
+
+void imprimirRegistroSueldo( fstream &leerDeArchivoSueldo )
+{
+   // crear archivo de texto
+   ofstream archivoImprimirSalidaSueldo( "ImprimirRegistroSueldo.txt", ios::out );
+
+   // salir del programa si ofstream no puede crear el archivo
+   if ( !archivoImprimirSalidaSueldo ) {
+      cerr << "No se pudo crear el archivo." << endl;
+      exit( 1 );
+
+   } // fin de instrucción if
+
+   archivoImprimirSalidaSueldo << left << setw( 9 ) << "Codigo" << setw( 20 )
+       << "Nombre: " << setw( 20 ) << "Sueldo" << setw( 20 ) << "Bono" << endl;
+
+   // colocar el apuntador de posición de archivo al principio del archivo de registros
+   leerDeArchivoSueldo.seekg( 0 );
+
+   // leer el primer registro del archivo de registros
+   ClsConceptos sueldo;
+   leerDeArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+
+   // copiar todos los registros del archivo de registros en el archivo de texto
+   while ( !leerDeArchivoSueldo.eof() ) {
+
+      // escribir un registro individual en el archivo de texto
+      if ( sueldo.mobtenerCodigo() != 0 )
+         mostrarLineaSueldo( archivoImprimirSalidaSueldo, sueldo );
+
+      // leer siguiente registro del archivo de registros
+      leerDeArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+         sizeof( ClsConceptos ) );
+
+   } // fin de instrucción while
+
+} // fin de la función imprimirRegistro
+
+void eliminarRegistroSueldo( fstream &eliminarDeArchivoSueldo )
+{
+   // obtener número de cuenta a eliminar
+   int numeroCodigo= obtenerSueldo( "Escriba la cuenta a eliminar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   eliminarDeArchivoSueldo.seekg(
+      ( numeroCodigo - 1 ) * sizeof( ClsConceptos ) );
+
+   // leer el registro del archivo
+   ClsConceptos sueldo;
+   eliminarDeArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+
+   // eliminar el registro, si es que existe en el archivo
+   if ( sueldo.mobtenerCodigo() != 0 ) {
+      ClsConceptos empleadoEnBlancoSueldo;
+
+      // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+      eliminarDeArchivoSueldo.seekp( ( numeroCodigo - 1 ) *
+         sizeof( ClsConceptos ) );
+
+      // reemplazar el registro existente con un registro en blanco
+      eliminarDeArchivoSueldo.write(
+         reinterpret_cast< const char * >( &empleadoEnBlancoSueldo ),
+         sizeof( ClsConceptos ) );
+
+      cout << "Empleado clave #" << numeroCodigo << " eliminado correctamente.\n";
+
+   } // fin de instrucción if
+
+   // mostrar error si el registro no existe
+   else
+   {
+       cerr << "Empleado clave #" << numeroCodigo << " esta vacia.\n";
+   }
+   getch();
+
+} // fin de eliminarRegistro
+
+void buscarEmpleadoSueldo( fstream &leerDeArchivoSueldo)
+{
+
+   // obtener el número de cuenta a buscar
+   int numeroCodigo = obtenerSueldo( "Escriba la cuenta que desea actualizar" );
+
+   // desplazar el apuntador de posición de archivo hasta el registro correcto en el archivo
+   leerDeArchivoSueldo.seekg(
+      ( numeroCodigo - 1 ) * sizeof( ClsConceptos ) );
+
+   // leer el primer registro del archivo
+   ClsConceptos sueldo;
+   leerDeArchivoSueldo.read( reinterpret_cast< char * >( &sueldo ),
+      sizeof( ClsConceptos ) );
+    //cout<<empleado.mobtenerClave();
+
+   // actualizar el registro
+   if ( sueldo.mobtenerCodigo() != 0 ) {
+      mostrarLineaSueldo( cout, sueldo );
+   }
+
+   // mostrar error si la cuenta no existe
+   else
+   {
+       cerr << "La cuenta #" << numeroCodigo
+         << " no tiene informacion." << endl;
+   }
+   getch();
+
+} // fin de la función consultarRegistro
